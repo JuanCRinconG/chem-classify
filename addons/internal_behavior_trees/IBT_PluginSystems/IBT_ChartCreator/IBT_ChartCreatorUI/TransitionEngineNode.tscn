@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://16gj8ibtiioi"]
+
+[ext_resource type="Script" uid="uid://dq1kksnfww4up" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_PluginCore/IBTTransitionNode.cs" id="1_transition_node"]
+[ext_resource type="Theme" uid="uid://b2gx8do2rhotk" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/BehaviorNodeTitle.tres" id="1_wd4hk"]
+[ext_resource type="Theme" uid="uid://bouh1fwsmxevr" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/TransitionLabelTheme.tres" id="2_uurol"]
+[ext_resource type="Script" uid="uid://b7rqa885vsvil" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/CRUDWorkspace.cs" id="3_crud_workspace"]
+[ext_resource type="FontFile" uid="uid://jrrphlmj06u6" path="res://addons/internal_behavior_trees/IBT_Assets/OpenSans-SemiBold.ttf" id="4_v656r"]
+[ext_resource type="Script" uid="uid://6l8v24vbvim0" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/GraphNodeComponentOrchestrator.cs" id="5_component_orchestrator"]
+[ext_resource type="Script" uid="uid://csxcwvpluf3ql" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/GroupEditorWorkspace.cs" id="6_group_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6230702, 0, 0.08695074, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar_selected"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.893679, 0.14045966, 0.23549828, 1)
+border_width_bottom = 2
+border_color = Color(1, 0.93, 0.85, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_body"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.055, 0.045, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w0r3"]
+bg_color = Color(0.81116855, 0.19924659, 0.109373026, 1)
+
+[node name="TransitionEngineNode" type="GraphNode" unique_id=129192181]
+custom_minimum_size = Vector2(225, 0)
+mouse_filter = 1
+theme = ExtResource("1_wd4hk")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_titlebar")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxFlat_titlebar_selected")
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_transition_node")
+OutputColor = Color(0.90588236, 0.64705884, 0, 1)
+TransitionLabelTheme = ExtResource("2_uurol")
+
+[node name="ComponentOrchestrator" type="Node" parent="." unique_id=428179294 node_paths=PackedStringArray("GraphNode", "Components")]
+script = ExtResource("5_component_orchestrator")
+GraphNode = NodePath("..")
+Components = [NodePath("../CRUDWorkspace"), NodePath("../CRUDWorkspace/ComponentsContainer/GroupEditorRow")]
+
+[node name="CRUDWorkspace" type="PanelContainer" parent="." unique_id=240183435 node_paths=PackedStringArray("DeleteButton", "ChangeTypeButton", "DeprecatedLabel")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_body")
+script = ExtResource("3_crud_workspace")
+DeleteButton = NodePath("ComponentsContainer/GroupEditorRow/DeleteButton")
+ChangeTypeButton = NodePath("ComponentsContainer/GroupEditorRow/ChangeTypeButton")
+DeprecatedLabel = NodePath("ComponentsContainer/DeprecatedLabel")
+
+[node name="ComponentsContainer" type="VBoxContainer" parent="CRUDWorkspace" unique_id=226450108]
+layout_mode = 2
+
+[node name="DeprecatedLabel" type="Label" parent="CRUDWorkspace/ComponentsContainer" unique_id=116275452]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_v656r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8w0r3")
+text = "This transition engine is not in the behavior data, change it's type or remove it"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GroupEditorRow" type="HBoxContainer" parent="CRUDWorkspace/ComponentsContainer" unique_id=1968282624 node_paths=PackedStringArray("GroupNameLineEdit")]
+layout_mode = 2
+script = ExtResource("6_group_editor")
+GroupNameLineEdit = NodePath("GroupNameLineEdit")
+
+[node name="GroupNameLineEdit" type="LineEdit" parent="CRUDWorkspace/ComponentsContainer/GroupEditorRow" unique_id=918273645]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Binding group used when the host wires this transition engine at runtime."
+placeholder_text = "Global"
+
+[node name="DeleteButton" type="Button" parent="CRUDWorkspace/ComponentsContainer/GroupEditorRow" unique_id=754857604]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Remove this transition engine from the chart."
+text = "🗑️"
+
+[node name="ChangeTypeButton" type="Button" parent="CRUDWorkspace/ComponentsContainer/GroupEditorRow" unique_id=271080315]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Change the transition-engine type."
+text = "🖊️"

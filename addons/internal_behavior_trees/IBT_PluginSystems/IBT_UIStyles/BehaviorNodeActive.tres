@@ -1,0 +1,72 @@
+[gd_resource type="Theme" format=3 uid="uid://n6spn7faupfy"]
+
+[ext_resource type="FontFile" uid="uid://jrrphlmj06u6" path="res://addons/internal_behavior_trees/IBT_Assets/OpenSans-SemiBold.ttf" id="1_xby3s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xby3s"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.78431374, 1, 0.4, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdyml"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.78431374, 1, 0.4, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_active_titlebar"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.19215687, 0.26666668, 0.64705884, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_color = Color(0.78431374, 1, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_active_titlebar_selected"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.2627451, 0.49411765, 0.8352941, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_color = Color(0.78431374, 1, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+
+[resource]
+GraphNode/styles/panel = SubResource("StyleBoxFlat_xby3s")
+GraphNode/styles/panel_selected = SubResource("StyleBoxFlat_vdyml")
+GraphNode/styles/titlebar = SubResource("StyleBoxFlat_active_titlebar")
+GraphNode/styles/titlebar_selected = SubResource("StyleBoxFlat_active_titlebar_selected")
+GraphNodeTitleLabel/colors/font_color = Color(1, 1, 1, 1)
+GraphNodeTitleLabel/colors/font_outline_color = Color(0.42365062, 0.42365065, 0.42365062, 1)
+GraphNodeTitleLabel/constants/outline_size = 1
+GraphNodeTitleLabel/font_sizes/font_size = 28
+GraphNodeTitleLabel/fonts/font = ExtResource("1_xby3s")

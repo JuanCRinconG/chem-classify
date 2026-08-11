@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dcl7mex53n7je"]
+
+[node name="ReusableErrorUI" type="PopupPanel" unique_id=1537567924]
+oversampling_override = 1.0
+visible = true
+
+[node name="LabelContainer" type="VBoxContainer" parent="." unique_id=1126029575]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+
+[node name="TextureRect" type="TextureRect" parent="LabelContainer" unique_id=656196293]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LabelContainer" unique_id=1886870113]
+layout_mode = 2

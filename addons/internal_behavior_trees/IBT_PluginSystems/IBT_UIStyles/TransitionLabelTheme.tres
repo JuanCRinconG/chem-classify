@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://bouh1fwsmxevr"]
+
+[ext_resource type="FontFile" uid="uid://jrrphlmj06u6" path="res://addons/internal_behavior_trees/IBT_Assets/OpenSans-SemiBold.ttf" id="1_ixqtj"]
+
+[resource]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_ixqtj")

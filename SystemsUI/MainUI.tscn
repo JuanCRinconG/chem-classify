@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dbwwegeti3vb3"]
+
+[ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://SystemsAssets/MainUITexture/QrBG.jpg" id="1_pm1sg"]
+[ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/MainSceneSystem/MainUISystem.cs" id="2_cukl5"]
+[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://SystemsUI/LoginUI/LoginPanel.tscn" id="2_jss8s"]
+[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/ServiceSystems/CloseProgramService/CloseProgramButton.cs" id="4_gsa4b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jss8s"]
+bg_color = Color(0.9490196, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.52679324, 8.5432083e-07, 2.8878452e-07, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsa4b"]
+bg_color = Color(1, 0.5942292, 0.53413904, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.52679324, 8.5432083e-07, 2.8878452e-07, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7wsd"]
+
+[node name="MainUi" type="PanelContainer" unique_id=401584730 node_paths=PackedStringArray("UIContainerSpace")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_cukl5")
+UIContainerSpace = NodePath("InitialUIContainer")
+FirstUIPanel = ExtResource("2_jss8s")
+
+[node name="BackgroundTexture" type="TextureRect" parent="." unique_id=783104334]
+layout_mode = 2
+texture = ExtResource("1_pm1sg")
+expand_mode = 5
+
+[node name="CloseProgramButton" type="Button" parent="." unique_id=55163931]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jss8s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jss8s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gsa4b")
+text = "❌"
+script = ExtResource("4_gsa4b")
+
+[node name="InitialUIContainer" type="PanelContainer" parent="." unique_id=324531599]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s7wsd")

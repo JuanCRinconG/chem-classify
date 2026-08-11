@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://14t7cpcrjm6n"]
+
+[ext_resource type="Script" uid="uid://dq1kksnfww4up" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_PluginCore/IBTTransitionNode.cs" id="1_engine"]
+[ext_resource type="Theme" uid="uid://b2gx8do2rhotk" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/BehaviorNodeTitle.tres" id="1_leleh"]
+[ext_resource type="Theme" uid="uid://bouh1fwsmxevr" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/TransitionLabelTheme.tres" id="2_transition_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6230702, 0, 0.08695074, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar_selected"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.893679, 0.14045966, 0.23549828, 1)
+border_width_bottom = 2
+border_color = Color(1, 0.93, 0.85, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[node name="TransitionEngineNode" type="GraphNode" unique_id=129192181]
+custom_minimum_size = Vector2(225, 0)
+focus_mode = 0
+mouse_filter = 1
+theme = ExtResource("1_leleh")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_titlebar")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxFlat_titlebar_selected")
+slots_focus_mode = 1
+script = ExtResource("1_engine")
+InitialOutputSlot = 0
+OutputColor = Color(0.90588236, 0.64705884, 0, 1)
+TransitionLabelTheme = ExtResource("2_transition_theme")

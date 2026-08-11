@@ -1,0 +1,230 @@
+[gd_scene format=3 uid="uid://xcmmsqodvdpo"]
+
+[ext_resource type="Script" uid="uid://bfu87r5f7ud2j" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/IBTChartCreatorUI.cs" id="1_view"]
+[ext_resource type="Script" uid="uid://lcwlnthasbhq" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorGraphEditor.cs" id="4_graph_editor"]
+[ext_resource type="PackedScene" uid="uid://cidbgvaj2jkxk" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorUI/BehaviorNode.tscn" id="5_behavior_node"]
+[ext_resource type="PackedScene" uid="uid://16gj8ibtiioi" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorUI/TransitionEngineNode.tscn" id="6_transition_engine_node"]
+[ext_resource type="PackedScene" uid="uid://bqx7changechartnodetype" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorUI/ChangeChartNodeTypePopup.tscn" id="7_change_chart_node_type_popup"]
+[ext_resource type="PackedScene" uid="uid://csjskl3us5plv" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorUI/RenameBindingGroupPopup.tscn" id="9_rename_binding_group_popup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_picker_panel"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.08, 0.08, 0.1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pouys"]
+bg_color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="IBTMainScreen" type="MarginContainer" unique_id=1397174336]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="IBTPluginUi" type="VBoxContainer" parent="." unique_id=1864234830 node_paths=PackedStringArray("TitleLabel", "DataPicker", "RefreshDataButton", "FailureSpace", "FailureTitle", "FailureHint", "IssuesList", "AuthoringWorkspace", "GraphView")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_view")
+TitleLabel = NodePath("TitleRow/TitleLabel")
+DataPicker = NodePath("TitleRow/DataPanel/DataPicker")
+RefreshDataButton = NodePath("TitleRow/RefreshDataButton")
+FailureSpace = NodePath("FailureSpace")
+FailureTitle = NodePath("FailureSpace/FailureTitle")
+FailureHint = NodePath("FailureSpace/FailureHint")
+IssuesList = NodePath("FailureSpace/IssuesList")
+AuthoringWorkspace = NodePath("AuthoringWorkspace")
+GraphView = NodePath("AuthoringWorkspace/GraphView")
+
+[node name="TitleRow" type="HBoxContainer" parent="IBTPluginUi" unique_id=2004454826]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="IBTPluginUi/TitleRow" unique_id=347158769]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "Internal Behavior Chart Creator"
+
+[node name="RefreshDataButton" type="Button" parent="IBTPluginUi/TitleRow" unique_id=1748649524]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "No behavior data loaded. Set an IBTData."
+disabled = true
+text = "🔄"
+metadata/internal_behavior_authored_tooltip = "Re-scan [Behavior] / [BehaviorTransition] into the session behavior data after a C# rebuild."
+metadata/ibt_authored_tooltip = "Re-scan [Behavior] / [BehaviorTransition] into the session behavior data after a C# rebuild."
+
+[node name="DataPanel" type="PanelContainer" parent="IBTPluginUi/TitleRow" unique_id=2068266821]
+custom_minimum_size = Vector2(250, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_picker_panel")
+
+[node name="DataPicker" type="EditorResourcePicker" parent="IBTPluginUi/TitleRow/DataPanel" unique_id=2068266823]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Behavior data for this editor session."
+base_type = "IBTData"
+
+[node name="FailureSpace" type="VBoxContainer" parent="IBTPluginUi" unique_id=98531712]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FailureTitle" type="Label" parent="IBTPluginUi/FailureSpace" unique_id=642210309]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "No behavior data"
+
+[node name="FailureHint" type="Label" parent="IBTPluginUi/FailureSpace" unique_id=523033452]
+layout_mode = 2
+text = "Set an IBTData, then use Refresh Data after C# rebuilds."
+autowrap_mode = 3
+
+[node name="IssuesList" type="ItemList" parent="IBTPluginUi/FailureSpace" unique_id=1620926821]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AuthoringWorkspace" type="VBoxContainer" parent="IBTPluginUi" unique_id=616943053]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ToolbarSpace" type="HBoxContainer" parent="IBTPluginUi/AuthoringWorkspace" unique_id=1632741295]
+layout_mode = 2
+
+[node name="BehaviorNodeTools" type="VBoxContainer" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace" unique_id=390933878]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GroupSelector" type="OptionButton" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace/BehaviorNodeTools" unique_id=95444183]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Namespace that owns the selected behavior type"
+disabled = true
+text_overrun_behavior = 3
+selected = 0
+fit_to_longest_item = false
+search_bar_enabled = true
+item_count = 1
+popup/item_0/text = "(no namespaces)"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="BehaviorSelector" type="OptionButton" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace/BehaviorNodeTools" unique_id=1264347201]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "A behavior type, use the ➕ button to add one behavior of this type"
+disabled = true
+text_overrun_behavior = 3
+selected = 0
+fit_to_longest_item = false
+search_bar_enabled = true
+item_count = 1
+popup/item_0/text = "(no behaviors)"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="AddBehaviorNode" type="Button" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace" unique_id=71832353]
+layout_mode = 2
+tooltip_text = "Set a behavior chart before adding nodes."
+disabled = true
+text = "➕"
+metadata/internal_behavior_authored_tooltip = "Add an instance of the selected behavior to the active chart."
+metadata/ibt_authored_tooltip = "Add an instance of the selected behavior to the active chart."
+
+[node name="TransitionEnginesTools" type="VBoxContainer" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace" unique_id=431503538]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GroupSelector" type="OptionButton" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace/TransitionEnginesTools" unique_id=338157470]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Namespace that owns the selected transition engine type"
+disabled = true
+text_overrun_behavior = 3
+selected = 0
+fit_to_longest_item = false
+search_bar_enabled = true
+item_count = 1
+popup/item_0/text = "(no namespaces)"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="EngineSelector" type="OptionButton" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace/TransitionEnginesTools" unique_id=131121295]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "A transition engine type, use the 📡 button to add one transition engine of this type"
+disabled = true
+text_overrun_behavior = 3
+selected = 0
+fit_to_longest_item = false
+search_bar_enabled = true
+item_count = 1
+popup/item_0/text = "(no transition engines)"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="AddTransitionEngine" type="Button" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace" unique_id=813040512]
+layout_mode = 2
+tooltip_text = "Set a behavior chart before adding nodes."
+disabled = true
+text = "📡"
+metadata/internal_behavior_authored_tooltip = "Add a transition engine to the chart."
+metadata/ibt_authored_tooltip = "Add an instance of the selected transition engine to the active chart."
+
+[node name="ChartPanel" type="PanelContainer" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace" unique_id=1286038680]
+custom_minimum_size = Vector2(250, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_picker_panel")
+
+[node name="ChartPicker" type="EditorResourcePicker" parent="IBTPluginUi/AuthoringWorkspace/ToolbarSpace/ChartPanel" unique_id=1286038681]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Behavior chart authored in this workspace."
+base_type = "IBTChart"
+
+[node name="GraphView" type="GraphEdit" parent="IBTPluginUi/AuthoringWorkspace" unique_id=1748390431 node_paths=PackedStringArray("GroupSelector", "BehaviorSelector", "AddBehaviorNodeButton", "EmitterGroupSelector", "EmitterSelector", "AddTransitionEngineButton", "ChartPicker")]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_pouys")
+right_disconnects = true
+minimap_enabled = false
+script = ExtResource("4_graph_editor")
+BehaviorNodeScene = ExtResource("5_behavior_node")
+TransitionEngineNodeScene = ExtResource("6_transition_engine_node")
+ChangeChartNodeTypePopupScene = ExtResource("7_change_chart_node_type_popup")
+RenameBindingGroupPopupScene = ExtResource("9_rename_binding_group_popup")
+GroupSelector = NodePath("../ToolbarSpace/BehaviorNodeTools/GroupSelector")
+BehaviorSelector = NodePath("../ToolbarSpace/BehaviorNodeTools/BehaviorSelector")
+AddBehaviorNodeButton = NodePath("../ToolbarSpace/AddBehaviorNode")
+EmitterGroupSelector = NodePath("../ToolbarSpace/TransitionEnginesTools/GroupSelector")
+EmitterSelector = NodePath("../ToolbarSpace/TransitionEnginesTools/EngineSelector")
+AddTransitionEngineButton = NodePath("../ToolbarSpace/AddTransitionEngine")
+ChartPicker = NodePath("../ToolbarSpace/ChartPanel/ChartPicker")

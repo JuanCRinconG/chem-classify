@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ccrwa4s7uhu31"]
+
+[ext_resource type="Script" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/ChangeChartNodeTypePopup.cs" id="1_script"]
+
+[node name="ChangeChartNodeTypePopup" type="ConfirmationDialog" node_paths=PackedStringArray("GroupSelector", "ItemSelector")]
+oversampling_override = 1.0
+title = "Change Type"
+size = Vector2i(360, 120)
+script = ExtResource("1_script")
+GroupSelector = NodePath("Content/GroupSelector")
+ItemSelector = NodePath("Content/ItemSelector")
+
+[node name="Content" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 352.0
+offset_bottom = 71.0
+theme_override_constants/separation = 8
+
+[node name="GroupSelector" type="OptionButton" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemSelector" type="OptionButton" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3

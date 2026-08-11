@@ -1,0 +1,256 @@
+[gd_scene format=3 uid="uid://cidbgvaj2jkxk"]
+
+[ext_resource type="Script" uid="uid://cyyungoqsl8pa" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_PluginCore/IBTBehaviorNode.cs" id="1_behavior_graph_node"]
+[ext_resource type="Theme" uid="uid://b2gx8do2rhotk" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/BehaviorNodeTitle.tres" id="1_c7fkb"]
+[ext_resource type="Theme" uid="uid://ba2iel0dqkli7" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/ResourcePickerTheme.tres" id="2_3oxf5"]
+[ext_resource type="Theme" uid="uid://bouh1fwsmxevr" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/TransitionLabelTheme.tres" id="2_cu4t5"]
+[ext_resource type="Script" uid="uid://boptculrisun" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/BoardsWorkspace.cs" id="3_boards_workspace"]
+[ext_resource type="Script" uid="uid://b7rqa885vsvil" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/CRUDWorkspace.cs" id="4_crud_workspace"]
+[ext_resource type="FontFile" uid="uid://jrrphlmj06u6" path="res://addons/internal_behavior_trees/IBT_Assets/OpenSans-SemiBold.ttf" id="4_xvtyt"]
+[ext_resource type="Script" uid="uid://wjxbj5iiy6b1" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/ConfigsWorkspace.cs" id="5_configs_workspace"]
+[ext_resource type="Script" uid="uid://6l8v24vbvim0" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorSystem/BehaviorNodeComponents/GraphNodeComponentOrchestrator.cs" id="6_component_orchestrator"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.19215687, 0.26666668, 0.64705884, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar_selected"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.2617837, 0.4942413, 0.8343299, 1)
+border_width_bottom = 2
+border_color = Color(0.85, 0.94, 1, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_body"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.055, 0.045, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w0r3"]
+bg_color = Color(0.81116855, 0.19924659, 0.109373026, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vyqh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.41568628, 0.81960785, 0.9882353, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45buo"]
+bg_color = Color(0.09940111, 0.65065277, 0.874514, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21m62"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="Theme" id="Theme_co6yf"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_21m62")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irosd"]
+bg_color = Color(0.2, 0.22745098, 0.35686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6bv7"]
+
+[node name="BehaviorNode" type="GraphNode" unique_id=1501701634 node_paths=PackedStringArray("ProcessOrderPicker", "SetAsInitialButton")]
+custom_minimum_size = Vector2(260, 0)
+mouse_filter = 1
+theme = ExtResource("1_c7fkb")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_titlebar")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxFlat_titlebar_selected")
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0.41557616, 0.8194809, 0.98931295, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0.19215687, 0.26666668, 0.64705884, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 1
+slot/1/left_color = Color(0.97526675, 0.9538285, 0.8098951, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_behavior_graph_node")
+ProcessOrderPicker = NodePath("MainToolbar/CRUDWorkspace/HeaderRow/ProcessOrderPicker")
+SetAsInitialButton = NodePath("MainToolbar/CRUDWorkspace/HeaderRow/PanelContainer/SetAsDefault")
+InitialOutputSlot = 2
+OutputColor = Color(0.90588236, 0.64705884, 0, 1)
+TransitionLabelTheme = ExtResource("2_cu4t5")
+
+[node name="ComponentOrchestrator" type="Node" parent="." unique_id=428179293 node_paths=PackedStringArray("GraphNode", "Components")]
+script = ExtResource("6_component_orchestrator")
+GraphNode = NodePath("..")
+Components = [NodePath("../MainToolbar/CRUDWorkspace"), NodePath("../NodeComponents/BehaviorComponents/BoardsRow"), NodePath("../NodeComponents/BehaviorComponents/ConfigsRow")]
+
+[node name="MainToolbar" type="PanelContainer" parent="." unique_id=120690997]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_body")
+
+[node name="CRUDWorkspace" type="VBoxContainer" parent="MainToolbar" unique_id=756024283 node_paths=PackedStringArray("DeleteButton", "ChangeTypeButton", "DeprecatedLabel")]
+layout_mode = 2
+script = ExtResource("4_crud_workspace")
+DeleteButton = NodePath("HeaderRow/DeleteButton")
+ChangeTypeButton = NodePath("HeaderRow/ChangeTypeButton")
+DeprecatedLabel = NodePath("DeprecatedLabel")
+
+[node name="DeprecatedLabel" type="Label" parent="MainToolbar/CRUDWorkspace" unique_id=2005944532]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_xvtyt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8w0r3")
+text = "This behavior node is not in the behavior data, change it's type or remove it"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HeaderRow" type="HBoxContainer" parent="MainToolbar/CRUDWorkspace" unique_id=366627226]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ProcessOrderPicker" type="OptionButton" parent="MainToolbar/CRUDWorkspace/HeaderRow" unique_id=1587895204]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Choose whether this behavior processes before or after its direct children."
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "No Child Process"
+popup/item_0/id = 0
+popup/item_1/text = "Parent Before Children"
+popup/item_1/id = 1
+popup/item_2/text = "Parent After Children"
+popup/item_2/id = 2
+
+[node name="DeleteButton" type="Button" parent="MainToolbar/CRUDWorkspace/HeaderRow" unique_id=201136009]
+layout_mode = 2
+tooltip_text = "Remove this behavior node from the chart."
+text = "🗑️"
+
+[node name="ChangeTypeButton" type="Button" parent="MainToolbar/CRUDWorkspace/HeaderRow" unique_id=1499285778]
+layout_mode = 2
+tooltip_text = "Change the variant of this behavior node"
+text = "🖊️"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainToolbar/CRUDWorkspace/HeaderRow" unique_id=1362792100]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2vyqh")
+
+[node name="SetAsDefault" type="CheckBox" parent="MainToolbar/CRUDWorkspace/HeaderRow/PanelContainer" unique_id=1217201745]
+layout_mode = 2
+tooltip_text = "Set this behavior node as the initial one the chart will use."
+theme_override_styles/hover = SubResource("StyleBoxFlat_45buo")
+
+[node name="NodeComponents" type="PanelContainer" parent="." unique_id=1549497154]
+layout_mode = 2
+
+[node name="BehaviorComponents" type="VBoxContainer" parent="NodeComponents" unique_id=1100621225]
+layout_mode = 2
+
+[node name="BoardsRow" type="PanelContainer" parent="NodeComponents/BehaviorComponents" unique_id=1816253411 node_paths=PackedStringArray("NoBoardsLabel", "BoardsWorkspaceNode", "BoardNameLabel", "BoardGroupLineEdit", "RenameBoardGroupButton")]
+layout_mode = 2
+script = ExtResource("3_boards_workspace")
+NoBoardsLabel = NodePath("NoBoardsLabel")
+BoardsWorkspaceNode = NodePath("BoardsWorkspace")
+BoardNameLabel = NodePath("BoardsWorkspace/BoardNameLabel")
+BoardGroupLineEdit = NodePath("BoardsWorkspace/BoardGroupLineEdit")
+RenameBoardGroupButton = NodePath("BoardsWorkspace/RenameBoardGroupButton")
+
+[node name="NoBoardsLabel" type="Label" parent="NodeComponents/BehaviorComponents/BoardsRow" unique_id=1122075236]
+layout_mode = 2
+tooltip_text = "This behavior does not implement BehaviorBoard<T>."
+text = "No boards expected"
+horizontal_alignment = 1
+
+[node name="BoardsWorkspace" type="HBoxContainer" parent="NodeComponents/BehaviorComponents/BoardsRow" unique_id=1162134184]
+visible = false
+layout_mode = 2
+
+[node name="BoardNameLabel" type="Label" parent="NodeComponents/BehaviorComponents/BoardsRow/BoardsWorkspace" unique_id=2084789133]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Board type the host must supply via SetBoards."
+mouse_filter = 0
+text = "BoardName"
+
+[node name="BoardGroupLineEdit" type="LineEdit" parent="NodeComponents/BehaviorComponents/BoardsRow/BoardsWorkspace" unique_id=1157651257]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Binding group matched against BehaviorEngine board registration."
+placeholder_text = "Global"
+
+[node name="RenameBoardGroupButton" type="Button" parent="NodeComponents/BehaviorComponents/BoardsRow/BoardsWorkspace" unique_id=422664188]
+layout_mode = 2
+tooltip_text = "Rename this board group on every behavior node in the chart."
+text = "🖊️"
+
+[node name="ConfigsRow" type="PanelContainer" parent="NodeComponents/BehaviorComponents" unique_id=686373015 node_paths=PackedStringArray("NoConfigsLabel", "ConfigsWorkspaceNode", "ConfigPicker", "InspectorPanel", "ConfigInspector")]
+layout_mode = 2
+script = ExtResource("5_configs_workspace")
+NoConfigsLabel = NodePath("NoConfigsLabel")
+ConfigsWorkspaceNode = NodePath("ConfigsWorkspace")
+ConfigPicker = NodePath("ConfigsWorkspace/ResourcePickerPanel/ConfigPicker")
+InspectorPanel = NodePath("ConfigsWorkspace/InspectorPanel")
+ConfigInspector = NodePath("ConfigsWorkspace/InspectorPanel/ConfigInspector")
+
+[node name="NoConfigsLabel" type="Label" parent="NodeComponents/BehaviorComponents/ConfigsRow" unique_id=503159766]
+layout_mode = 2
+tooltip_text = "No configs available for this behavior node, use BehaviorConfig<T> on a BehaviorCore class to use external configs"
+mouse_filter = 0
+text = "No configs available"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigsWorkspace" type="VBoxContainer" parent="NodeComponents/BehaviorComponents/ConfigsRow" unique_id=1035909061]
+visible = false
+layout_mode = 2
+
+[node name="ResourcePickerPanel" type="PanelContainer" parent="NodeComponents/BehaviorComponents/ConfigsRow/ConfigsWorkspace" unique_id=444856563]
+layout_mode = 2
+theme = ExtResource("2_3oxf5")
+
+[node name="ConfigPicker" type="EditorResourcePicker" parent="NodeComponents/BehaviorComponents/ConfigsRow/ConfigsWorkspace/ResourcePickerPanel" unique_id=803356383]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Optional configuration resource for this behavior."
+theme = SubResource("Theme_co6yf")
+toggle_mode = true
+
+[node name="InspectorPanel" type="PanelContainer" parent="NodeComponents/BehaviorComponents/ConfigsRow/ConfigsWorkspace" unique_id=756653451]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_3oxf5")
+
+[node name="ConfigInspector" type="EditorInspector" parent="NodeComponents/BehaviorComponents/ConfigsRow/ConfigsWorkspace/InspectorPanel" unique_id=803356384]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_irosd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_u6bv7")
+draw_focus_border = false
+vertical_scroll_mode = 0

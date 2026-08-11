@@ -1,0 +1,237 @@
+[gd_scene format=3 uid="uid://bpofuqj4ng221"]
+
+[ext_resource type="Script" uid="uid://bk76ekgoh61rg" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_RuntimeEditor/IBT_RuntimeEditorSystem/IBTRuntimeEditorUI.cs" id="1_panel"]
+[ext_resource type="Script" uid="uid://fbp0loqlfoya" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_RuntimeEditor/IBT_RuntimeEditorSystem/IBTRuntimeGraphEdit.cs" id="3_graph"]
+[ext_resource type="PackedScene" uid="uid://bht4ggvwbu6bn" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_RuntimeEditor/IBT_RuntimeEditorUI/BehaviorNode.tscn" id="4_behavior_node"]
+[ext_resource type="PackedScene" uid="uid://14t7cpcrjm6n" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_RuntimeEditor/IBT_RuntimeEditorUI/TransitionNode.tscn" id="5_engine_node"]
+[ext_resource type="Theme" uid="uid://b2gx8do2rhotk" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/BehaviorNodeTitle.tres" id="6_lp8ll"]
+[ext_resource type="Theme" uid="uid://n6spn7faupfy" path="res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_UIStyles/BehaviorNodeActive.tres" id="7_lp8ll"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdi34"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w0r3"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7mgy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yu70j"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127608, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.32172796, 0.321728, 0.32172775, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w0r3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4t55"]
+bg_color = Color(0, 0, 0, 0.2784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e15o"]
+bg_color = Color(0.043137256, 0.043137256, 0.043137256, 0.5058824)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.043137256, 0.043137256, 0.043137256, 0.5058824)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="IBTMainScreen" type="HBoxContainer" unique_id=2112164309]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="." unique_id=156177423]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="UIBrain" type="PanelContainer" parent="." unique_id=1879622409 node_paths=PackedStringArray("FailureSpace", "FailureTitle", "FailureHint", "IssuesList", "AuthoringWorkspace", "EntitySelector", "GraphView", "KeyDisplayLabel")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_hdi34")
+script = ExtResource("1_panel")
+FailureSpace = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel")
+FailureTitle = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace/FailureTitle")
+FailureHint = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace/FailureHint")
+IssuesList = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace/IssuesList")
+AuthoringWorkspace = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace")
+EntitySelector = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/BlackPanel/ToolBar/EntitySelector")
+GraphView = NodePath("InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/GraphPanel/GraphView")
+KeyDisplayLabel = NodePath("InnerContainer/IBTPluginUi/BlackPanel/TitleRow/KeyLabel")
+
+[node name="InnerContainer" type="PanelContainer" parent="UIBrain" unique_id=1186521105]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8w0r3")
+
+[node name="IBTPluginUi" type="VBoxContainer" parent="UIBrain/InnerContainer" unique_id=1864234830]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="BlackPanel" type="PanelContainer" parent="UIBrain/InnerContainer/IBTPluginUi" unique_id=1663241401]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7mgy")
+
+[node name="TitleRow" type="HBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi/BlackPanel" unique_id=2004454826]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/BlackPanel/TitleRow" unique_id=347158769]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "Internal Behavior Editor"
+
+[node name="PressLabel" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/BlackPanel/TitleRow" unique_id=1964071843]
+layout_mode = 2
+text = "Press"
+
+[node name="KeyLabel" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/BlackPanel/TitleRow" unique_id=997002263]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ToExitLabel" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/BlackPanel/TitleRow" unique_id=1127455928]
+layout_mode = 2
+text = "to exit"
+
+[node name="WorkspacePanel" type="VBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi" unique_id=1875660837]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FailBlackPanel" type="PanelContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel" unique_id=1490717339]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7mgy")
+
+[node name="FailureSpace" type="VBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel" unique_id=98531712]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FailureTitle" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace" unique_id=642210309]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "No behavior data"
+
+[node name="FailureHint" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace" unique_id=523033452]
+layout_mode = 2
+text = "Assign an IBTData resource on the runtime editor autoload."
+autowrap_mode = 3
+
+[node name="IssuesList" type="ItemList" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/FailBlackPanel/FailureSpace" unique_id=1620926821]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+
+[node name="AuthoringWorkspace" type="VBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel" unique_id=616943053]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="BlackPanel" type="PanelContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace" unique_id=1655734703]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yu70j")
+
+[node name="ToolBar" type="HBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/BlackPanel" unique_id=93299522]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntitySelector" type="OptionButton" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/BlackPanel/ToolBar" unique_id=95444183]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Entity with an editable behavior chart"
+focus_mode = 0
+text_overrun_behavior = 3
+fit_to_longest_item = false
+search_bar_enabled = true
+
+[node name="PushGraphButton" type="Button" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/BlackPanel/ToolBar" unique_id=1464712886]
+layout_mode = 2
+focus_mode = 0
+disabled = true
+text = "Push Graph"
+
+[node name="GraphPanel" type="PanelContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace" unique_id=1750363682]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8w0r3")
+
+[node name="GraphView" type="GraphEdit" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/GraphPanel" unique_id=1748390431 node_paths=PackedStringArray("EntitySelector", "PushGraphButton", "TransitionLabelsSpace", "TransitionLabelDefault")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h4t55")
+right_disconnects = true
+minimap_enabled = false
+show_menu = false
+show_zoom_buttons = false
+show_grid_buttons = false
+show_minimap_button = false
+show_arrange_button = false
+script = ExtResource("3_graph")
+BehaviorNodeScene = ExtResource("4_behavior_node")
+TransitionEngineNodeScene = ExtResource("5_engine_node")
+EntitySelector = NodePath("../../BlackPanel/ToolBar/EntitySelector")
+PushGraphButton = NodePath("../../BlackPanel/ToolBar/PushGraphButton")
+InactiveGraphNodeTheme = ExtResource("6_lp8ll")
+ActiveGraphNodeTheme = ExtResource("7_lp8ll")
+TransitionLabelsSpace = NodePath("../PanelContainer/TransitionLabelsSpace")
+TransitionLabelDefault = NodePath("../TransitionLabelDefault")
+
+[node name="TransitionLabelDefault" type="Label" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/GraphPanel" unique_id=954087014]
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4e15o")
+text = "(transition message)"
+
+[node name="PanelContainer" type="MarginContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/GraphPanel" unique_id=192959912]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TransitionLabelsSpace" type="VBoxContainer" parent="UIBrain/InnerContainer/IBTPluginUi/WorkspacePanel/AuthoringWorkspace/GraphPanel/PanelContainer" unique_id=1714153613]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2

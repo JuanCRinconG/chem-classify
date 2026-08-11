@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://quh5ye76ijee"]
+
+[ext_resource type="Script" uid="uid://uqwxlhcvw5c2" path="res://addons/data_path_maker/DataPathMakerSystem/DataPathPopup.cs" id="1_popup"]
+
+[node name="DataPathPopup" type="PopupPanel" unique_id=1286903513 node_paths=PackedStringArray("ChromeRoot", "FailureSpace", "DataPathMakerWorkspace", "ChangeDataButton", "CurrentDataLabel", "BackButton", "Search", "KeyList")]
+oversampling_override = 1.0
+size = Vector2i(330, 268)
+wrap_controls = false
+exclusive = true
+min_size = Vector2i(330, 268)
+max_size = Vector2i(330, 268)
+script = ExtResource("1_popup")
+PopupMouseOffset = Vector2(-70, 10)
+ChromeRoot = NodePath("Chrome")
+FailureSpace = NodePath("Chrome/WorkspaceContainer/FailureSpace")
+DataPathMakerWorkspace = NodePath("Chrome/WorkspaceContainer/DataPathMakerWorkspace")
+ChangeDataButton = NodePath("Chrome/WorkspaceContainer/DataPathToolbar/ChangeData")
+CurrentDataLabel = NodePath("Chrome/WorkspaceContainer/DataPathToolbar/CurrentDataLabel")
+BackButton = NodePath("Chrome/WorkspaceContainer/DataPathMakerWorkspace/Toolbar/BackButton")
+Search = NodePath("Chrome/WorkspaceContainer/DataPathMakerWorkspace/Toolbar/Search")
+KeyList = NodePath("Chrome/WorkspaceContainer/DataPathMakerWorkspace/PanelContainer/KeyList")
+
+[node name="Chrome" type="MarginContainer" parent="." unique_id=1533668519]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="WorkspaceContainer" type="VBoxContainer" parent="Chrome" unique_id=411514779]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DataPathToolbar" type="HBoxContainer" parent="Chrome/WorkspaceContainer" unique_id=860212382]
+layout_mode = 2
+
+[node name="ChangeData" type="Button" parent="Chrome/WorkspaceContainer/DataPathToolbar" unique_id=416686703]
+layout_mode = 2
+text = "Change Data..."
+
+[node name="CurrentDataLabel" type="Label" parent="Chrome/WorkspaceContainer/DataPathToolbar" unique_id=1074235643]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "(no data)"
+text_overrun_behavior = 3
+
+[node name="DataPathMakerWorkspace" type="VBoxContainer" parent="Chrome/WorkspaceContainer" unique_id=751951506]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Toolbar" type="HBoxContainer" parent="Chrome/WorkspaceContainer/DataPathMakerWorkspace" unique_id=1863451924]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Search" type="LineEdit" parent="Chrome/WorkspaceContainer/DataPathMakerWorkspace/Toolbar" unique_id=1182540665]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search…"
+
+[node name="BackButton" type="Button" parent="Chrome/WorkspaceContainer/DataPathMakerWorkspace/Toolbar" unique_id=675778913]
+layout_mode = 2
+tooltip_text = "Return to previous selection"
+disabled = true
+text = "<"
+
+[node name="PanelContainer" type="PanelContainer" parent="Chrome/WorkspaceContainer/DataPathMakerWorkspace" unique_id=1945334621]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="KeyList" type="ItemList" parent="Chrome/WorkspaceContainer/DataPathMakerWorkspace/PanelContainer" unique_id=40239434]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+allow_reselect = true
+
+[node name="FailureSpace" type="VBoxContainer" parent="Chrome/WorkspaceContainer" unique_id=2050443187]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Chrome/WorkspaceContainer/FailureSpace" unique_id=1937332711]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No session resource. Use Change Data to load a Resource root."
+autowrap_mode = 3
+text_overrun_behavior = 3
