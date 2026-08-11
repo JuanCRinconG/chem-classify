@@ -1,6 +1,6 @@
-public partial class ReusableError : PopupPanel
+public partial class ErrorService : PopupPanel
 {
-	public static ReusableError CurrentInstance;
+	public static ErrorService CurrentInstance;
 
 	[Export]
 	public TextureRect WarnIcon;
@@ -19,10 +19,10 @@ public partial class ReusableError : PopupPanel
 		CurrentInstance = null;
 	}
 
-	public void CastErrorMessage(ReusableErrorData ErrorData)
+	public void CastErrorMessage(Control Caster, ErrorData Error)
 	{
-		WarnIcon.Texture = ErrorData.WarnTexture;
-		WarnTextSpace.Text = ErrorData.WarnText;
+		WarnIcon.Texture = Error.WarnTexture;
+		WarnTextSpace.Text = Error.WarnText;
 		this.Visible = true;
 	}
 }

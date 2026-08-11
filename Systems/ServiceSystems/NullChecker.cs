@@ -18,6 +18,14 @@ public static class NullChecker
 				GD.PushWarning($"[NullChecker] '{entry.Name}' is null.");
 				result = false;
 			}
+			if (entry.Value is string StringEntry)
+			{
+				if (string.IsNullOrWhiteSpace(StringEntry))
+				{
+					GD.PushWarning($"[NullChecker] '{entry.Name}' is null or whitespace");
+					result = false;
+				}
+			}
 		}
 
 		return result;
