@@ -60,11 +60,21 @@ $env:GOOGLE_APPLICATION_CREDENTIALS
 Test-Path $env:GOOGLE_APPLICATION_CREDENTIALS
 ```
 
-you should see the credentials path after that, twice, as well as a True at the end for the Test-Path, reload your IDE and type this command to verify if eveyrthing worked:  
+you should see the credentials path after that, twice, as well as a True at the end for the Test-Path, reload your IDE and type this command to verify if everything worked:  
 
 ```
 $env:GOOGLE_APPLICATION_CREDENTIALS
 ```
+
+then, execute this command:
+
+```
+[System.Environment]::SetEnvironmentVariable("FIREBASE_WEB_API_KEY", "<the-key-in-APIKeys>", "User")
+
+$env:FIREBASE_WEB_API_KEY = [System.Environment]::GetEnvironmentVariable("FIREBASE_WEB_API_KEY", "User")
+```
+
+this will provide the environment with the apiKey for the firebase web
 
 # Second Dependency: Simple mail transfer protocol
 
@@ -104,6 +114,6 @@ the last test should provide the environment variables plus a false, meaning tha
 
 # Success criteria in Godot
 
-Before any godot testing is done, you must reload godot entirely afterall setups
+Before any godot testing is done, you must reload godot entirely after all the setups
 
 the actual success criteria for the godot test: currently, the firebase test script is in a node within the main scene, when executing the project normally, you should see a sample UID from an user from the firebase auth section, as well as a message that says "Firebase admin connection seems ok"

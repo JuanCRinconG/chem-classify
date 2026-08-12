@@ -9,11 +9,11 @@ public static class MailService
     public static string pass = System.Environment.GetEnvironmentVariable("SMTP_PASS");
     public static string from = System.Environment.GetEnvironmentVariable("SMTP_FROM");
 
-    public static async Task SendMail(MailData SendableMail)
+    public static async Task SendMail(MailData SendableMail, string MailReceiver)
     {
         var mailMessage = new MimeMessage();
         mailMessage.From.Add(MailboxAddress.Parse(from));
-        mailMessage.To.Add(MailboxAddress.Parse(SendableMail.MailReceiver));
+        mailMessage.To.Add(MailboxAddress.Parse(MailReceiver));
         mailMessage.Subject = SendableMail.MailSubject;
         mailMessage.Body = new TextPart("plain") { Text = SendableMail.MailBody};
 

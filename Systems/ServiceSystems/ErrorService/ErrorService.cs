@@ -1,6 +1,6 @@
 public partial class ErrorService : PopupPanel
 {
-	public static ErrorService CurrentInstance;
+	public static ErrorService Current;
 
 	[Export]
 	public TextureRect WarnIcon;
@@ -10,13 +10,13 @@ public partial class ErrorService : PopupPanel
 
 	public override void _EnterTree()
 	{
-		CurrentInstance = this;
+		Current = this;
 		this.Visible = false;
 	}
 
 	public override void _ExitTree()
 	{
-		CurrentInstance = null;
+		Current = null;
 	}
 
 	public void CastErrorMessage(Control Caster, ErrorData Error)

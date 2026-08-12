@@ -4,6 +4,9 @@ public partial class MailNode : Node
     [Export]
     public MailData MailMessage;
 
+    [Export]
+    public string MailReceiver;
+
     public override void _EnterTree()
     {
         if (MailMessage == null)
@@ -11,6 +14,9 @@ public partial class MailNode : Node
             GD.PrintErr("MailMessage is null");
             return;
         }
-        _ = MailService.SendMail(MailMessage);
+        if (MailMessage.VerifyMail())
+        {
+            _ = MailService.SendMail(MailMessage, MailReceiver);
+        }    
     }
 }

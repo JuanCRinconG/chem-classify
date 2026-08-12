@@ -1,15 +1,15 @@
-public class UISwapService
+public static class UISwapService
 {
     /// <summary>
     /// Utility for swapping to a different scene
     /// </summary>
     /// <param name="Current"></param>
     /// <param name="Scene"></param>
-    public void SwapScene(Control Current, PackedScene Scene)
+    public static void SwapScene(Control Current, PackedScene Scene)
     {
         Current.Visible = false;
         var NextScene = Scene.Instantiate();
-        MainUISystem.CurrentInstance.UIContainerSpace.AddChild(NextScene);
+        MainUISystem.Current.UIContainerSpace.AddChild(NextScene);
         Current.QueueFree();
     }
 }

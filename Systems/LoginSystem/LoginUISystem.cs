@@ -1,90 +1,37 @@
-/*
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+using System;
 
-public partial class LoginUiController : Control
+public partial class LoginUISystem : Control
 {
-    // UI Node References
-    [Export] private LineEdit _emailInput;
-    [Export] private LineEdit _passwordInput;
-    [Export] private Label _statusLabel;
+    private UIBindings _LoginBindings = new();
 
-    private static readonly HttpClient _client = new HttpClient();
-    private const string BackendUrl = "https://your-custom-backend.com";
+    [Export]
+    public LineEdit EmailInput;
 
-    // Triggered by your UI Button's "pressed" signal
-    public async void OnLoginButtonPressed()
+    [Export]
+    public LineEdit PasswordInput;
+
+    [Export]
+    public Button ConfirmFieldsButton;
+
+    public event Action LoginSuccess;
+
+    public override void _Ready()
     {
-        string email = _emailInput.Text.Trim();
-        string password = _passwordInput.Text;
+        _LoginBindings.BindButton(ConfirmFieldsButton, OnConfirmFields);
+    }
 
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+    public async void OnConfirmFields()
+    {
+        ConfirmFieldsButton.Disabled = true;
+        string UserEmail = EmailInput.Text.Trim();
+        string UserPassword = PasswordInput.Text; 
+        UserSessionData? data = await FirebaseAuthenticate.SignIn(UserEmail, UserPassword);
+        if (data == null)
         {
-            _statusLabel.Text = "Please fill in all fields.";
             return;
         }
-
-        _statusLabel.Text = "Connecting to game servers...";
-        
-        // Disable UI elements to prevent double-clicking
-        _emailInput.Editable = false;
-        _passwordInput.Editable = false;
-
-        CleanBackendResponse result = await RequestLoginFromBackend(email, password);
-
-        // Re-enable UI
-        _emailInput.Editable = true;
-        _passwordInput.Editable = true;
-
-        if (result != null && result.Success)
-        {
-            _statusLabel.Text = "Login successful!";
-            // Save result.Token globally to attach to your future data requests
-            GD.Print($"User Logged In. UID: {result.LocalId}");
-            
-            // Proceed to the main application or character select screen
-        }
-        else
-        {
-            _statusLabel.Text = result?.ErrorMessage ?? "Connection failed.";
-        }
-    }
-
-    private async Task<CleanBackendResponse> RequestLoginFromBackend(string email, string password)
-    {
-        var loginData = new { email = email, password = password };
-        string json = JsonSerializer.Serialize(loginData);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-        try
-        {
-            HttpResponseMessage response = await _client.PostAsync(BackendUrl, content);
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<CleanBackendResponse>(jsonResponse, new JsonSerializerOptions 
-                { 
-                    PropertyNameCaseInsensitive = true 
-                });
-            }
-        }
-        catch (HttpRequestException e)
-        {
-            GD.PrintErr($"Network Error: {e.Message}");
-        }
-
-        return null;
+        _ = new UserSession(data.Value);
+        LoginSuccess?.Invoke();
+        ConfirmFieldsButton.Disabled = false;
     }
 }
-
-// Match the clean structural mapping from the backend
-public class CleanBackendResponse
-{
-    public bool Success { get; set; }
-    public string LocalId { get; set; }
-    public string Token { get; set; }
-    public string ErrorMessage { get; set; }
-}
-*/

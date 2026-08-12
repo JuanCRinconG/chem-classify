@@ -9,11 +9,11 @@ public partial class MainUISystem : Control
 	[Export]
 	public PackedScene FirstUIPanel;
 
-	public static MainUISystem CurrentInstance;
+	public static MainUISystem Current;
 	
 	public override void _EnterTree()
 	{
-		CurrentInstance = this;
+		Current = this;
 	}
 
 	public override void _Ready()
@@ -29,6 +29,6 @@ public partial class MainUISystem : Control
 	
 	public override void _ExitTree()
 	{
-		CurrentInstance = null;
+		Current = null;
 	}
 }
