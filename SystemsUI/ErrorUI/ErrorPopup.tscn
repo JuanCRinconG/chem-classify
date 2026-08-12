@@ -32,3 +32,5 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

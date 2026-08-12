@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bkd8prgw1gjqr"]
+
+[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://SystemsUI/LoginUI/LoginTheme.tres" id="1_14px2"]
+[ext_resource type="Script" uid="uid://bg4og635k3w0n" path="res://Systems/LoginSystem/CreateAccountUISystem.cs" id="2_ms4ls"]
+[ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_8clu7"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UISwapService/UISwapButton.cs" id="4_14px2"]
+[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://SystemsUI/LoginUI/LoginPanel.tscn" id="5_7ojac"]
+
+[node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmPassword", "ConfirmFieldsButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -96.0
+offset_right = 193.5
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_14px2")
+script = ExtResource("2_ms4ls")
+EmailInput = NodePath("VBoxContainer/EmailInput")
+PasswordInput = NodePath("VBoxContainer/PasswordInput")
+ConfirmPassword = NodePath("VBoxContainer/PasswordConfirm")
+ConfirmFieldsButton = NodePath("VBoxContainer/HBoxContainer/ConfirmFields")
+LoginError = ExtResource("3_8clu7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1057539187]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1103271864]
+layout_mode = 2
+text = "Create Account"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer" unique_id=169948863]
+visible = false
+layout_mode = 2
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer" unique_id=415940881]
+layout_mode = 2
+placeholder_text = "(your email here)"
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer" unique_id=945747193]
+layout_mode = 2
+placeholder_text = "(your password here)"
+
+[node name="PasswordConfirm" type="LineEdit" parent="VBoxContainer" unique_id=184332624]
+layout_mode = 2
+placeholder_text = "(confirm your password)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=498867843]
+layout_mode = 2
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1353278045 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Return"
+script = ExtResource("4_14px2")
+CurrentSceneRoot = NodePath("../../..")
+NextScene = ExtResource("5_7ojac")
+
+[node name="ConfirmFields" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=942896483]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"

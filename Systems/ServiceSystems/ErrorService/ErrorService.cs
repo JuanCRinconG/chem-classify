@@ -18,17 +18,26 @@ public partial class ErrorService : PopupPanel
 	{
 		WarnIcon.Texture = Error.WarnTexture;
 		WarnTextSpace.Text = Error.WarnText;
-		ResetSize();
-		Vector2I popupSize = Size;
-		Rect2 CasterRect = Caster.GetGlobalRect();
-		Vector2 anchor = new (CasterRect.Position.X, CasterRect.Position.Y);
-		anchor += new Vector2(Error.OffsetFromCaster.X, Error.OffsetFromCaster.Y);
-		Transform2D toScreen = Caster.GetViewport().GetScreenTransform();
-		Vector2 screenPos = toScreen * anchor;
-		Vector2I popupPos = (Vector2I)screenPos.Round();
-		Vector2 visible = Caster.GetViewport().GetVisibleRect().Size;
-		popupPos.X = Mathf.Clamp(popupPos.X, 0, (int)visible.X - popupSize.X);
-		popupPos.Y = Mathf.Clamp(popupPos.Y, 0, (int)visible.Y - popupSize.Y);
-		Popup(new Rect2I(popupPos, popupSize));
+		ResetSize(); 
+
+		Vector2 popupSize = Size;
+		Rect2 casterGlobalRect = Caster.GetGlobalRect();
+		Vector2 targetPos = casterGlobalRect.GetCenter() - (popupSize * 0.5f);
+		targetPos += Error.OffsetFromCaster;
+
+		Rect2 viewportRect = Caster.GetViewport().GetVisibleRect();
+		
+		float minX = viewportRect.Position.X;
+		float minY = viewportRect.Position.Y;
+		float maxX = Mathf.Max(minX, viewportRect.End.X - popupSize.X);
+		float maxY = Mathf.Max(minY, viewportRect.End.Y - popupSize.Y);
+
+		Vector2I finalPos = (Vector2I)new Vector2(
+			Mathf.Clamp(targetPos.X, minX, maxX),
+			Mathf.Clamp(targetPos.Y, minY, maxY)
+		).Round();
+
+		Position = finalPos;
+		Popup();
 	}
 }

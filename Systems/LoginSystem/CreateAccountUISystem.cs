@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-public partial class LoginUISystem : Control
+public partial class CreateAccountUISystem : Control
 {
     private UIBindings _LoginBindings = new();
 
@@ -12,13 +12,13 @@ public partial class LoginUISystem : Control
     public LineEdit PasswordInput;
 
     [Export]
+    public LineEdit ConfirmPassword;
+
+    [Export]
     public Button ConfirmFieldsButton;
 
     [Export]
     public ErrorData LoginError;
-
-    [Export]
-    public Button ForgotPasswordButton;
 
     public event Action LoginSuccess;
 
@@ -50,10 +50,17 @@ public partial class LoginUISystem : Control
             return;
         }
         string UserPassword = PasswordInput.Text; 
-        string PasswordResult = LoginValidation.Password(UserPassword);
+        string PasswordResult = LoginValidation.PasswordForCreate(UserPassword);
         if (LoginValidation.Invalid(PasswordResult))
         {
             LoginError.WarnText = PasswordResult;
+            ErrorService.Current.CastErrorMessage(this, LoginError);
+            return;
+        }
+        string ConfirmationResult = LoginValidation.PasswordConfirmation(UserPassword, ConfirmPassword.Text);
+        if (LoginValidation.Invalid(ConfirmationResult))
+        {
+            LoginError.WarnText = ConfirmationResult;
             ErrorService.Current.CastErrorMessage(this, LoginError);
             return;
         }

@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Net.Http;
 using System.Text;
@@ -8,15 +9,38 @@ using System.Threading.Tasks;
 public static class FirebaseAuthenticate
 {
     private static readonly System.Net.Http.HttpClient Http = new System.Net.Http.HttpClient();
-    public static async Task<UserSessionData?> SignIn(string email, string password)
+
+    private static readonly string apiKey = GetFireBaseAPIKey();
+
+    private static readonly string ToolkitUrlBase = "https://identitytoolkit.googleapis.com/v1/accounts:";
+
+    private static string GetFireBaseAPIKey()
     {
-        string apiKey = System.Environment.GetEnvironmentVariable("FIREBASE_WEB_API_KEY");
-        if (string.IsNullOrWhiteSpace(apiKey))
+        string? ApiKey = System.Environment.GetEnvironmentVariable("FIREBASE_WEB_API_KEY");
+        if (string.IsNullOrWhiteSpace(ApiKey))
         {
             GD.PrintErr("Firebase web api key is missing");
-            return null;
+            return "";
         }
-        string url = $"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={apiKey}";
+        return ApiKey;
+    }
+
+    public static Task<AuthResult> SignIn(string email, string password)
+        => PostEmailPassword("signInWithPassword", email, password, "Sign-in");
+
+    public static Task<AuthResult> SignUp(string email, string password)
+        => PostEmailPassword("signUp", email, password, "Sign-up");
+    
+    private static async Task<AuthResult> PostEmailPassword(
+    string endpoint,      // "signInWithPassword" | "signUp"
+    string email,
+    string password,
+    string failLogLabel)
+    {
+        string apiKey = GetFireBaseAPIKey();
+        if (string.IsNullOrWhiteSpace(apiKey))
+            return AuthResult.Fail("Authentication service is not configured.");
+        string url = $"{ToolkitUrlBase}{endpoint}?key={apiKey}";
         var payload = new { email, password, returnSecureToken = true };
         using var content = new StringContent(
             JsonSerializer.Serialize(payload),
@@ -28,32 +52,114 @@ public static class FirebaseAuthenticate
             string body = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                GD.PrintErr($"Sign-in failed: {body}");
-                return null;
+                GD.PrintErr($"{failLogLabel} failed: {body}");
+                string raw = TryGetFirebaseErrorMessage(body);
+                string userMsg = MapFirebaseErrorMessage(raw);
+                return AuthResult.Fail(userMsg);
             }
-            var parsed = JsonSerializer.Deserialize<SignInResponse>(body);
+            var parsed = JsonSerializer.Deserialize<AuthTokenResponse>(body);
             if (parsed == null || string.IsNullOrWhiteSpace(parsed.LocalId))
-                return null;
-            return new UserSessionData(
+                return AuthResult.Fail("Unexpected response from authentication service.");
+            return AuthResult.Success(new UserSessionData(
                 parsed.LocalId,
                 parsed.Email ?? email,
-                parsed.IdToken);
+                parsed.IdToken));
         }
         catch (Exception ex)
         {
-            GD.PrintErr($"Sign-in exception: {ex.Message}");
-            return null;
+            GD.PrintErr($"{failLogLabel} exception: {ex.Message}");
+            return AuthResult.Fail("Network error. Check your connection and try again.");
         }
     }
-    private sealed class SignInResponse
+
+    private static string TryGetFirebaseErrorMessage(string body)
     {
-        [JsonPropertyName("localId")] public string LocalId { get; set; }
-        [JsonPropertyName("email")] public string Email { get; set; }
-        [JsonPropertyName("idToken")] public string IdToken { get; set; }
+        if (string.IsNullOrWhiteSpace(body))
+            return string.Empty;
+
+        try
+        {
+            var envelope = JsonSerializer.Deserialize<FirebaseErrorEnvelope>(body);
+            return envelope?.Error?.Message?.Trim() ?? string.Empty;
+        }
+        catch (JsonException)
+        {
+            return string.Empty;
+        }
+    }
+
+    private static string NormalizeFirebaseErrorCode(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+            return string.Empty;
+
+        // "WEAK_PASSWORD : Password should be..." → "WEAK_PASSWORD"
+        int colon = raw.IndexOf(':');
+        string code = colon >= 0 ? raw[..colon] : raw;
+        return code.Trim().ToUpperInvariant();
+    }
+
+    private static string MapFirebaseErrorMessage(string rawMessage)
+    {
+        string code = NormalizeFirebaseErrorCode(rawMessage);
+
+        return code switch
+        {
+            "EMAIL_EXISTS" =>
+                "This email is already registered.",
+            "EMAIL_NOT_FOUND" =>
+                "No account exists with this email.",
+            "INVALID_PASSWORD" =>
+                "Incorrect password.",
+            "INVALID_LOGIN_CREDENTIALS" =>
+                "Incorrect email or password.",
+            "INVALID_EMAIL" =>
+                "The email address is invalid.",
+            "WEAK_PASSWORD" =>
+                "Password is too weak. Use at least 6 characters.",
+            "OPERATION_NOT_ALLOWED" =>
+                "Email/password accounts are disabled for this project.",
+            "USER_DISABLED" =>
+                "This account has been disabled.",
+            "TOO_MANY_ATTEMPTS_TRY_LATER" =>
+                "Too many attempts. Try again later.",
+            "MISSING_PASSWORD" =>
+                "Password is required.",
+            "MISSING_EMAIL" =>
+                "Email is required.",
+            _ =>
+                string.IsNullOrEmpty(code)
+                    ? "Authentication failed. Please try again."
+                    : $"Authentication failed ({code})."
+        };
+    }
+
+    private sealed class AuthTokenResponse
+    {
+        [JsonPropertyName("localId")] public string? LocalId { get; set; }
+        [JsonPropertyName("email")] public string? Email { get; set; }
+        [JsonPropertyName("idToken")] public string? IdToken { get; set; }
+    }
+
+    private sealed class FirebaseErrorEnvelope
+    {
+        [JsonPropertyName("error")]
+        public FirebaseErrorBody? Error { get; set; }
+    }
+
+    private sealed class FirebaseErrorBody
+    {
+        [JsonPropertyName("code")]
+        public int Code { get; set; }
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
     }
 }
 
-public static class FirebaseCreateUser
+public readonly record struct AuthResult(UserSessionData? Data, string? ErrorMessage)
 {
-    
+    public bool Ok => Data is not null;
+    public static AuthResult Success(UserSessionData data) => new(data, null);
+    public static AuthResult Fail(string message) => new(null, message);
 }
