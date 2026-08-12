@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0.53224236, 0.5322423, 0.53224254, 1)
 boot_splash/image="uid://cnwmbutu7h4ns"
 config/icon="res://icon.svg"
 
+[autoload]
+
+ErrorPopup="*uid://dcl7mex53n7je"
+
 [display]
 
 window/size/mode=3

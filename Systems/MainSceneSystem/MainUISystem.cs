@@ -14,6 +14,7 @@ public partial class MainUISystem : Control
 	public override void _EnterTree()
 	{
 		Current = this;
+		FirebaseConnect.InitializeFirebase();
 	}
 
 	public override void _Ready()

@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://bghlurisvn5yk"]
 
 [ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://SystemsUI/LoginUI/LoginTheme.tres" id="1_vg5ts"]
+[ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/LoginSystem/LoginUISystem.cs" id="2_ayv28"]
+[ext_resource type="Texture2D" uid="uid://xjwc08ecvb5l" path="res://SystemsAssets/ErrorAssets/MailError.png" id="3_f2vgc"]
+[ext_resource type="Script" uid="uid://cpml3o3e1wfmi" path="res://Systems/ServiceSystems/ErrorService/ErrorData.cs" id="4_r7ofh"]
 
-[node name="LoginPanel" type="PanelContainer" unique_id=362582116]
+[sub_resource type="Resource" id="Resource_x8x6w"]
+script = ExtResource("4_r7ofh")
+WarnTexture = ExtResource("3_f2vgc")
+metadata/_custom_type_script = "uid://cpml3o3e1wfmi"
+
+[node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmFieldsButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -15,6 +23,11 @@ offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vg5ts")
+script = ExtResource("2_ayv28")
+EmailInput = NodePath("VBoxContainer/EmailInput")
+PasswordInput = NodePath("VBoxContainer/PasswordInput")
+ConfirmFieldsButton = NodePath("VBoxContainer/ConfirmFields")
+LoginError = SubResource("Resource_x8x6w")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1057539187]
 layout_mode = 2
