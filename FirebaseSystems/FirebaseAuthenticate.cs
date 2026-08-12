@@ -10,8 +10,6 @@ public static class FirebaseAuthenticate
 {
     private static readonly System.Net.Http.HttpClient Http = new System.Net.Http.HttpClient();
 
-    private static readonly string apiKey = GetFireBaseAPIKey();
-
     private static readonly string ToolkitUrlBase = "https://identitytoolkit.googleapis.com/v1/accounts:";
 
     private static string GetFireBaseAPIKey()

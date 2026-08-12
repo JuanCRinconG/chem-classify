@@ -1,3 +1,5 @@
+using System.CodeDom;
+
 [GlobalClass]
 public partial class ErrorData : Resource
 {
@@ -9,4 +11,10 @@ public partial class ErrorData : Resource
 
     [Export]
     public string WarnText;
+
+    public void Show(string ErrorMessage, Control Source)
+    {
+        WarnText = ErrorMessage;
+        ErrorService.Current.CastErrorMessage(Source, this);
+    }
 }

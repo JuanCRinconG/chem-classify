@@ -42,29 +42,27 @@ public partial class LoginUISystem : Control
     public async Task VerifyUserInputs()
     {
         string UserEmail = EmailInput.Text.Trim();
-        string MailResult = LoginValidation.Email(UserEmail);
-        if (LoginValidation.Invalid(MailResult))
+        if (LoginValidation.Email(UserEmail) is string emailError)
         {
-            LoginError.WarnText = MailResult;
-            ErrorService.Current.CastErrorMessage(this, LoginError);
-            return;
-        }
-        string UserPassword = PasswordInput.Text; 
-        string PasswordResult = LoginValidation.Password(UserPassword);
-        if (LoginValidation.Invalid(PasswordResult))
-        {
-            LoginError.WarnText = PasswordResult;
-            ErrorService.Current.CastErrorMessage(this, LoginError);
+            LoginError.Show(emailError, this);
             return;
         }
 
+        string UserPassword = PasswordInput.Text;
+        if (LoginValidation.Password(UserPassword) is string passwordError)
+        {
+            LoginError.Show(passwordError, this);
+            return;
+        }  
+        
         AuthResult result = await FirebaseAuthenticate.SignIn(UserEmail, UserPassword);
         if (!result.Ok)
         {
-            LoginError.WarnText = result.ErrorMessage ?? "Authentication fail, verify that email or password are correct";
-            ErrorService.Current.CastErrorMessage(this, LoginError);
+            string authError = result.ErrorMessage ?? "Authentication failed, verify that email or password are correct";
+            LoginError.Show(authError, this);
             return;
         }
+
         _ = new UserSession(result.Data.Value);
         LoginSuccess?.Invoke();
     }

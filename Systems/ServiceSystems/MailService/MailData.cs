@@ -1,17 +1,25 @@
-[GlobalClass]
-public partial class MailData : Resource
+public class MailData
 {
-    [Export]
-    public string MailSubject;
+    public string Receiver;
 
-    [Export]
-    public string MailBody;
+    public string Subject;
 
-    public bool VerifyMail ()
+    public string Body;
+
+    public bool VerifyMail()
     {
-        bool result = NullChecker.GroupNullChecker(
-            (MailSubject, nameof(MailSubject)),
-            (MailBody, nameof(MailBody)));
+        bool result = NullChecker.GroupNullChecker
+        (
+            (Receiver, nameof(Receiver)),
+            (Subject, nameof(Subject)),
+            (Body, nameof(Body))
+        );
+        result = LoginValidation.Email(Receiver) is string;
         return result;
+    }
+
+    public async void SendMail()
+    {
+        await MailService.SendMail(this);
     }
 }

@@ -42,28 +42,24 @@ public partial class CreateAccountUISystem : Control
     public async Task VerifyUserInputs()
     {
         string UserEmail = EmailInput.Text.Trim();
-        string MailResult = LoginValidation.Email(UserEmail);
-        if (LoginValidation.Invalid(MailResult))
+        if (LoginValidation.Email(UserEmail) is string emailError)
         {
-            LoginError.WarnText = MailResult;
-            ErrorService.Current.CastErrorMessage(this, LoginError);
+            LoginError.Show(emailError, this);
             return;
         }
-        string UserPassword = PasswordInput.Text; 
-        string PasswordResult = LoginValidation.PasswordForCreate(UserPassword);
-        if (LoginValidation.Invalid(PasswordResult))
+
+        string UserPassword = PasswordInput.Text;
+        if (LoginValidation.PasswordForCreate(UserPassword) is string passwordError)
         {
-            LoginError.WarnText = PasswordResult;
-            ErrorService.Current.CastErrorMessage(this, LoginError);
+            LoginError.Show(passwordError, this);
             return;
-        }
-        string ConfirmationResult = LoginValidation.PasswordConfirmation(UserPassword, ConfirmPassword.Text);
-        if (LoginValidation.Invalid(ConfirmationResult))
+        } 
+
+        if (LoginValidation.PasswordConfirmation(UserPassword, ConfirmPassword.Text) is string confirmationError)
         {
-            LoginError.WarnText = ConfirmationResult;
-            ErrorService.Current.CastErrorMessage(this, LoginError);
+            LoginError.Show(confirmationError, this);
             return;
-        }
+        } 
 
         AuthResult result = await FirebaseAuthenticate.SignUp(UserEmail, UserPassword);
         if (!result.Ok)

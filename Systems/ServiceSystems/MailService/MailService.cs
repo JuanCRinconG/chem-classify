@@ -9,13 +9,19 @@ public static class MailService
     public static string pass = System.Environment.GetEnvironmentVariable("SMTP_PASS");
     public static string from = System.Environment.GetEnvironmentVariable("SMTP_FROM");
 
-    public static async Task SendMail(MailData SendableMail, string MailReceiver)
+    public static async Task SendMail(MailData SendableMail)
     {
+        if (!SendableMail.VerifyMail())
+        {
+            GD.PrintErr("Invalid mail, cannot send");
+            return;
+        }
+        
         var mailMessage = new MimeMessage();
         mailMessage.From.Add(MailboxAddress.Parse(from));
-        mailMessage.To.Add(MailboxAddress.Parse(MailReceiver));
-        mailMessage.Subject = SendableMail.MailSubject;
-        mailMessage.Body = new TextPart("plain") { Text = SendableMail.MailBody};
+        mailMessage.To.Add(MailboxAddress.Parse(SendableMail.Receiver));
+        mailMessage.Subject = SendableMail.Subject;
+        mailMessage.Body = new TextPart("plain") { Text = SendableMail.Body};
 
         using var client = new MailKit.Net.Smtp.SmtpClient();
         await client.ConnectAsync(host, port, MailKit.Security.SecureSocketOptions.StartTls);
