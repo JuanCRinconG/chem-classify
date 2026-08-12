@@ -5,7 +5,7 @@
 
 [node name="ErrorPopup" type="PopupPanel" unique_id=1537567924 node_paths=PackedStringArray("WarnIcon", "WarnTextSpace")]
 oversampling_override = 1.0
-size = Vector2i(210, 100)
+size = Vector2i(250, 100)
 visible = true
 theme = ExtResource("1_hcwc2")
 script = ExtResource("2_aursa")
@@ -15,7 +15,7 @@ WarnTextSpace = NodePath("MarginContainer/LabelContainer/RichTextLabel")
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1838243268]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 205.0
+offset_right = 245.0
 offset_bottom = 95.0
 
 [node name="LabelContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1827267668]
@@ -28,7 +28,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer" unique_id=1886870113]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 fit_content = true

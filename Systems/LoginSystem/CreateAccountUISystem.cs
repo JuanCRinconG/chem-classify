@@ -65,7 +65,7 @@ public partial class CreateAccountUISystem : Control
             return;
         }
 
-        AuthResult result = await FirebaseAuthenticate.SignIn(UserEmail, UserPassword);
+        AuthResult result = await FirebaseAuthenticate.SignUp(UserEmail, UserPassword);
         if (!result.Ok)
         {
             LoginError.WarnText = result.ErrorMessage ?? "Authentication fail, verify that email or password are correct";

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/LoginSystem/LoginUISystem.cs" id="2_ayv28"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_oycse"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UISwapService/UISwapButton.cs" id="4_f2vgc"]
-[ext_resource type="PackedScene" uid="uid://bkd8prgw1gjqr" path="res://SystemsUI/LoginUI/CreateAccountPanel.tscn" id="5_r7ofh"]
 
 [node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmFieldsButton", "ForgotPasswordButton")]
 anchors_preset = 8
@@ -59,7 +58,7 @@ size_flags_horizontal = 3
 text = "Create account"
 script = ExtResource("4_f2vgc")
 CurrentSceneRoot = NodePath("../../..")
-NextScene = ExtResource("5_r7ofh")
+NextScenePath = "uid://bkd8prgw1gjqr"
 
 [node name="ForgotPassword" type="Button" parent="VBoxContainer/AdditionalTools" unique_id=1412341953]
 layout_mode = 2

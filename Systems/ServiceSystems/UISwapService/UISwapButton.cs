@@ -5,8 +5,8 @@ public partial class UISwapButton : Button
     [Export]
     public Control CurrentSceneRoot;
 
-    [Export]
-    public PackedScene NextScene;
+     [Export(PropertyHint.File, "*.tscn,*.scn")]
+    public string NextScenePath;
 
     public override void _EnterTree()
     {
@@ -18,9 +18,8 @@ public partial class UISwapButton : Button
         UIBinding.Clear();
     }
 
-
     public void OnSwapScenePressed()
     {
-        UISwapService.SwapScene(CurrentSceneRoot, NextScene);
+        UISwapService.SwapScenePath(CurrentSceneRoot, NextScenePath);
     }
 }

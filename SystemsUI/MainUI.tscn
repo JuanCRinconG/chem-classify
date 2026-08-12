@@ -29,8 +29,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7wsd"]
-
 [node name="MainUi" type="PanelContainer" unique_id=401584730 node_paths=PackedStringArray("UIContainerSpace")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,6 +44,9 @@ layout_mode = 2
 texture = ExtResource("1_pm1sg")
 expand_mode = 5
 
+[node name="InitialUIContainer" type="Control" parent="." unique_id=1824848929]
+layout_mode = 2
+
 [node name="CloseProgramButton" type="Button" parent="." unique_id=55163931]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -55,9 +56,3 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jss8s")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gsa4b")
 text = "❌"
 script = ExtResource("4_gsa4b")
-
-[node name="InitialUIContainer" type="PanelContainer" parent="." unique_id=324531599]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_s7wsd")
