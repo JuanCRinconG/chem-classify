@@ -14,8 +14,11 @@ public class MailData
             (Subject, nameof(Subject)),
             (Body, nameof(Body))
         );
-        result = LoginValidation.Email(Receiver) is string;
-        return result;
+        if (!result)
+        {
+            return result;
+        }
+        return !(LoginValidation.Email(Receiver) is string);
     }
 
     public async void SendMail()

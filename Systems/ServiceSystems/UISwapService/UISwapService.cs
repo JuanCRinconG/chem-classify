@@ -1,3 +1,5 @@
+using System;
+
 public static class UISwapService
 {
     /// <summary>
@@ -13,7 +15,7 @@ public static class UISwapService
         Current.QueueFree();
     }
 
-    public static void SwapScenePath(Control current, string scenePath)
+    public static void SwapScenePath(Control current, string scenePath, Action<Node> configure = null)
     {
         if (string.IsNullOrEmpty(scenePath))
         {
@@ -21,12 +23,12 @@ public static class UISwapService
             return;
         }
 
-        current.Visible = false;
-
         // Load the resource on-demand at runtime
         var packedScene = GD.Load<PackedScene>(scenePath);
         var nextScene = packedScene.Instantiate();
+        configure?.Invoke(nextScene);
 
+        current.Visible = false;
         MainUISystem.Current.UIContainerSpace.AddChild(nextScene);
         current.QueueFree();
     }

@@ -25,6 +25,7 @@ public partial class LoginUISystem : Control
     public override void _Ready()
     {
         _LoginBindings.BindButton(ConfirmFieldsButton, OnConfirmFields);
+        _LoginBindings.BindButton(ForgotPasswordButton, OnForgotPassword);
     }
 
     public override void _ExitTree()
@@ -37,6 +38,25 @@ public partial class LoginUISystem : Control
         ConfirmFieldsButton.Disabled = true;
         await VerifyUserInputs();
         ConfirmFieldsButton.Disabled = false;
+    }
+
+    public void OnForgotPassword()
+    {
+        ForgotPasswordButton.Disabled = true;
+        string UserEmail = EmailInput.Text.Trim();
+        if (LoginValidation.Email(UserEmail) is string emailError)
+        {
+            LoginError.Show(emailError, this);
+            ForgotPasswordButton.Disabled = false;
+            return;
+        }
+        ForgotPasswordButton.Disabled = false;
+        UISwapService.SwapScenePath(this, UIScreens.Current.TwoFA, node =>
+        {
+            if (node is TwoFactorAuthenticator auth)
+                auth.ReceiverMail = UserEmail;
+        });
+        
     }
 
     public async Task VerifyUserInputs()

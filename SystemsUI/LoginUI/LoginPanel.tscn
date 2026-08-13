@@ -33,10 +33,6 @@ layout_mode = 2
 text = "Log in"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="VBoxContainer" unique_id=169948863]
-visible = false
-layout_mode = 2
-
 [node name="EmailInput" type="LineEdit" parent="VBoxContainer" unique_id=415940881]
 layout_mode = 2
 placeholder_text = "your-email@ucundinamarca.edu.co"

@@ -5,7 +5,7 @@ public partial class UISwapButton : Button
     [Export]
     public Control CurrentSceneRoot;
 
-     [Export(PropertyHint.File, "*.tscn,*.scn")]
+    [Export(PropertyHint.File, "*.tscn,*.scn")]
     public string NextScenePath;
 
     public override void _EnterTree()

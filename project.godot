@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ErrorPopup="*uid://dcl7mex53n7je"
+UIScreens="*uid://ym4ta5hyvdy6"
 
 [display]
 
