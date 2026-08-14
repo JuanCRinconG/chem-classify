@@ -1,6 +1,7 @@
 #if TOOLS
 #nullable enable
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 
@@ -24,14 +25,7 @@ public partial class GroupEditorWorkspace : Control, IBTNodeComponent
 
 	public override void _Ready()
 	{
-		_bindings.Bind<LineEdit.TextSubmittedEventHandler>(
-			add => GroupNameLineEdit.TextSubmitted += add,
-			remove => GroupNameLineEdit.TextSubmitted -= remove,
-			_ => ApplyGroupName());
-		_bindings.BindSignal(
-			GroupNameLineEdit,
-			Control.SignalName.FocusExited,
-			Callable.From(ApplyGroupName));
+		_bindings.BindLineEditCommit(GroupNameLineEdit, ApplyGroupName);
 	}
 
 	public void RefreshFromChart(IBTData? data)
@@ -45,7 +39,7 @@ public partial class GroupEditorWorkspace : Control, IBTNodeComponent
 
 		Visible = true;
 		_suppressGroupEdit = true;
-		GroupNameLineEdit.Text = ChartBindingGroups.Display(chartNode.BindingGroup);
+		GroupNameLineEdit.Text = chartNode.BindingGroup ?? string.Empty;
 		_suppressGroupEdit = false;
 	}
 
@@ -58,7 +52,7 @@ public partial class GroupEditorWorkspace : Control, IBTNodeComponent
 			return;
 		}
 
-		StringName bindingGroup = ChartBindingGroups.Normalize(GroupNameLineEdit.Text);
+		string? bindingGroup = ChartBindingGroups.ToStored(GroupNameLineEdit.Text);
 		if (ChartBindingGroups.GroupsEqual(chartNode.BindingGroup, bindingGroup))
 		{
 			return;
@@ -68,10 +62,10 @@ public partial class GroupEditorWorkspace : Control, IBTNodeComponent
 		{
 			IBTVariables.LogWarn(
 				"Chart",
-				$"Binding group '{ChartBindingGroups.Display(bindingGroup)}' is already used by another "
+				$"Binding group '{ChartBindingGroups.FormatForLog(bindingGroup)}' is already used by another "
 				+ $"'{chartNode.FullTypeName}' transition engine on this chart.");
 			_suppressGroupEdit = true;
-			GroupNameLineEdit.Text = ChartBindingGroups.Display(chartNode.BindingGroup);
+			GroupNameLineEdit.Text = chartNode.BindingGroup ?? string.Empty;
 			_suppressGroupEdit = false;
 			return;
 		}

@@ -6,3 +6,5 @@
 script = ExtResource("1_w0tj4")
 TwoFA = "uid://bd5qbiw65vods"
 MainApp = "uid://ir86gkjgdm0m"
+LoginScreen = "uid://bghlurisvn5yk"
+CreateAccountScreen = "uid://bkd8prgw1gjqr"

@@ -43,7 +43,7 @@ public partial class IBTChart : Resource
 			BehaviorNode? node = entry.Value;
 			if (node != null)
 			{
-				node.BoardGroup = ChartBindingGroups.Normalize(node.BoardGroup);
+				node.BoardGroup = ChartBindingGroups.ToStored(node.BoardGroup);
 			}
 		}
 
@@ -52,7 +52,7 @@ public partial class IBTChart : Resource
 			TransitionEngineNode? node = entry.Value;
 			if (node != null)
 			{
-				node.BindingGroup = ChartBindingGroups.Normalize(node.BindingGroup);
+				node.BindingGroup = ChartBindingGroups.ToStored(node.BindingGroup);
 			}
 		}
 	}
@@ -84,7 +84,7 @@ public partial class IBTChart : Resource
 			return false;
 		}
 
-		node.BindingGroup = ChartBindingGroups.Normalize(node.BindingGroup);
+		node.BindingGroup = ChartBindingGroups.ToStored(node.BindingGroup);
 		TransitionEngineNodes[instanceId] = node;
 		return true;
 	}
@@ -295,12 +295,12 @@ public partial class IBTChart : Resource
 	/// </summary>
 	public bool TrySetTransitionEngineBindingGroup(
 		string instanceId,
-		StringName bindingGroup,
+		string? bindingGroup,
 		string? exceptInstanceId = null)
 	{
 		EnsureCollections();
 		instanceId = BehaviorDataKeys.Normalize(instanceId);
-		bindingGroup = ChartBindingGroups.Normalize(bindingGroup);
+		bindingGroup = ChartBindingGroups.ToStored(bindingGroup);
 		if (string.IsNullOrEmpty(instanceId)
 			|| !TransitionEngineNodes.TryGetValue(instanceId, out TransitionEngineNode? node)
 			|| node == null)
@@ -325,12 +325,11 @@ public partial class IBTChart : Resource
 	/// <summary>Returns whether an emitter type already uses a binding group on this chart.</summary>
 	public bool HasTransitionEngineBinding(
 		string emitterTypeName,
-		StringName bindingGroup,
+		string? bindingGroup,
 		string? exceptInstanceId = null)
 	{
 		EnsureCollections();
 		emitterTypeName = BehaviorDataKeys.Normalize(emitterTypeName);
-		bindingGroup = ChartBindingGroups.Normalize(bindingGroup);
 		exceptInstanceId = BehaviorDataKeys.Normalize(exceptInstanceId);
 		if (string.IsNullOrEmpty(emitterTypeName))
 		{
@@ -362,11 +361,10 @@ public partial class IBTChart : Resource
 	}
 
 	/// <summary>Renames a shared board binding group across every behavior node on this chart.</summary>
-	public bool TryRenameBoardGroup(StringName fromGroup, StringName toGroup)
+	public bool TryRenameBoardGroup(string? fromGroup, string? toGroup)
 	{
 		EnsureCollections();
-		fromGroup = ChartBindingGroups.Normalize(fromGroup);
-		toGroup = ChartBindingGroups.Normalize(toGroup);
+		toGroup = ChartBindingGroups.ToStored(toGroup);
 		if (ChartBindingGroups.GroupsEqual(fromGroup, toGroup))
 		{
 			return false;

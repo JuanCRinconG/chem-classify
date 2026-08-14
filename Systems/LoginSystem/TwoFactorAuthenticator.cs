@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class TwoFactorAuthenticator : Control
 {
@@ -22,12 +23,11 @@ public partial class TwoFactorAuthenticator : Control
 
     private Authenticator RuntimeAuthentication = new();
 
-    public string ReceiverMail;
-
     public override void _Ready()
     {
         TFABindings.BindButton(ResendCodeButton, AuthenticationCommand);
         TFABindings.BindButton(ConfirmButton, OnConfirmFields);
+        TFABindings.BindButton(ReturnButton, OnReturn);
         AuthenticationCommand();
     }
 
@@ -43,19 +43,35 @@ public partial class TwoFactorAuthenticator : Control
             GD.PrintErr("Could not generate the code");
             return;
         }
-        if (!RuntimeAuthentication.TrySendCodeMail(ReceiverMail))
+        if (!RuntimeAuthentication.TrySendCodeMail(MainUISystem.Current.Board.Email))
         {
             GD.PrintErr("Could not send mail");
             return;
         }
     }
 
-    private void OnConfirmFields()
+    private async void OnConfirmFields()
     {
         if (!RuntimeAuthentication.VerifyCode(FactorFields))
         {
             TFAError.Show("The code does not match", this);
+            return;
         }
+
+        ConfirmButton.Disabled = true;
+        ResendCodeButton.Disabled = true;
+        await MainUISystem.Current.FinishAuth(this);
+        if (!GodotObject.IsInstanceValid(this) || !IsInsideTree())
+        {
+            return;
+        }
+        ConfirmButton.Disabled = false;
+        ResendCodeButton.Disabled = false;
+    }
+
+    private void OnReturn()
+    {
+        MainUISystem.Current.CancelAuth(this);
     }
 
     private sealed class Authenticator
@@ -128,7 +144,7 @@ public partial class TwoFactorAuthenticator : Control
             CodeMail.Receiver = Receiver;
             CodeMail.Subject = "Your code for logging into ChemClassify";
             CodeMail.Body = "Your code is " + string.Join("-", FactorKeys);
-            CodeMail.SendMail();
+            CodeMail.Send();
             return true;
         }
     }

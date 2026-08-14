@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bd5qbiw65vods"]
 
-[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://SystemsUI/LoginUI/LoginTheme.tres" id="1_jb8sh"]
+[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://SystemsUI/LoginUI/LoginResources/LoginTheme.tres" id="1_jb8sh"]
 [ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/LoginSystem/TwoFactorAuthenticator.cs" id="2_bh35k"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_p2tyc"]
-[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UISwapService/UISwapButton.cs" id="4_jw5os"]
 
 [node name="TwoFactorAuthenticationUI" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("FactorFields", "ConfirmButton", "ResendCodeButton", "ReturnButton")]
 anchors_preset = 8
@@ -85,13 +84,10 @@ text = "Confirm"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=498867843]
 layout_mode = 2
 
-[node name="ReturnButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1353278045 node_paths=PackedStringArray("CurrentSceneRoot")]
+[node name="ReturnButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1353278045]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Return"
-script = ExtResource("4_jw5os")
-CurrentSceneRoot = NodePath("../../..")
-NextScenePath = "uid://bghlurisvn5yk"
 
 [node name="ResendMailButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1893046114]
 layout_mode = 2

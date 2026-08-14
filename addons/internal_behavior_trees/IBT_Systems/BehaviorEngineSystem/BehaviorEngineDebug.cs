@@ -29,7 +29,7 @@ public partial class BehaviorEngine
 		GD.Print($"BehaviorEngine: received signal {ownerName}.{transitionName}");
 	}
 
-	private void LogAbstractTransitionBound(string ownerName, StringName bindingGroup, string transitionName)
+	private void LogAbstractTransitionBound(string ownerName, string bindingGroup, string transitionName)
 	{
 		if (!Debug)
 		{
@@ -38,7 +38,7 @@ public partial class BehaviorEngine
 
 		GD.Print(
 			$"BehaviorEngine: bound abstract transition "
-			+ $"{ownerName}.{ChartBindingGroups.Display(bindingGroup)}.{transitionName}");
+			+ $"{ownerName}.{ChartBindingGroups.FormatForLog(bindingGroup)}.{transitionName}");
 	}
 
 	private void LogBuildReport(
@@ -95,7 +95,7 @@ public partial class BehaviorEngine
 		foreach (AbstractTransitionSlot slot in _abstractByOwnerTransition.Values)
 		{
 			report.AppendLine(
-				$"    {slot.TypeName}.{ChartBindingGroups.Display(slot.BindingGroup)}.{slot.TransitionName}"
+				$"    {slot.TypeName}.{ChartBindingGroups.FormatForLog(slot.BindingGroup)}.{slot.TransitionName}"
 				+ $" -> {slot.Destination.GetType().Name} [PendingConnect]");
 		}
 	}

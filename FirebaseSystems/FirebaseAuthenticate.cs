@@ -28,6 +28,59 @@ public static class FirebaseAuthenticate
 
     public static Task<AuthResult> SignUp(string email, string password)
         => PostEmailPassword("signUp", email, password, "Sign-up");
+
+    /// <summary>
+    /// Identity Toolkit <c>accounts:update</c>. Requires a current ID token.
+    /// </summary>
+    public static async Task<AuthResult> ChangePassword(string idToken, string newPassword)
+    {
+        var posted = await TryPost(
+            "update",
+            new { idToken, password = newPassword, returnSecureToken = true },
+            "Change-password");
+        if (!posted.Ok)
+            return AuthResult.Fail(posted.FailMessage!);
+
+        var parsed = JsonSerializer.Deserialize<AuthTokenResponse>(posted.Body);
+        if (parsed == null || string.IsNullOrWhiteSpace(parsed.LocalId))
+            return AuthResult.Fail("Unexpected response from authentication service.");
+
+        return AuthResult.Success(new UserSessionData(
+            parsed.LocalId,
+            parsed.Email ?? string.Empty,
+            parsed.IdToken ?? idToken));
+    }
+
+    /// <summary>
+    /// Identity Toolkit <c>accounts:sendOobCode</c> with <c>PASSWORD_RESET</c>.
+    /// Firebase emails the reset link; it does not set the password by itself.
+    /// </summary>
+    public static async Task<AuthCommandResult> SendPasswordReset(string email)
+    {
+        var posted = await TryPost(
+            "sendOobCode",
+            new { requestType = "PASSWORD_RESET", email },
+            "Password-reset");
+        if (!posted.Ok)
+            return AuthCommandResult.Fail(posted.FailMessage!);
+
+        return AuthCommandResult.Success();
+    }
+
+    /// <summary>
+    /// Identity Toolkit <c>accounts:resetPassword</c>. Completes a reset from an email <c>oobCode</c>.
+    /// </summary>
+    public static async Task<AuthCommandResult> ConfirmPasswordReset(string oobCode, string newPassword)
+    {
+        var posted = await TryPost(
+            "resetPassword",
+            new { oobCode, newPassword },
+            "Confirm-password-reset");
+        if (!posted.Ok)
+            return AuthCommandResult.Fail(posted.FailMessage!);
+
+        return AuthCommandResult.Success();
+    }
     
     private static async Task<AuthResult> PostEmailPassword(
     string endpoint,      // "signInWithPassword" | "signUp"
@@ -35,11 +88,33 @@ public static class FirebaseAuthenticate
     string password,
     string failLogLabel)
     {
+        var posted = await TryPost(
+            endpoint,
+            new { email, password, returnSecureToken = true },
+            failLogLabel);
+        if (!posted.Ok)
+            return AuthResult.Fail(posted.FailMessage!);
+
+        var parsed = JsonSerializer.Deserialize<AuthTokenResponse>(posted.Body);
+        if (parsed == null || string.IsNullOrWhiteSpace(parsed.LocalId))
+            return AuthResult.Fail("Unexpected response from authentication service.");
+
+        return AuthResult.Success(new UserSessionData(
+            parsed.LocalId,
+            parsed.Email ?? email,
+            parsed.IdToken));
+    }
+
+    private static async Task<(bool Ok, string Body, string? FailMessage)> TryPost(
+        string endpoint,
+        object payload,
+        string failLogLabel)
+    {
         string apiKey = GetFireBaseAPIKey();
         if (string.IsNullOrWhiteSpace(apiKey))
-            return AuthResult.Fail("Authentication service is not configured.");
+            return (false, "", "Authentication service is not configured.");
+
         string url = $"{ToolkitUrlBase}{endpoint}?key={apiKey}";
-        var payload = new { email, password, returnSecureToken = true };
         using var content = new StringContent(
             JsonSerializer.Serialize(payload),
             Encoding.UTF8,
@@ -52,21 +127,14 @@ public static class FirebaseAuthenticate
             {
                 GD.PrintErr($"{failLogLabel} failed: {body}");
                 string raw = TryGetFirebaseErrorMessage(body);
-                string userMsg = MapFirebaseErrorMessage(raw);
-                return AuthResult.Fail(userMsg);
+                return (false, body, MapFirebaseErrorMessage(raw));
             }
-            var parsed = JsonSerializer.Deserialize<AuthTokenResponse>(body);
-            if (parsed == null || string.IsNullOrWhiteSpace(parsed.LocalId))
-                return AuthResult.Fail("Unexpected response from authentication service.");
-            return AuthResult.Success(new UserSessionData(
-                parsed.LocalId,
-                parsed.Email ?? email,
-                parsed.IdToken));
+            return (true, body, null);
         }
         catch (Exception ex)
         {
             GD.PrintErr($"{failLogLabel} exception: {ex.Message}");
-            return AuthResult.Fail("Network error. Check your connection and try again.");
+            return (false, "", "Network error. Check your connection and try again.");
         }
     }
 
@@ -125,6 +193,18 @@ public static class FirebaseAuthenticate
                 "Password is required.",
             "MISSING_EMAIL" =>
                 "Email is required.",
+            "INVALID_ID_TOKEN" or "TOKEN_EXPIRED" =>
+                "Your session expired. Sign in again and retry.",
+            "CREDENTIAL_TOO_OLD_LOGIN_AGAIN" =>
+                "Please sign in again before changing your password.",
+            "RESET_PASSWORD_EXCEED_LIMIT" =>
+                "Too many password reset attempts. Try again later.",
+            "INVALID_OOB_CODE" =>
+                "This password reset link is invalid.",
+            "EXPIRED_OOB_CODE" =>
+                "This password reset link has expired.",
+            "USER_NOT_FOUND" =>
+                "No account exists with this email.",
             _ =>
                 string.IsNullOrEmpty(code)
                     ? "Authentication failed. Please try again."
@@ -160,4 +240,10 @@ public readonly record struct AuthResult(UserSessionData? Data, string? ErrorMes
     public bool Ok => Data is not null;
     public static AuthResult Success(UserSessionData data) => new(data, null);
     public static AuthResult Fail(string message) => new(null, message);
+}
+
+public readonly record struct AuthCommandResult(bool Ok, string? ErrorMessage)
+{
+    public static AuthCommandResult Success() => new(true, null);
+    public static AuthCommandResult Fail(string message) => new(false, message);
 }

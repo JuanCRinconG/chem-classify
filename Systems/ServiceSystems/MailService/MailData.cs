@@ -6,7 +6,7 @@ public class MailData
 
     public string Body;
 
-    public bool VerifyMail()
+    public bool Verify()
     {
         bool result = NullChecker.GroupNullChecker
         (
@@ -21,7 +21,7 @@ public class MailData
         return !(LoginValidation.Email(Receiver) is string);
     }
 
-    public async void SendMail()
+    public async void Send()
     {
         await MailService.SendMail(this);
     }

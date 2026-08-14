@@ -67,8 +67,6 @@ public partial class BehaviorEngine
 	/// <summary>
 	/// Enters the chart initial behavior subtree.
 	/// Call after <see cref="Build"/>, <see cref="SetBoards"/>, and <see cref="SetExternalTransitions"/>.
-	/// Each binding entry is <c>(target, group)</c>. Use <c>(target, default)</c> for
-	/// <see cref="DefaultGroupName"/>.
 	/// Starts at most once until <see cref="Reset"/>.
 	/// </summary>
 	public void Start()
@@ -120,8 +118,7 @@ public partial class BehaviorEngine
 	/// Stops the engine, unbinds abstract contexts, and clears build state so this instance
 	/// can be rebuilt without allocating a new <see cref="BehaviorEngine"/>.
 	/// Typical chart swap:
-	/// <c>Dispose(); Build(chart); SetBoards((host, default)); SetExternalTransitions((host, default)); Start();</c>
-	/// — <c>default</c> selects <see cref="DefaultGroupName"/> (<c>"Global"</c>).
+	/// <c>Dispose(); Build(chart); SetBoards((host, null)); SetExternalTransitions((host, null)); Start();</c>
 	/// </summary>
 	public void Dispose()
 	{

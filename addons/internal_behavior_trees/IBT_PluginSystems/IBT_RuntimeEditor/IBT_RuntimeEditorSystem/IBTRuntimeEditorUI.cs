@@ -1,5 +1,6 @@
 #nullable enable
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 

@@ -96,7 +96,7 @@ GroupNameLineEdit = NodePath("GroupNameLineEdit")
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Binding group used when the host wires this transition engine at runtime."
-placeholder_text = "Global"
+placeholder_text = "(default)"
 
 [node name="DeleteButton" type="Button" parent="CRUDWorkspace/ComponentsContainer/GroupEditorRow" unique_id=754857604]
 layout_mode = 2

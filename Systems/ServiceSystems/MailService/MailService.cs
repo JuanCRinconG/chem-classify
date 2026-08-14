@@ -11,7 +11,7 @@ public static class MailService
 
     public static async Task SendMail(MailData SendableMail)
     {
-        if (!SendableMail.VerifyMail())
+        if (!SendableMail.Verify())
         {
             GD.PrintErr("Invalid mail, cannot send");
             return;

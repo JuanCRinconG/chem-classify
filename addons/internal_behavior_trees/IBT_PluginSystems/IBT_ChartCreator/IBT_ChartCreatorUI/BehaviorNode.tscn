@@ -203,7 +203,7 @@ text = "BoardName"
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Binding group matched against BehaviorEngine board registration."
-placeholder_text = "Global"
+placeholder_text = "(default)"
 
 [node name="RenameBoardGroupButton" type="Button" parent="NodeComponents/BehaviorComponents/BoardsRow/BoardsWorkspace" unique_id=422664188]
 layout_mode = 2

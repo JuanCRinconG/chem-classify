@@ -34,7 +34,7 @@ public partial class BehaviorNode : TransitionNode
 	/// Host board binding group matched during <see cref="BehaviorEngine"/> board registration.
 	/// </summary>
 	[Export]
-	public StringName BoardGroup { get; set; } = BehaviorEngine.DefaultGroupName;
+	public string? BoardGroup { get; set; }
 
 	/// <summary>
 	/// Applies a data-validated behavior replacement without changing this

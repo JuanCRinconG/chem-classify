@@ -31,4 +31,4 @@ text = "Global"
 [node name="NewGroupLineEdit" type="LineEdit" parent="Content" unique_id=498148445]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Global"
+placeholder_text = "(default)"

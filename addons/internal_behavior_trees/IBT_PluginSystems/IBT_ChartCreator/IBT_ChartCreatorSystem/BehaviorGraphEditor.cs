@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 
@@ -182,7 +183,7 @@ public partial class BehaviorGraphEditor : GraphEdit
 		AfterChartWorkspaceMutation(() => IncrementalRefreshTransitionEngine(instanceId));
 	}
 
-	public void RequestRenameBoardGroup(StringName fromGroup, StringName toGroup)
+	public void RequestRenameBoardGroup(string? fromGroup, string? toGroup)
 	{
 		if (_chart == null || !_chart.TryRenameBoardGroup(fromGroup, toGroup))
 		{
@@ -406,7 +407,10 @@ public partial class BehaviorGraphEditor : GraphEdit
 		var chartNode = new TransitionEngineNode
 		{
 			FullTypeName = emitterTypeName,
-			BindingGroup = ChartBindingGroups.SuggestEmitterGroup(_chart, emitterTypeName),
+			BindingGroup = ChartBindingGroups.SuggestEmitterGroup(
+				_chart,
+				emitterTypeName,
+				IBTVariables.SuggestedEngineGroupPrefix),
 		};
 
 		if (!_chart.TryAddTransitionEngineNode(instanceId, chartNode))

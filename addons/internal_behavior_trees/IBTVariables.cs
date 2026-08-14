@@ -10,8 +10,9 @@ public static class IBTVariables
 {
 	public const string PluginName = "Behavior";
 
-	public static readonly StringName DefaultGroupName = BehaviorEngine.DefaultGroupName;
-	
+	/// <summary>Prefix for auto-suggested duplicate transition-engine binding groups (<c>Engine_2</c>, …).</summary>
+	public const string SuggestedEngineGroupPrefix = "Engine";
+
 	public const string ChartCreatorPath =
 		"res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_ChartCreator/IBT_ChartCreatorUI/ChartCreator.tscn";
 
@@ -23,10 +24,19 @@ public static class IBTVariables
 	public const string PluginIconPath =
 		"res://addons/internal_behavior_trees/IBT_Assets/IBTLogo.svg";
 
+	public const string BehaviorTag2DScenePath =
+		"res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_Tags/IBT_TagsUI/2DBehaviorTag.tscn";
+	public const string BehaviorTag3DScenePath =
+		"res://addons/internal_behavior_trees/IBT_PluginSystems/IBT_Tags/IBT_TagsUI/3DBehaviorTag.tscn";
+
 	/// <summary>Eager-loaded main-screen scene (C# equivalent of GDScript preload).</summary>
 	public static readonly PackedScene MainScreenScene = GD.Load<PackedScene>(ChartCreatorPath);
 
 	public static readonly StringName BehaviorTagGroup = "BehaviorTags";
+
+	public static readonly PackedScene BehaviorTag2DScene = GD.Load<PackedScene>(BehaviorTag2DScenePath);
+
+	public static readonly PackedScene BehaviorTag3DScene = GD.Load<PackedScene>(BehaviorTag3DScenePath);
 
 	/// <summary>Eager-loaded plugin tab icon.</summary>
 	public static readonly Texture2D PluginIcon = GD.Load<Texture2D>(PluginIconPath);

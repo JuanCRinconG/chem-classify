@@ -1,5 +1,6 @@
 #if TOOLS
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 

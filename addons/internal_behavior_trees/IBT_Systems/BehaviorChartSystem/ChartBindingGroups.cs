@@ -1,59 +1,52 @@
 #nullable enable
-using Godot;
 
 namespace IBTSystem;
 
 /// <summary>
 /// Normalizes chart binding-group names shared by board and emitter nodes.
-/// Unset, default, and empty <see cref="StringName"/> values resolve to
-/// <see cref="BehaviorEngine.DefaultGroupName"/>.
+/// Stored chart values use null for the default group; runtime dictionaries use
+/// <see cref="Canonical"/> (empty string) as the default key.
 /// </summary>
 public static class ChartBindingGroups
 {
+	public static bool IsDefault(string? group) =>
+		string.IsNullOrWhiteSpace(group);
+
+	/// <summary>Persisted chart value. Null means default group.</summary>
+	public static string? ToStored(string? group) =>
+		IsDefault(group) ? null : group!.Trim();
+
+	/// <summary>Runtime dictionary key. Empty string means default group.</summary>
+	public static string Canonical(string? group) =>
+		IsDefault(group) ? string.Empty : group!.Trim();
+
+	public static bool GroupsEqual(string? a, string? b) =>
+		Canonical(a) == Canonical(b);
+
+	/// <summary>Debug and warning text for the default group.</summary>
+	public static string FormatForLog(string? group) =>
+		IsDefault(group) ? "(default)" : group!.Trim();
+
 	/// <summary>
-	/// Returns <paramref name="group"/> when set; otherwise
-	/// <see cref="BehaviorEngine.DefaultGroupName"/>.
-	/// Safe for Godot default/uninitialized <see cref="StringName"/> (e.g. tuple
-	/// <c>(target, default)</c> in <see cref="BehaviorEngine.SetBoards"/>).
+	/// Suggests the next unused binding group for a duplicate emitter type on this chart.
+	/// Returns null when the default slot is still free.
 	/// </summary>
-	public static StringName Normalize(StringName group) =>
-		string.IsNullOrEmpty(group) ? BehaviorEngine.DefaultGroupName : group;
-
-	public static StringName Normalize(string? group)
-	{
-		if (string.IsNullOrWhiteSpace(group))
-		{
-			return BehaviorEngine.DefaultGroupName;
-		}
-
-		return new StringName(group.Trim());
-	}
-
-	public static string Display(StringName group) =>
-		string.IsNullOrEmpty(group) || group == BehaviorEngine.DefaultGroupName
-			? BehaviorEngine.DefaultGroupName
-			: group.ToString();
-
-	public static bool GroupsEqual(StringName a, StringName b) =>
-		Normalize(a) == Normalize(b);
-
-	/// <summary>Suggests the next unused binding group for an emitter type on this chart.</summary>
-	public static StringName SuggestEmitterGroup(IBTChart chart, string emitterTypeName)
+	public static string? SuggestEmitterGroup(IBTChart chart, string emitterTypeName, string groupPrefix)
 	{
 		emitterTypeName = BehaviorDataKeys.Normalize(emitterTypeName);
 		if (string.IsNullOrEmpty(emitterTypeName))
 		{
-			return BehaviorEngine.DefaultGroupName;
+			return null;
 		}
 
-		if (!chart.HasTransitionEngineBinding(emitterTypeName, BehaviorEngine.DefaultGroupName))
+		if (!chart.HasTransitionEngineBinding(emitterTypeName, null))
 		{
-			return BehaviorEngine.DefaultGroupName;
+			return null;
 		}
 
 		for (int index = 2; ; index++)
 		{
-			var candidate = new StringName($"{BehaviorEngine.DefaultGroupName}_{index}");
+			string candidate = $"{groupPrefix}_{index}";
 			if (!chart.HasTransitionEngineBinding(emitterTypeName, candidate))
 			{
 				return candidate;

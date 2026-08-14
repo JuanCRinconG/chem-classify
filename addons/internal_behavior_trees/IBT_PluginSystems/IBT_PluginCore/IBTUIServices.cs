@@ -62,6 +62,15 @@ public sealed class IBTBindings
 		subscribe(handler);
 		_pendingBindings.Add(() => unsubscribe(handler));
 	}
+
+	public void BindLineEditCommit(LineEdit edit, Action handler)
+	{
+		Bind<LineEdit.TextSubmittedEventHandler>(
+			add => edit.TextSubmitted += add,
+			remove => edit.TextSubmitted -= remove,
+			_ => handler());
+		BindSignal(edit, Control.SignalName.FocusExited, Callable.From(handler));
+	}
 }
 
 public static class GodotObjectExtensions

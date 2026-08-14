@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 
@@ -24,7 +25,7 @@ public partial class IBTTransitionNode : GraphNode
 	private readonly Dictionary<int, string> _transitionNameByPort = new();
 	private readonly List<Control> _transitionOutputRows = new();
 
-	public IBTSystem.TransitionNode? CurrentNode { get; set; }
+	public TransitionNode? CurrentNode { get; set; }
 	public string InstanceId { get; protected set; } = string.Empty;
 
 	public Action<IBTData?>? AfterRefreshFromChart { get; set; }

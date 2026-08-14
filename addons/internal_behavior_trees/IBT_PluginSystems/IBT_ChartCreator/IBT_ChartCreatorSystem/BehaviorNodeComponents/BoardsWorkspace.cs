@@ -1,6 +1,7 @@
 #if TOOLS
 #nullable enable
 using Godot;
+using IBTSystem;
 
 namespace IBTPlugin;
 
@@ -37,14 +38,7 @@ public partial class BoardsWorkspace : Control, IBTNodeComponent
 
 	public override void _Ready()
 	{
-		_bindings.Bind<LineEdit.TextSubmittedEventHandler>(
-			add => BoardGroupLineEdit.TextSubmitted += add,
-			remove => BoardGroupLineEdit.TextSubmitted -= remove,
-			_ => CommitBoardGroup());
-		_bindings.BindSignal(
-			BoardGroupLineEdit,
-			Control.SignalName.FocusExited,
-			Callable.From(CommitBoardGroup));
+		_bindings.BindLineEditCommit(BoardGroupLineEdit, CommitBoardGroup);
 		_bindings.BindButton(RenameBoardGroupButton, OpenRenameBoardGroupPopup);
 	}
 
@@ -69,7 +63,7 @@ public partial class BoardsWorkspace : Control, IBTNodeComponent
 
 		BoardNameLabel.Text = boardTypeName;
 		_suppressBoardGroupChanged = true;
-		BoardGroupLineEdit.Text = ChartBindingGroups.Display(chartNode.BoardGroup);
+		BoardGroupLineEdit.Text = chartNode.BoardGroup ?? string.Empty;
 		_suppressBoardGroupChanged = false;
 	}
 
@@ -80,7 +74,7 @@ public partial class BoardsWorkspace : Control, IBTNodeComponent
 			return;
 		}
 
-		StringName boardGroup = ChartBindingGroups.Normalize(BoardGroupLineEdit.Text);
+		string? boardGroup = ChartBindingGroups.ToStored(BoardGroupLineEdit.Text);
 		if (ChartBindingGroups.GroupsEqual(chartNode.BoardGroup, boardGroup))
 		{
 			return;
@@ -103,7 +97,7 @@ public partial class BoardsWorkspace : Control, IBTNodeComponent
 			return;
 		}
 
-		StringName currentGroup = chartNode.BoardGroup;
+		string? currentGroup = chartNode.BoardGroup;
 		RenameBindingGroupPopup.Open(
 			editor.RenameBindingGroupPopupScene,
 			GetTree(),

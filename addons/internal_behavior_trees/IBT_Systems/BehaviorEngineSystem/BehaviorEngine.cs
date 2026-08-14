@@ -13,15 +13,13 @@ namespace IBTSystem;
 /// </summary>
 public partial class BehaviorEngine
 {
-	public static readonly StringName DefaultGroupName = "Global";
-
-	private readonly Dictionary<(string Owner, StringName Group, string Transition), AbstractTransitionSlot>
+	private readonly Dictionary<(string Owner, string Group, string Transition), AbstractTransitionSlot>
 		_abstractByOwnerTransition = new();
 
 	private BehaviorCore[] _behaviors = Array.Empty<BehaviorCore>();
 	private Dictionary<string, BehaviorCore> _instanceIdToCore = null!;
 	private IBTChart? _chart;
-	private readonly Dictionary<StringName, object> _boardsByGroup = new();
+	private readonly Dictionary<string, object> _boardsByGroup = new();
 
 	/// <summary>
 	/// True after factory construction and behavior-owned wiring finished.
@@ -43,11 +41,9 @@ public partial class BehaviorEngine
 	/// <summary>
 	/// Registers board targets by binding group, then applies them to built behaviors
 	/// by chart <see cref="BehaviorNode.BoardGroup"/>.
-	/// Each entry is <c>(target, group)</c>. Omit the group with <c>(target, default)</c>;
-	/// unset/default/empty groups normalize to <see cref="DefaultGroupName"/> via
-	/// <see cref="ChartBindingGroups.Normalize"/>.
+	/// Each entry is <c>(target, group)</c>. Null or whitespace group means default.
 	/// </summary>
-	public void SetBoards(params (object Target, StringName Group)[] entries)
+	public void SetBoards(params (object Target, string? Group)[] entries)
 	{
 		WarnIfNotBuilt(nameof(SetBoards));
 		if (entries == null || entries.Length == 0)
@@ -57,12 +53,12 @@ public partial class BehaviorEngine
 
 		for (int i = 0; i < entries.Length; i++)
 		{
-			(object? target, StringName group) = entries[i];
+			(object? target, string? group) = entries[i];
 			if (target == null)
 			{
 				GD.PushWarning(
 					$"BehaviorEngine.SetBoards: null target skipped for group "
-					+ $"'{ChartBindingGroups.Display(group)}'.");
+					+ $"'{ChartBindingGroups.FormatForLog(group)}'.");
 				continue;
 			}
 
@@ -74,12 +70,10 @@ public partial class BehaviorEngine
 
 	/// <summary>
 	/// Binds chart external-transition slots whose binding group and declaring type match each entry.
-	/// Each entry is <c>(target, group)</c>. Omit the group with <c>(target, default)</c>;
-	/// unset/default/empty groups normalize to <see cref="DefaultGroupName"/> via
-	/// <see cref="ChartBindingGroups.Normalize"/>.
+	/// Each entry is <c>(target, group)</c>. Null or whitespace group means default.
 	/// Replaces prior bindings for the same group and declaring type before wiring.
 	/// </summary>
-	public void SetExternalTransitions(params (object Target, StringName Group)[] entries)
+	public void SetExternalTransitions(params (object Target, string? Group)[] entries)
 	{
 		WarnIfNotBuilt(nameof(SetExternalTransitions));
 		if (entries == null || entries.Length == 0)
@@ -89,16 +83,16 @@ public partial class BehaviorEngine
 
 		for (int i = 0; i < entries.Length; i++)
 		{
-			(object? target, StringName group) = entries[i];
+			(object? target, string? group) = entries[i];
 			if (target == null)
 			{
 				GD.PushWarning(
 					$"BehaviorEngine.SetExternalTransitions: null target skipped for group "
-					+ $"'{ChartBindingGroups.Display(group)}'.");
+					+ $"'{ChartBindingGroups.FormatForLog(group)}'.");
 				continue;
 			}
 
-			StringName resolvedGroup = ChartBindingGroups.Normalize(group);
+			string resolvedGroup = ChartBindingGroups.Canonical(group);
 			UnbindExternalTransitionsFor(resolvedGroup, target);
 			BindExternalTransitionsFor(resolvedGroup, target);
 		}
@@ -218,10 +212,10 @@ public partial class BehaviorEngine
 
 	private void WireAbstractTransitionSlots(
 		string ownerName,
-		StringName bindingGroup,
+		string? bindingGroup,
 		Godot.Collections.Dictionary<string, string> transitions)
 	{
-		StringName resolvedGroup = ChartBindingGroups.Normalize(bindingGroup);
+		string resolvedGroup = ChartBindingGroups.Canonical(bindingGroup);
 		foreach ((string transitionName, BehaviorCore destination, BehaviorTransitionWire wire) in
 			EnumerateResolvedTransitionEdges(ownerName, transitions))
 		{
@@ -236,7 +230,7 @@ public partial class BehaviorEngine
 			{
 				throw new InvalidOperationException(
 					$"BehaviorEngine.Build: duplicate abstract transition "
-					+ $"'{ownerName}.{ChartBindingGroups.Display(resolvedGroup)}.{transitionName}'.");
+					+ $"'{ownerName}.{ChartBindingGroups.FormatForLog(resolvedGroup)}.{transitionName}'.");
 			}
 		}
 	}
@@ -403,8 +397,8 @@ public partial class BehaviorEngine
 		where TConfig : Resource =>
 		((BehaviorConfig<TConfig>)core).Config = (TConfig)config;
 
-	private void RegisterBoardGroup(StringName group, object board) =>
-		_boardsByGroup[ChartBindingGroups.Normalize(group)] = board;
+	private void RegisterBoardGroup(string? group, object board) =>
+		_boardsByGroup[ChartBindingGroups.Canonical(group)] = board;
 
 	private void ApplyRegisteredBoards()
 	{
@@ -429,7 +423,7 @@ public partial class BehaviorEngine
 				continue;
 			}
 
-			StringName boardGroup = ChartBindingGroups.Normalize(chartNode.BoardGroup);
+			string boardGroup = ChartBindingGroups.Canonical(chartNode.BoardGroup);
 			if (!_boardsByGroup.TryGetValue(boardGroup, out object? board))
 			{
 				continue;
@@ -456,7 +450,7 @@ public partial class BehaviorEngine
 		where TBoard : class =>
 		((BehaviorBoard<TBoard>)core).Board = (TBoard)board;
 
-	private void UnbindExternalTransitionsFor(StringName group, object entry)
+	private void UnbindExternalTransitionsFor(string group, object entry)
 	{
 		foreach (AbstractTransitionSlot slot in _abstractByOwnerTransition.Values)
 		{
@@ -469,7 +463,7 @@ public partial class BehaviorEngine
 		}
 	}
 
-	private void BindExternalTransitionsFor(StringName group, object entry)
+	private void BindExternalTransitionsFor(string group, object entry)
 	{
 		bool matchedAnySlot = false;
 		foreach (AbstractTransitionSlot slot in _abstractByOwnerTransition.Values)
@@ -488,7 +482,7 @@ public partial class BehaviorEngine
 		{
 			GD.PushWarning(
 				$"BehaviorEngine.SetExternalTransitions: no chart slots matched group "
-				+ $"'{ChartBindingGroups.Display(group)}' for '{entry.GetType().Name}'.");
+				+ $"'{ChartBindingGroups.FormatForLog(group)}' for '{entry.GetType().Name}'.");
 		}
 	}
 
@@ -602,20 +596,20 @@ public partial class BehaviorEngine
 	{
 		public AbstractTransitionSlot(
 			string typeName,
-			StringName bindingGroup,
+			string bindingGroup,
 			string transitionName,
 			BehaviorCore destination,
 			BehaviorTransitionWire wire)
 		{
 			TypeName = typeName;
-			BindingGroup = ChartBindingGroups.Normalize(bindingGroup);
+			BindingGroup = bindingGroup;
 			TransitionName = transitionName;
 			Destination = destination;
 			Wire = wire;
 		}
 
 		public string TypeName { get; }
-		public StringName BindingGroup { get; }
+		public string BindingGroup { get; }
 		public string TransitionName { get; }
 		public BehaviorCore Destination { get; }
 		public BehaviorTransitionWire Wire { get; }

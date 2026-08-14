@@ -14,5 +14,5 @@ public partial class TransitionEngineNode : TransitionNode
 {
 	/// <summary>Runtime binding group matched by the host when wiring external transitions.</summary>
 	[Export]
-	public StringName BindingGroup { get; set; } = BehaviorEngine.DefaultGroupName;
+	public string? BindingGroup { get; set; }
 }
