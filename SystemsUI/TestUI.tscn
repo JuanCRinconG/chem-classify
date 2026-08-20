@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://c87cipi5kaxpc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei0pb"]
+bg_color = Color(0.19980118, 0.20779085, 0.21575043, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.827451, 0.8352941, 0.84313726, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_s7wsd"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_s7rlf"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_0cvp5"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_utshk"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_51o8a"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_cfbgu"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_bhy14"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_41juj"]
+
+[sub_resource type="Theme" id="Theme_kkt5b"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ei0pb")
+SpinBox/constants/buttons_width = 0
+SpinBox/constants/field_and_buttons_separation = 0
+SpinBox/constants/set_min_buttons_width_from_icons = 0
+SpinBox/icons/down = SubResource("ImageTexture_s7wsd")
+SpinBox/icons/down_disabled = SubResource("ImageTexture_s7rlf")
+SpinBox/icons/down_hover = SubResource("ImageTexture_0cvp5")
+SpinBox/icons/down_pressed = SubResource("ImageTexture_utshk")
+SpinBox/icons/up = SubResource("ImageTexture_51o8a")
+SpinBox/icons/up_disabled = SubResource("ImageTexture_cfbgu")
+SpinBox/icons/up_hover = SubResource("ImageTexture_bhy14")
+SpinBox/icons/up_pressed = SubResource("ImageTexture_41juj")
+
+[node name="Control" type="PanelContainer" unique_id=993404592]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kkt5b")
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=1640724059]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="MainContainer" unique_id=1967774983]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/Title" unique_id=792931014]
+layout_mode = 2
+text = "Item_Name"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer/Title" unique_id=1992053381]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "iron short sword"
+
+[node name="OptionButton" type="OptionButton" parent="MainContainer/Title" unique_id=1843220582]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "(rarity)"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="LineEdit2" type="LineEdit" parent="MainContainer/Title" unique_id=1166994374]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "(path to icon)"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="MainContainer/Title" unique_id=2115772696]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MainContainer" unique_id=1258730282]
+layout_mode = 2
+text = "Item tool "
+
+[node name="WeaponContainer" type="VBoxContainer" parent="MainContainer" unique_id=799271805]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/WeaponContainer" unique_id=1693896355]
+layout_mode = 2
+text = "Item_weapon"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/WeaponContainer" unique_id=1044201503]
+layout_mode = 2
+
+[node name="WeaponProperties" type="VBoxContainer" parent="MainContainer/WeaponContainer/PanelContainer" unique_id=1827659521]
+layout_mode = 2
+
+[node name="Names" type="HBoxContainer" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties" unique_id=97792608]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=466609355]
+layout_mode = 2
+text = "Type Name"
+
+[node name="LineEdit2" type="LineEdit" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=719750413]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=1583997159]
+layout_mode = 2
+text = "Weapon Grade"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=654850020]
+layout_mode = 2
+
+[node name="MainHand" type="Button" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=36726624]
+layout_mode = 2
+text = "✋"
+
+[node name="Offhand" type="Button" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=742622060]
+layout_mode = 2
+text = "🤚"
+
+[node name="Both" type="Button" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/Names" unique_id=555322464]
+layout_mode = 2
+text = "🤝"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties" unique_id=401264320]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer" unique_id=500195431]
+layout_mode = 2
+text = "Weapon stats"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer" unique_id=1203686869]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties" unique_id=577099974]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer2" unique_id=1570854544]
+layout_mode = 2
+text = "Weapon buffs"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer2" unique_id=445043256]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties" unique_id=320078278]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer3" unique_id=1606708679]
+layout_mode = 2
+text = "Weapon requirements"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer/WeaponContainer/PanelContainer/WeaponProperties/HBoxContainer3" unique_id=1354012289]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MainContainer" unique_id=1477947025]
+layout_mode = 2
+text = "Item equipment"
+
+[node name="Label3" type="Label" parent="MainContainer" unique_id=1875386562]
+layout_mode = 2
+text = "Item material"
+
+[node name="Label4" type="Label" parent="MainContainer" unique_id=1599647165]
+layout_mode = 2
+text = "Item description"
+
+[node name="LineEdit" type="LineEdit" parent="MainContainer" unique_id=1029602884]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer" unique_id=1501131900]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/HBoxContainer" unique_id=1338746835]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/PanelContainer" unique_id=706119638]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1892957335]
+layout_mode = 2
+text = "Price"
+
+[node name="SpinBox" type="SpinBox" parent="MainContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1838550122]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="MainContainer/HBoxContainer" unique_id=1523266607]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainContainer/HBoxContainer/PanelContainer2" unique_id=1176743573]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/PanelContainer2/VBoxContainer2" unique_id=994756892]
+layout_mode = 2
+text = "Weight"
+
+[node name="SpinBox" type="SpinBox" parent="MainContainer/HBoxContainer/PanelContainer2/VBoxContainer2" unique_id=941358061]
+layout_mode = 2
+
+[node name="PanelContainer4" type="PanelContainer" parent="MainContainer/HBoxContainer" unique_id=973094787]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainContainer/HBoxContainer/PanelContainer4" unique_id=1279724099]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/PanelContainer4/VBoxContainer3" unique_id=238319523]
+layout_mode = 2
+text = "Durability"
+
+[node name="SpinBox" type="SpinBox" parent="MainContainer/HBoxContainer/PanelContainer4/VBoxContainer3" unique_id=574334412]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="MainContainer/HBoxContainer" unique_id=1515841342]
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="MainContainer/HBoxContainer/PanelContainer3" unique_id=596108002]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/PanelContainer3/VBoxContainer4" unique_id=1006667409]
+layout_mode = 2
+text = "Stacking"
+
+[node name="SpinBox" type="CheckBox" parent="MainContainer/HBoxContainer/PanelContainer3/VBoxContainer4" unique_id=762362754]
+layout_mode = 2
+size_flags_horizontal = 4
