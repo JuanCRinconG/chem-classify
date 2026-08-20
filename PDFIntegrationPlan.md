@@ -1,23 +1,24 @@
----
-name: PDF Viewer Strategy
-overview: Recommend a PDFium-backed in-Godot PDF viewer for ChemClassify (Godot 4.7 C#) that covers view/pan/zoom plus search/selection/copy across desktop and mobile, with an OS-viewer fallback behind the same abstraction.
+name: PDF Viewer Strategy  
+overview: Recommend a PDFium-backed in-Godot PDF viewer for ChemClassify (Godot 4.7 C#) that covers view/pan/zoom plus search/selection/copy across desktop and mobile, with an OS-viewer fallback behind the same abstraction.  
 todos:
-  - id: spike-pdfium
-    content: "Spike: PDFium GDExtension loads PDF, renders page texture, zoom re-render on desktop"
-    status: pending
-  - id: viewer-mvp
-    content: "Build PdfViewer Control: pan/scroll, page nav, progressive zoom"
-    status: pending
-  - id: text-layer
-    content: Add search highlights + selection quads + clipboard copy via PDFium text API
-    status: pending
-  - id: service-api
-    content: Introduce IPdfDocumentService + OsPdfFallback behind same C# interface
-    status: pending
-  - id: mobile-binaries
-    content: Ship Android/iOS PDFium binaries in .gdextension; verify exports
-    status: pending
+
+- id: spike-pdfium  
+content: "Spike: PDFium GDExtension loads PDF, renders page texture, zoom re-render on desktop"  
+status: pending
+- id: viewer-mvp  
+content: "Build PdfViewer Control: pan/scroll, page nav, progressive zoom"  
+status: pending
+- id: text-layer  
+content: Add search highlights + selection quads + clipboard copy via PDFium text API  
+status: pending
+- id: service-api  
+content: Introduce IPdfDocumentService + OsPdfFallback behind same C# interface  
+status: pending
+- id: mobile-binaries  
+content: Ship Android/iOS PDFium binaries in .gdextension; verify exports  
+status: pending  
 isProject: false
+
 ---
 
 # PDF Viewing Strategy for ChemClassify
@@ -41,11 +42,13 @@ There is **no existing PDF code** in the repo yet.
 
 Embed Chromium, host Mozilla **PDF.js** inside it.
 
-| Pros | Cons |
-|------|------|
+
+| Pros                                                | Cons                                                |
+| --------------------------------------------------- | --------------------------------------------------- |
 | Best ready-made PDF UX (zoom, search, select, copy) | **Desktop only** — CEF does not support Android/iOS |
-| Same Chromium engine on Win/Mac/Linux | Large binary (~100MB–1GB artifacts) |
-| Rich JS ecosystem later | Heavy for a chemistry/classify app |
+| Same Chromium engine on Win/Mac/Linux               | Large binary (~100MB–1GB artifacts)                 |
+| Rich JS ecosystem later                             | Heavy for a chemistry/classify app                  |
+
 
 **Verdict:** Excellent desktop prototype, **not viable as the primary mobile strategy**.
 
@@ -53,11 +56,13 @@ Embed Chromium, host Mozilla **PDF.js** inside it.
 
 Use OS webview (WebView2 / WKWebView / WebKitGTK) + PDF.js.
 
-| Pros | Cons |
-|------|------|
-| Smaller than CEF; PDF.js still gives A+B | **Android/iOS support in godot_wry is planned, not shipped** |
-| Good desktop path | Webview often draws **on top** of Godot (not a true in-scene texture) |
-| | Engine differences per OS |
+
+| Pros                                     | Cons                                                                  |
+| ---------------------------------------- | --------------------------------------------------------------------- |
+| Smaller than CEF; PDF.js still gives A+B | **Android/iOS support in godot_wry is planned, not shipped**          |
+| Good desktop path                        | Webview often draws **on top** of Godot (not a true in-scene texture) |
+|                                          | Engine differences per OS                                             |
+
 
 **Verdict:** Attractive long-term if mobile lands; **not ready** for your targets today.
 
@@ -67,11 +72,13 @@ Convert each page to PNG/JPEG, show with `TextureRect` + pinch zoom.
 
 **ImageMagick specifically:** it can rasterize PDFs, but almost always **delegates to Ghostscript**. It produces **bitmaps only** — no text layer, no search index, no selection quads. To get search/copy you would re-OCR or keep a parallel text pipeline, which is fragile and expensive.
 
-| Pros | Cons |
-|------|------|
-| Conceptually simple | **Fails requirement B** without extra text pipeline |
-| Works everywhere if you ship converters | High-zoom = huge textures / memory |
-| Useful for thumbnails / previews | Slow; licensing (Ghostscript) complexity |
+
+| Pros                                    | Cons                                                |
+| --------------------------------------- | --------------------------------------------------- |
+| Conceptually simple                     | **Fails requirement B** without extra text pipeline |
+| Works everywhere if you ship converters | High-zoom = huge textures / memory                  |
+| Useful for thumbnails / previews        | Slow; licensing (Ghostscript) complexity            |
+
 
 **Verdict:** Fine for **thumbnails or offline preview caches**, **not** the main viewer for A+B.
 
@@ -81,12 +88,14 @@ Load PDF via a **GDExtension** (or custom C++/Rust plugin), render pages to `Ima
 
 Existing Godot-adjacent work: [pdfium-gde](https://github.com/aliarcanakgun/pdfium-gde) (Godot 4.5+, render + text rects; young project — treat as reference, not a guaranteed drop-in for all mobile ABIs).
 
-| Pros | Cons |
-|------|------|
-| **Same architecture on desktop + mobile** if you ship per-platform binaries | You build zoom/pan/selection UI yourself |
-| True in-Godot viewport (textures) | Selection/copy is more work than PDF.js |
-| Search + hit-testing is supported by PDFium | Must maintain native builds (win/mac/linux/android/ios) |
-| Scalable: lazy pages, DPI based on zoom, LRU texture cache | Immature Godot wrappers may need forking |
+
+| Pros                                                                        | Cons                                                    |
+| --------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Same architecture on desktop + mobile** if you ship per-platform binaries | You build zoom/pan/selection UI yourself                |
+| True in-Godot viewport (textures)                                           | Selection/copy is more work than PDF.js                 |
+| Search + hit-testing is supported by PDFium                                 | Must maintain native builds (win/mac/linux/android/ios) |
+| Scalable: lazy pages, DPI based on zoom, LRU texture cache                  | Immature Godot wrappers may need forking                |
+
 
 **Verdict:** **Best primary fit** for ChemClassify’s platform + A+B constraints.
 
@@ -96,10 +105,12 @@ Existing Godot-adjacent work: [pdfium-gde](https://github.com/aliarcanakgun/pdfi
 - iOS: `PDFKit` / `QLPreviewController`
 - Desktop: shell-open default PDF app
 
-| Pros | Cons |
-|------|------|
-| Minimal effort; reliable | Leaves Godot UI / inconsistent UX |
+
+| Pros                                 | Cons                                |
+| ------------------------------------ | ----------------------------------- |
+| Minimal effort; reliable             | Leaves Godot UI / inconsistent UX   |
 | Free search/select on some platforms | Harder to integrate with app chrome |
+
 
 **Verdict:** Keep as **explicit fallback** behind the same service interface.
 
@@ -125,6 +136,8 @@ flowchart TB
   Text --> UI
 ```
 
+
+
 ### Why this over CEF/PDF.js as primary
 
 You need **Android + iOS inside Godot**. CEF cannot do that. ImageMagick cannot do selection/search honestly. PDFium is the same engine Chrome uses under the hood, ships on mobile widely, and exposes text geometry needed for B.
@@ -133,14 +146,16 @@ PDF.js remains a **future optional desktop enhancer** (via WebView/CEF) if you l
 
 ### Viewer capabilities mapping
 
-| Need | Implementation |
-|------|----------------|
-| View pages | `render_page(page, scale)` → `ImageTexture` |
-| Pan / scroll | Godot `ScrollContainer` / custom gesture layer |
-| Zoom | Change render scale (not just stretch pixels); debounce + progressive low-DPI then high-DPI |
-| Search | Build per-page text + optional global index from PDFium text API; highlight match rects |
-| Select / copy | Hit-test character/word quads; draw selection overlay; `DisplayServer.clipboard_set` |
-| Memory scale | Lazy load visible ±N pages; LRU evict textures; cancel stale high-DPI jobs |
+
+| Need          | Implementation                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------- |
+| View pages    | `render_page(page, scale)` → `ImageTexture`                                                 |
+| Pan / scroll  | Godot `ScrollContainer` / custom gesture layer                                              |
+| Zoom          | Change render scale (not just stretch pixels); debounce + progressive low-DPI then high-DPI |
+| Search        | Build per-page text + optional global index from PDFium text API; highlight match rects     |
+| Select / copy | Hit-test character/word quads; draw selection overlay; `DisplayServer.clipboard_set`        |
+| Memory scale  | Lazy load visible ±N pages; LRU evict textures; cancel stale high-DPI jobs                  |
+
 
 ### App integration shape (fits current C# systems style)
 
@@ -183,9 +198,12 @@ If the spike fails on mobile binaries, activate OS fallback for that platform wh
 
 ## Decision summary
 
-| Option | Role in ChemClassify |
-|--------|----------------------|
-| PDFium + Godot UI | **Primary** viewer for desktop + mobile |
-| OS native open | **Fallback** only |
-| CEF/WebView + PDF.js | Optional later desktop upgrade, not primary |
+
+| Option                    | Role in ChemClassify                                |
+| ------------------------- | --------------------------------------------------- |
+| PDFium + Godot UI         | **Primary** viewer for desktop + mobile             |
+| OS native open            | **Fallback** only                                   |
+| CEF/WebView + PDF.js      | Optional later desktop upgrade, not primary         |
 | ImageMagick / pure raster | Thumbnails / offline previews only, not main viewer |
+
+
