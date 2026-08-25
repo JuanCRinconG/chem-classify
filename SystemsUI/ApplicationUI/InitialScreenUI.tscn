@@ -1,19 +1,57 @@
 [gd_scene format=3 uid="uid://ir86gkjgdm0m"]
 
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://SystemsUI/ApplicationUI/MainAppTheme.tres" id="1_qb208"]
+
 [node name="InitialScreenUi" type="PanelContainer" unique_id=186350908]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = -11.5
-offset_right = 32.5
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_qb208")
 
-[node name="Label" type="Label" parent="." unique_id=24697397]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=694614047]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=24697397]
 layout_mode = 2
 text = "Success!"
 horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=222394145]
+layout_mode = 2
+text = "boton"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="." unique_id=2114528180]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+folded = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer" unique_id=1309045826]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=639838277]
+layout_mode = 2
+text = "boton"
+
+[node name="Button2" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=133094231]
+layout_mode = 2
+text = "boton"
+
+[node name="Button3" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=1204032930]
+layout_mode = 2
+text = "boton"
+
+[node name="Button4" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=153855577]
+layout_mode = 2
+text = "boton"
+
+[node name="Button5" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=2086042298]
+layout_mode = 2
+text = "boton"
+
+[node name="Button6" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=1009066553]
+layout_mode = 2
+text = "boton"
