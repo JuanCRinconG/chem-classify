@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ym4ta5hyvdy6"]
 
-[ext_resource type="Script" uid="uid://cwa5v386ad8pq" path="res://Systems/ServiceSystems/UISwapService/UIScreens.cs" id="1_w0tj4"]
+[ext_resource type="Script" uid="uid://cwa5v386ad8pq" path="res://Systems/ServiceSystems/UIServices/UIScreens.cs" id="1_w0tj4"]
 
 [node name="UIScreens" type="Node" unique_id=1286843836]
 script = ExtResource("1_w0tj4")

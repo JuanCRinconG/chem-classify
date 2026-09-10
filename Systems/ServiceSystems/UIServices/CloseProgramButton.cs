@@ -12,7 +12,6 @@ public partial class CloseProgramButton : Button
         UIBinding.Clear();
     }
 
-
     public void OnCloseProgramPressed()
     {
         GetTree().Quit();

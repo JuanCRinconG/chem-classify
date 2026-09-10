@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://SystemsAssets/MainUITexture/QrBG.jpg" id="1_pm1sg"]
 [ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/MainSceneSystem/MainUISystem.cs" id="2_cukl5"]
 [ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://SystemsUI/LoginUI/LoginPanel.tscn" id="2_jss8s"]
-[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/ServiceSystems/CloseProgramService/CloseProgramButton.cs" id="4_gsa4b"]
+[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/ServiceSystems/UIServices/CloseProgramButton.cs" id="4_gsa4b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jss8s"]
 bg_color = Color(0.9490196, 0, 0, 1)

@@ -1,6 +1,25 @@
 [gd_scene format=3 uid="uid://ir86gkjgdm0m"]
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://SystemsUI/ApplicationUI/MainAppTheme.tres" id="1_qb208"]
+[ext_resource type="Script" uid="uid://b8syuq2bf6b8h" path="res://Systems/ServiceSystems/UIServices/UIToggleButton.cs" id="2_uvio7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7wsd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7wsd"]
 
 [node name="InitialScreenUi" type="PanelContainer" unique_id=186350908]
 anchors_preset = 15
@@ -13,45 +32,128 @@ theme = ExtResource("1_qb208")
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=694614047]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=24697397]
+[node name="TitleBarTools" type="PanelContainer" parent="VBoxContainer" unique_id=1250569393]
 layout_mode = 2
-text = "Success!"
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TitleBarTools" unique_id=1833395999]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TitleBarTools/VBoxContainer" unique_id=24697397]
+layout_mode = 2
+text = "ChemClassify"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=222394145]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleBarTools/VBoxContainer" unique_id=1797206868]
 layout_mode = 2
-text = "boton"
 
-[node name="FoldableContainer" type="FoldableContainer" parent="." unique_id=2114528180]
+[node name="FoldableContainer" type="Button" parent="VBoxContainer/TitleBarTools/VBoxContainer/HBoxContainer" unique_id=912680467 node_paths=PackedStringArray("PrimaryControls", "SecondaryControls")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-folded = true
+text = ">"
+script = ExtResource("2_uvio7")
+PrimaryControls = [NodePath("../../../../MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace")]
+SecondaryControls = []
 
-[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer" unique_id=1309045826]
+[node name="SearchBar" type="LineEdit" parent="VBoxContainer/TitleBarTools/VBoxContainer/HBoxContainer" unique_id=332277918]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "(introduce a chemical name)"
+
+[node name="MainWorkspaceContainer" type="PanelContainer" parent="VBoxContainer" unique_id=151789216]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s7wsd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MainWorkspaceContainer" unique_id=1487779424]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AdminToolsWorkspace" type="PanelContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer" unique_id=1545434411]
 visible = false
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
 
-[node name="Button" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=639838277]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace" unique_id=1309045826]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=639838277]
 layout_mode = 2
 text = "boton"
 
-[node name="Button2" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=133094231]
+[node name="Button2" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=133094231]
 layout_mode = 2
 text = "boton"
 
-[node name="Button3" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=1204032930]
+[node name="Button3" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=1204032930]
 layout_mode = 2
 text = "boton"
 
-[node name="Button4" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=153855577]
+[node name="Button4" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=153855577]
 layout_mode = 2
 text = "boton"
 
-[node name="Button5" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=2086042298]
+[node name="Button5" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=2086042298]
 layout_mode = 2
 text = "boton"
 
-[node name="Button6" type="Button" parent="FoldableContainer/VBoxContainer" unique_id=1009066553]
+[node name="Button6" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace/VBoxContainer" unique_id=1009066553]
 layout_mode = 2
 text = "boton"
+
+[node name="ChemicalsWorkspace" type="PanelContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer" unique_id=43798190]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
+
+[node name="RecentChemicals" type="ScrollContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace" unique_id=983084064]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals" unique_id=1257458713]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1665740438]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button2" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=793714886]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button3" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=452010041]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button4" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1867882525]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button5" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=637105100]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button6" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=2002827151]
+layout_mode = 2
+text = "Quimico"
+
+[node name="Button7" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1490211335]
+layout_mode = 2
+text = "Quimico"
+
+[node name="SearchedChemicals" type="ScrollContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace" unique_id=925350394]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/SearchedChemicals" unique_id=230148952]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="PanelContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/SearchedChemicals/VBoxContainer" unique_id=93746102]
+layout_mode = 2
