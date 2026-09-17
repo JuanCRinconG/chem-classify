@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://dqrlookupvw03"]
+
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_theme"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="2_swap"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scan"]
+bg_color = Color(0.75, 0.75, 0.75, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.13725491, 0.21568628, 0.11372549, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="QRLookupDisplay" type="PanelContainer" unique_id=2400001001]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=2400001002]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="RootVBox" type="VBoxContainer" parent="Margin" unique_id=2400001003]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=2400001004]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="HeaderRow" type="HBoxContainer" parent="Margin/RootVBox/HeaderBar" unique_id=2400001005]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2400001006]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "QR / SDS Lookup"
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2400001007 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+text = "Return"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../..")
+NextScenePath = "uid://ir86gkjgdm0m"
+
+[node name="BodyRow" type="HBoxContainer" parent="Margin/RootVBox" unique_id=2400001008]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="ScanSection" type="PanelContainer" parent="Margin/RootVBox/BodyRow" unique_id=2400001009]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="ScanVBox" type="VBoxContainer" parent="Margin/RootVBox/BodyRow/ScanSection" unique_id=2400001010]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ScanTitle" type="Label" parent="Margin/RootVBox/BodyRow/ScanSection/ScanVBox" unique_id=2400001011]
+layout_mode = 2
+text = "Camera / QR frame"
+horizontal_alignment = 1
+
+[node name="ScanFrame" type="PanelContainer" parent="Margin/RootVBox/BodyRow/ScanSection/ScanVBox" unique_id=2400001012]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_scan")
+
+[node name="ScanHint" type="Label" parent="Margin/RootVBox/BodyRow/ScanSection/ScanVBox/ScanFrame" unique_id=2400001013]
+layout_mode = 2
+text = "QR preview placeholder
+(payload = SDS id only)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartScanButton" type="Button" parent="Margin/RootVBox/BodyRow/ScanSection/ScanVBox" unique_id=2400001014]
+layout_mode = 2
+text = "Start scan (placeholder)"
+
+[node name="ManualSection" type="PanelContainer" parent="Margin/RootVBox/BodyRow" unique_id=2400001015]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="ManualVBox" type="VBoxContainer" parent="Margin/RootVBox/BodyRow/ManualSection" unique_id=2400001016]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ManualTitle" type="Label" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001017]
+layout_mode = 2
+text = "Manual SDS id"
+horizontal_alignment = 1
+
+[node name="SdsIdInput" type="LineEdit" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001018]
+layout_mode = 2
+placeholder_text = "Paste or type SDS id"
+
+[node name="LookupButton" type="Button" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001019]
+layout_mode = 2
+text = "Look up"
+
+[node name="ResultCaption" type="Label" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001020]
+layout_mode = 2
+text = "Last result"
+
+[node name="ResultName" type="Label" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001021]
+layout_mode = 2
+text = "—"
+
+[node name="ResultHazard" type="Label" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001022]
+layout_mode = 2
+text = "Hazard: —"
+
+[node name="ResultExpires" type="Label" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001023]
+layout_mode = 2
+text = "Expires: —"
+
+[node name="Spacer" type="Control" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001024]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OpenDetailButton" type="Button" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001025 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+text = "Open detail"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../../..")
+NextScenePath = "uid://cdsdetailview02"
+
+[node name="OpenPdfButton" type="Button" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=2400001026]
+layout_mode = 2
+text = "Open SDS (OS viewer)"

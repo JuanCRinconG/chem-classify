@@ -15,6 +15,21 @@ public partial class UIScreens : Node
     [Export(PropertyHint.File, Format)]
     public string CreateAccountScreen;
 
+    [Export(PropertyHint.File, Format)]
+    public string PdfRegisterScreen;
+
+    [Export(PropertyHint.File, Format)]
+    public string SdsLibraryScreen;
+
+    [Export(PropertyHint.File, Format)]
+    public string SdsDetailScreen;
+
+    [Export(PropertyHint.File, Format)]
+    public string QrLookupScreen;
+
+    [Export(PropertyHint.File, Format)]
+    public string ExpirationMonitorScreen;
+
     public override void _EnterTree()
     {
         Current = this;

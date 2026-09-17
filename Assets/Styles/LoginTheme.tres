@@ -1,0 +1,50 @@
+[gd_resource type="Theme" format=3 uid="uid://yvf8423vevsk"]
+
+[ext_resource type="Texture2D" uid="uid://dk53xwhqp6rqx" path="res://Assets/MainUITexture/EmptyImage.tres" id="1_kkt5b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mpdxk"]
+bg_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.13594964, 0.21389064, 0.11468988, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mpdxk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rsl2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rsl2"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+Button/styles/normal = SubResource("StyleBoxFlat_mpdxk")
+Label/colors/font_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+Label/font_sizes/font_size = 20
+Label/styles/focus = SubResource("StyleBoxEmpty_mpdxk")
+Label/styles/normal = SubResource("StyleBoxEmpty_6rsl2")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_6rsl2")
+SpinBox/constants/buttons_vertical_separation = 0
+SpinBox/constants/buttons_width = 0
+SpinBox/constants/field_and_buttons_separation = 0
+SpinBox/constants/set_min_buttons_width_from_icons = 0
+SpinBox/icons/down = ExtResource("1_kkt5b")
+SpinBox/icons/down_disabled = ExtResource("1_kkt5b")
+SpinBox/icons/down_hover = ExtResource("1_kkt5b")
+SpinBox/icons/down_pressed = ExtResource("1_kkt5b")
+SpinBox/icons/up = ExtResource("1_kkt5b")
+SpinBox/icons/up_disabled = ExtResource("1_kkt5b")
+SpinBox/icons/up_hover = ExtResource("1_kkt5b")
+SpinBox/icons/up_pressed = ExtResource("1_kkt5b")

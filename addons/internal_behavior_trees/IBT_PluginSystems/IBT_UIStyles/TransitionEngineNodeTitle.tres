@@ -1,7 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://c0hd4f4t745na"]
-
-[resource]
-GraphNodeTitleLabel/colors/font_color = Color(0, 0, 0, 1)
-GraphNodeTitleLabel/colors/font_outline_color = Color(0.42365062, 0.42365065, 0.42365062, 1)
-GraphNodeTitleLabel/constants/outline_size = 1
-GraphNodeTitleLabel/font_sizes/font_size = 28

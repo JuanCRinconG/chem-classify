@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dcl7mex53n7je"]
+
+[ext_resource type="Theme" uid="uid://b53umqmv1irtu" path="res://Assets/Styles/ErrorTheme.tres" id="1_hcwc2"]
+[ext_resource type="Script" uid="uid://2bk0oi2m2rrg" path="res://Systems/ServiceSystems/ErrorService/ErrorService.cs" id="2_aursa"]
+
+[node name="ErrorPopup" type="PopupPanel" unique_id=1537567924 node_paths=PackedStringArray("WarnIcon", "WarnTextSpace")]
+oversampling_override = 1.0
+size = Vector2i(250, 100)
+visible = true
+theme = ExtResource("1_hcwc2")
+script = ExtResource("2_aursa")
+WarnIcon = NodePath("MarginContainer/LabelContainer/TextureRect")
+WarnTextSpace = NodePath("MarginContainer/LabelContainer/RichTextLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1838243268]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 245.0
+offset_bottom = 95.0
+
+[node name="LabelContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1827267668]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LabelContainer" unique_id=656196293]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer" unique_id=1886870113]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ErrorData" format=3 uid="uid://mvqkw0lq5o8x"]
 
-[ext_resource type="Texture2D" uid="uid://xjwc08ecvb5l" path="res://SystemsAssets/ErrorAssets/MailError.png" id="1_3fy43"]
+[ext_resource type="Texture2D" uid="uid://xjwc08ecvb5l" path="res://Assets/ErrorAssets/MailError.png" id="1_3fy43"]
 [ext_resource type="Script" uid="uid://cpml3o3e1wfmi" path="res://Systems/ServiceSystems/ErrorService/ErrorData.cs" id="2_x3eu7"]
 
 [resource]

@@ -43,7 +43,7 @@ public partial class TwoFactorAuthenticator : Control
             GD.PrintErr("Could not generate the code");
             return;
         }
-        if (!RuntimeAuthentication.TrySendCodeMail(MainUISystem.Current.Board.Email))
+        if (!RuntimeAuthentication.TrySendCodeMail(MainAppCore.Current.Board.Email))
         {
             GD.PrintErr("Could not send mail");
             return;
@@ -60,7 +60,7 @@ public partial class TwoFactorAuthenticator : Control
 
         ConfirmButton.Disabled = true;
         ResendCodeButton.Disabled = true;
-        await MainUISystem.Current.FinishAuth(this);
+        await MainAppCore.Current.FinishAuth(this);
         if (!GodotObject.IsInstanceValid(this) || !IsInsideTree())
         {
             return;
@@ -71,7 +71,7 @@ public partial class TwoFactorAuthenticator : Control
 
     private void OnReturn()
     {
-        MainUISystem.Current.CancelAuth(this);
+        MainAppCore.Current.CancelAuth(this);
     }
 
     private sealed class Authenticator

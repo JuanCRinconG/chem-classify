@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://bbse70gf87fd2"]
+
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_theme"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="2_swap"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="SDSDetailDisplay" type="PanelContainer" unique_id=2300001001]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=2300001002]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="RootVBox" type="VBoxContainer" parent="Margin" unique_id=2300001003]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=2300001004]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="HeaderRow" type="HBoxContainer" parent="Margin/RootVBox/HeaderBar" unique_id=2300001005]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2300001006]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDS Detail"
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2300001007 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+text = "Return"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../..")
+NextScenePath = "uid://ir86gkjgdm0m"
+
+[node name="DetailSection" type="PanelContainer" parent="Margin/RootVBox" unique_id=2300001008]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="DetailVBox" type="VBoxContainer" parent="Margin/RootVBox/DetailSection" unique_id=2300001009]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DisplayNameLabel" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001010]
+layout_mode = 2
+text = "Chemical name"
+horizontal_alignment = 1
+
+[node name="DisplayNameValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001011]
+layout_mode = 2
+text = "Acetone (sample)"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001012]
+layout_mode = 2
+
+[node name="SdsIdCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001013]
+layout_mode = 2
+text = "SDS id"
+
+[node name="SdsIdValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001014]
+layout_mode = 2
+text = "sds_sample_001"
+
+[node name="CasCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001015]
+layout_mode = 2
+text = "CAS number"
+
+[node name="CasValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001016]
+layout_mode = 2
+text = "67-64-1"
+
+[node name="HazardCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001017]
+layout_mode = 2
+text = "Hazard summary"
+
+[node name="HazardValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001018]
+layout_mode = 2
+text = "Highly flammable liquid and vapor"
+
+[node name="ExpiresCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001019]
+layout_mode = 2
+text = "Expires at"
+
+[node name="ExpiresValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001020]
+layout_mode = 2
+text = "2026-12-31"
+
+[node name="FileCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001021]
+layout_mode = 2
+text = "File"
+
+[node name="FileValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001022]
+layout_mode = 2
+text = "acetone-sds.pdf"
+
+[node name="StatusCaption" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001023]
+layout_mode = 2
+text = "Status"
+
+[node name="StatusValue" type="Label" parent="Margin/RootVBox/DetailSection/DetailVBox" unique_id=2300001024]
+layout_mode = 2
+text = "Active"
+
+[node name="ActionsRow" type="HBoxContainer" parent="Margin/RootVBox" unique_id=2300001025]
+layout_mode = 2
+
+[node name="OpenPdfButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=2300001026]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open SDS (OS viewer)"
+
+[node name="BackToLibraryButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=2300001027 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to library"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../..")
+NextScenePath = "uid://bqs8libraryd01"

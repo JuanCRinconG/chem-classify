@@ -11,7 +11,7 @@ public static class UISwapService
     {
         Current.Visible = false;
         var NextScene = Scene.Instantiate();
-        MainUISystem.Current.UIContainerSpace.AddChild(NextScene);
+        MainAppCore.Current.UIContainerSpace.AddChild(NextScene);
         Current.QueueFree();
     }
 
@@ -29,7 +29,7 @@ public static class UISwapService
         configure?.Invoke(nextScene);
 
         current.Visible = false;
-        MainUISystem.Current.UIContainerSpace.AddChild(nextScene);
+        MainAppCore.Current.UIContainerSpace.AddChild(nextScene);
         current.QueueFree();
     }
 }

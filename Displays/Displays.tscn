@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ym4ta5hyvdy6"]
+
+[ext_resource type="Script" uid="uid://cwa5v386ad8pq" path="res://Systems/ServiceSystems/UIServices/UIScreens.cs" id="1_w0tj4"]
+
+[node name="Displays" type="Node" unique_id=1286843836]
+script = ExtResource("1_w0tj4")
+TwoFA = "uid://bd5qbiw65vods"
+MainApp = "uid://ir86gkjgdm0m"
+LoginScreen = "uid://bghlurisvn5yk"
+CreateAccountScreen = "uid://bkd8prgw1gjqr"
+PdfRegisterScreen = "uid://ctuqcoee76a62"
+SdsLibraryScreen = "uid://kxatks0gcy53"
+SdsDetailScreen = "uid://bbse70gf87fd2"
+QrLookupScreen = "uid://dqrlookupvw03"
+ExpirationMonitorScreen = "uid://bs1bgmfrdhuql"

@@ -20,7 +20,7 @@ public partial class UISwapButton : Button
 
     public void OnSwapScenePressed()
     {
-        MainUISystem.Current.Board.Reset();
+        MainAppCore.Current.Board.Reset();
         UISwapService.SwapScenePath(CurrentSceneRoot, NextScenePath);
     }
 }

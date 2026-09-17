@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bd5qbiw65vods"]
+
+[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_jb8sh"]
+[ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/LoginSystem/TwoFactorAuthenticator.cs" id="2_bh35k"]
+[ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_p2tyc"]
+
+[node name="TwoFactorAuthenticationUI" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("FactorFields", "ConfirmButton", "ResendCodeButton", "ReturnButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -96.0
+offset_right = 193.5
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jb8sh")
+script = ExtResource("2_bh35k")
+FactorFields = [NodePath("VBoxContainer/FactorFieldsContainer/Field"), NodePath("VBoxContainer/FactorFieldsContainer/Field2"), NodePath("VBoxContainer/FactorFieldsContainer/Field3"), NodePath("VBoxContainer/FactorFieldsContainer/Field4"), NodePath("VBoxContainer/FactorFieldsContainer/Field5")]
+ConfirmButton = NodePath("VBoxContainer/ConfirmFields")
+ResendCodeButton = NodePath("VBoxContainer/HBoxContainer/ResendMailButton")
+ReturnButton = NodePath("VBoxContainer/HBoxContainer/ReturnButton")
+TFAError = ExtResource("3_p2tyc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1057539187]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1103271864]
+layout_mode = 2
+text = "Verify your account"
+horizontal_alignment = 1
+
+[node name="ContextLabel" type="Label" parent="VBoxContainer" unique_id=2138855415]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Check your mail to get the code"
+horizontal_alignment = 1
+
+[node name="FactorFieldsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2041381267]
+layout_mode = 2
+
+[node name="Field" type="SpinBox" parent="VBoxContainer/FactorFieldsContainer" unique_id=353826394]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.0
+rounded = true
+alignment = 1
+
+[node name="Field2" type="SpinBox" parent="VBoxContainer/FactorFieldsContainer" unique_id=377433833]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.0
+rounded = true
+alignment = 1
+
+[node name="Field3" type="SpinBox" parent="VBoxContainer/FactorFieldsContainer" unique_id=286596869]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.0
+rounded = true
+alignment = 1
+
+[node name="Field4" type="SpinBox" parent="VBoxContainer/FactorFieldsContainer" unique_id=225860327]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.0
+rounded = true
+alignment = 1
+
+[node name="Field5" type="SpinBox" parent="VBoxContainer/FactorFieldsContainer" unique_id=1378612846]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.0
+rounded = true
+alignment = 1
+
+[node name="ConfirmFields" type="Button" parent="VBoxContainer" unique_id=942896483]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=498867843]
+layout_mode = 2
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1353278045]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Return"
+
+[node name="ResendMailButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1893046114]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resend Mail"

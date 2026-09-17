@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://h20jwkngfukd"]
+
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_qbxay"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7h3p"]
+bg_color = Color(0.82, 0.82, 0.82, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.13725491, 0.21568628, 0.11372549, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="ChemicalExpirationCard" type="PanelContainer" unique_id=1007042869]
+custom_minimum_size = Vector2(180, 140)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qbxay")
+theme_override_styles/panel = SubResource("StyleBoxFlat_p7h3p")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1905157790]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin" unique_id=1905157798]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ChemicalNameLabel" type="Label" parent="Margin/VBoxContainer" unique_id=19935872]
+layout_mode = 2
+text = "Chemical name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CasLabel" type="Label" parent="Margin/VBoxContainer" unique_id=19935873]
+layout_mode = 2
+text = "CAS: —"
+horizontal_alignment = 1
+
+[node name="ExpirationDateLabel" type="Label" parent="Margin/VBoxContainer" unique_id=1601819240]
+layout_mode = 2
+text = "Expires: —"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Margin/VBoxContainer" unique_id=206312917]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+value = 65.0
+show_percentage = false
+
+[node name="StatusLabel" type="Label" parent="Margin/VBoxContainer" unique_id=1601819241]
+layout_mode = 2
+text = "OK"
+horizontal_alignment = 1

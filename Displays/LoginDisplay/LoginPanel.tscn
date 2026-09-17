@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bghlurisvn5yk"]
+
+[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_vg5ts"]
+[ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/LoginSystem/LoginCore.cs" id="2_ayv28"]
+[ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_oycse"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="4_f2vgc"]
+
+[node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmFieldsButton", "ForgotPasswordButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -96.0
+offset_right = 193.5
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vg5ts")
+script = ExtResource("2_ayv28")
+EmailInput = NodePath("VBoxContainer/EmailInput")
+PasswordInput = NodePath("VBoxContainer/PasswordInput")
+ConfirmFieldsButton = NodePath("VBoxContainer/ConfirmFields")
+LoginError = ExtResource("3_oycse")
+ForgotPasswordButton = NodePath("VBoxContainer/AdditionalTools/ForgotPassword")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1057539187]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1103271864]
+layout_mode = 2
+text = "Log in"
+horizontal_alignment = 1
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer" unique_id=415940881]
+layout_mode = 2
+placeholder_text = "your-email@ucundinamarca.edu.co"
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer" unique_id=945747193]
+layout_mode = 2
+placeholder_text = "your-password"
+
+[node name="ConfirmFields" type="Button" parent="VBoxContainer" unique_id=942896483]
+layout_mode = 2
+text = "Confirm"
+
+[node name="AdditionalTools" type="HBoxContainer" parent="VBoxContainer" unique_id=1730648100]
+layout_mode = 2
+
+[node name="MakeAccount" type="Button" parent="VBoxContainer/AdditionalTools" unique_id=1000400085 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create account"
+script = ExtResource("4_f2vgc")
+CurrentSceneRoot = NodePath("../../..")
+NextScenePath = "uid://bkd8prgw1gjqr"
+
+[node name="ForgotPassword" type="Button" parent="VBoxContainer/AdditionalTools" unique_id=1412341953]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Forgot password"

@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://ctuqcoee76a62"]
+
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_as82s"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="2_swap"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="FirebasePDFRegister" type="PanelContainer" unique_id=1290836043]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_as82s")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=2100001001]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="RootVBox" type="VBoxContainer" parent="Margin" unique_id=2100001002]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=2100001003]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="HeaderRow" type="HBoxContainer" parent="Margin/RootVBox/HeaderBar" unique_id=2100001004]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2100001005]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Register SDS PDF"
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=2100001006 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+text = "Return"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../..")
+NextScenePath = "uid://ir86gkjgdm0m"
+
+[node name="FormSection" type="PanelContainer" parent="Margin/RootVBox" unique_id=2100001007]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="FormScroll" type="ScrollContainer" parent="Margin/RootVBox/FormSection" unique_id=2100001008]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FormVBox" type="VBoxContainer" parent="Margin/RootVBox/FormSection/FormScroll" unique_id=2100001009]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="DisplayNameLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001010]
+layout_mode = 2
+text = "Chemical / product name"
+
+[node name="DisplayNameInput" type="LineEdit" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001011]
+layout_mode = 2
+placeholder_text = "e.g. Acetone"
+
+[node name="CasLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001012]
+layout_mode = 2
+text = "CAS number (optional)"
+
+[node name="CasInput" type="LineEdit" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001013]
+layout_mode = 2
+placeholder_text = "e.g. 67-64-1"
+
+[node name="HazardLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001014]
+layout_mode = 2
+text = "Hazard summary (optional)"
+
+[node name="HazardInput" type="LineEdit" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001015]
+layout_mode = 2
+placeholder_text = "One short line for mobile cards"
+
+[node name="ExpiresLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001016]
+layout_mode = 2
+text = "Expiration date"
+
+[node name="ExpiresRow" type="HBoxContainer" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001017]
+layout_mode = 2
+
+[node name="ExpiresYear" type="SpinBox" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow" unique_id=2100001018]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2020.0
+max_value = 2100.0
+value = 2026.0
+prefix = "Y "
+
+[node name="ExpiresMonth" type="SpinBox" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow" unique_id=2100001019]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 12.0
+value = 1.0
+prefix = "M "
+
+[node name="ExpiresDay" type="SpinBox" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow" unique_id=2100001020]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 31.0
+value = 1.0
+prefix = "D "
+
+[node name="FileLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001021]
+layout_mode = 2
+text = "SDS PDF file"
+
+[node name="FileRow" type="HBoxContainer" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001022]
+layout_mode = 2
+
+[node name="SelectedFileLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox/FileRow" unique_id=2100001023]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No file selected"
+
+[node name="PickFileButton" type="Button" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox/FileRow" unique_id=2100001024]
+layout_mode = 2
+text = "Choose PDF"
+
+[node name="SdsIdPreviewLabel" type="Label" parent="Margin/RootVBox/FormSection/FormScroll/FormVBox" unique_id=2100001025]
+layout_mode = 2
+text = "SDS id (assigned on save): —"
+
+[node name="ActionsRow" type="HBoxContainer" parent="Margin/RootVBox" unique_id=2100001026]
+layout_mode = 2
+
+[node name="ClearButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=2100001027]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear"
+
+[node name="RegisterButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=2100001028]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Register SDS"
