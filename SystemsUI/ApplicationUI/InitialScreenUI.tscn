@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://SystemsUI/ApplicationUI/MainAppTheme.tres" id="1_qb208"]
 [ext_resource type="Script" uid="uid://b8syuq2bf6b8h" path="res://Systems/ServiceSystems/UIServices/UIToggleButton.cs" id="2_uvio7"]
+[ext_resource type="PackedScene" uid="uid://h20jwkngfukd" path="res://SystemsUI/ApplicationUI/ChemicalExpirationCard.tscn" id="3_6r7le"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7wsd"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -110,40 +111,62 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
 [node name="RecentChemicals" type="ScrollContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace" unique_id=983084064]
 layout_mode = 2
 size_flags_horizontal = 3
+vertical_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals" unique_id=1257458713]
+[node name="CardGrid" type="GridContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals" unique_id=2096609176]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="ChemicalExpirationCard" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=1007042869 instance=ExtResource("3_6r7le")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1665740438]
+[node name="ChemicalExpirationCard2" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=1615948069 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button2" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=793714886]
+[node name="ChemicalExpirationCard3" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=830787850 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button3" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=452010041]
+[node name="ChemicalExpirationCard4" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=815414888 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button4" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1867882525]
+[node name="ChemicalExpirationCard5" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=519595488 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button5" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=637105100]
+[node name="ChemicalExpirationCard6" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=1347547989 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button6" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=2002827151]
+[node name="ChemicalExpirationCard7" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=693746930 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button7" type="Button" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/GridContainer" unique_id=1490211335]
+[node name="ChemicalExpirationCard8" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=2034339023 instance=ExtResource("3_6r7le")]
 layout_mode = 2
-text = "Quimico"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChemicalExpirationCard9" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=844127849 instance=ExtResource("3_6r7le")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChemicalExpirationCard10" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=70888738 instance=ExtResource("3_6r7le")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="SearchedChemicals" type="ScrollContainer" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace" unique_id=925350394]
 visible = false
