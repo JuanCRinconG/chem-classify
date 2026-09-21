@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://bs1bgmfrdhuql"]
+
+[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_theme"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/Services/UIServices/UISwapButton.cs" id="2_swap"]
+[ext_resource type="PackedScene" uid="uid://h20jwkngfukd" path="res://Displays/Application/ChemicalExpirationCard.tscn" id="3_card"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15686275, 0.24313726, 0.13333334, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="ExpirationMonitorDisplay" type="PanelContainer" unique_id=-1794966295]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=-1794966294]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="RootVBox" type="VBoxContainer" parent="Margin" unique_id=-1794966293]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=-1794966292]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="HeaderRow" type="HBoxContainer" parent="Margin/RootVBox/HeaderBar" unique_id=-1794966291]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=-1794966290]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Expiration Monitor"
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="Margin/RootVBox/HeaderBar/HeaderRow" unique_id=-1794966289 node_paths=PackedStringArray("CurrentSceneRoot")]
+layout_mode = 2
+text = "Return"
+script = ExtResource("2_swap")
+CurrentSceneRoot = NodePath("../../../../..")
+NextScenePath = "uid://ir86gkjgdm0m"
+
+[node name="FilterBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=-1794966288]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="FilterRow" type="HBoxContainer" parent="Margin/RootVBox/FilterBar" unique_id=-1794966287]
+layout_mode = 2
+
+[node name="WindowLabel" type="Label" parent="Margin/RootVBox/FilterBar/FilterRow" unique_id=-1794966286]
+layout_mode = 2
+text = "Notify window (days)"
+
+[node name="WindowDays" type="SpinBox" parent="Margin/RootVBox/FilterBar/FilterRow" unique_id=-1794966285]
+layout_mode = 2
+min_value = 1.0
+max_value = 365.0
+value = 30.0
+
+[node name="IncludeExpired" type="CheckBox" parent="Margin/RootVBox/FilterBar/FilterRow" unique_id=-1794966284]
+layout_mode = 2
+button_pressed = true
+text = "Include expired"
+
+[node name="ApplyFilterButton" type="Button" parent="Margin/RootVBox/FilterBar/FilterRow" unique_id=-1794966283]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply filter"
+
+[node name="SummaryBar" type="PanelContainer" parent="Margin/RootVBox" unique_id=-1794966282]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="SummaryRow" type="HBoxContainer" parent="Margin/RootVBox/SummaryBar" unique_id=-1794966281]
+layout_mode = 2
+
+[node name="ExpiringCountLabel" type="Label" parent="Margin/RootVBox/SummaryBar/SummaryRow" unique_id=-1794966280]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Expiring soon: 3 (sample)"
+horizontal_alignment = 1
+
+[node name="ExpiredCountLabel" type="Label" parent="Margin/RootVBox/SummaryBar/SummaryRow" unique_id=-1794966279]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Already expired: 1 (sample)"
+horizontal_alignment = 1
+
+[node name="ListSection" type="PanelContainer" parent="Margin/RootVBox" unique_id=-1794966278]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_section")
+
+[node name="ListScroll" type="ScrollContainer" parent="Margin/RootVBox/ListSection" unique_id=-1794966277]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardGrid" type="GridContainer" parent="Margin/RootVBox/ListSection/ListScroll" unique_id=-1794966276]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="ChemicalExpirationCard" parent="Margin/RootVBox/ListSection/ListScroll/CardGrid" unique_id=-1794966275 instance=ExtResource("3_card")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChemicalExpirationCard2" parent="Margin/RootVBox/ListSection/ListScroll/CardGrid" unique_id=-1794966274 instance=ExtResource("3_card")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChemicalExpirationCard3" parent="Margin/RootVBox/ListSection/ListScroll/CardGrid" unique_id=-1794966273 instance=ExtResource("3_card")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChemicalExpirationCard4" parent="Margin/RootVBox/ListSection/ListScroll/CardGrid" unique_id=-1794966272 instance=ExtResource("3_card")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionsRow" type="HBoxContainer" parent="Margin/RootVBox" unique_id=-1794966271]
+layout_mode = 2
+
+[node name="SendTestMailButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=-1794966270]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Send test alert mail"
+
+[node name="OpenDetailButton" type="Button" parent="Margin/RootVBox/ActionsRow" unique_id=-1794966269]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open selected detail"
+script = ExtResource("2_swap")
+NextScenePath = "uid://cdsdetailview02"

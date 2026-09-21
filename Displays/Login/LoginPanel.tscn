@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bghlurisvn5yk"]
 
 [ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_vg5ts"]
-[ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/LoginSystem/LoginCore.cs" id="2_ayv28"]
+[ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/Login/LoginCore.cs" id="2_ayv28"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_oycse"]
-[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="4_f2vgc"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/Services/UIServices/UISwapButton.cs" id="4_f2vgc"]
 
 [node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmFieldsButton", "ForgotPasswordButton")]
 anchors_preset = 8

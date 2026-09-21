@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ir86gkjgdm0m"]
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_qb208"]
-[ext_resource type="Script" uid="uid://b8syuq2bf6b8h" path="res://Systems/ServiceSystems/UIServices/UIToggleButton.cs" id="2_uvio7"]
-[ext_resource type="PackedScene" uid="uid://h20jwkngfukd" path="res://Displays/AppDisplays/ChemicalExpirationCard.tscn" id="3_6r7le"]
-[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="4_swap"]
+[ext_resource type="Script" uid="uid://b8syuq2bf6b8h" path="res://Systems/Services/UIServices/UIToggleButton.cs" id="2_uvio7"]
+[ext_resource type="PackedScene" uid="uid://h20jwkngfukd" path="res://Displays/Application/ChemicalExpirationCard.tscn" id="3_6r7le"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/Services/UIServices/UISwapButton.cs" id="4_swap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7wsd"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -24,7 +24,6 @@ expand_margin_bottom = 3.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7wsd"]
 
 [node name="InitialScreenUi" type="PanelContainer" unique_id=186350908]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -49,14 +48,12 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleBarTools/VBoxContainer" unique_id=1797206868]
 layout_mode = 2
 
-[node name="FoldableContainer" type="Button" parent="VBoxContainer/TitleBarTools/VBoxContainer/HBoxContainer" unique_id=912680467 node_paths=PackedStringArray("PrimaryControls", "SecondaryControls")]
+[node name="FoldableContainer" type="Button" parent="VBoxContainer/TitleBarTools/VBoxContainer/HBoxContainer" unique_id=912680467]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = ">"
 script = ExtResource("2_uvio7")
-PrimaryControls = [NodePath("../../../../MainWorkspaceContainer/HBoxContainer/AdminToolsWorkspace")]
-SecondaryControls = []
 
 [node name="SearchBar" type="LineEdit" parent="VBoxContainer/TitleBarTools/VBoxContainer/HBoxContainer" unique_id=332277918]
 layout_mode = 2
@@ -161,21 +158,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ChemicalExpirationCard7" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=693746930 instance=ExtResource("3_6r7le")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ChemicalExpirationCard8" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=2034339023 instance=ExtResource("3_6r7le")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ChemicalExpirationCard9" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=844127849 instance=ExtResource("3_6r7le")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ChemicalExpirationCard10" parent="VBoxContainer/MainWorkspaceContainer/HBoxContainer/ChemicalsWorkspace/RecentChemicals/CardGrid" unique_id=70888738 instance=ExtResource("3_6r7le")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

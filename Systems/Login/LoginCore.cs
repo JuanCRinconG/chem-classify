@@ -86,17 +86,17 @@ public partial class LoginCore : Control
             return;
         }
 
-        AuthBoard board = MainAppCore.Current.Board;
+        AuthBoard board = DisplayEngineCore.Current.Board;
         board.Path = AuthPath.Login;
         board.Email = UserEmail;
         board.Password = null;
         board.Session = result.Data;
-        MainAppCore.Current.SwapTo(this, UIScreens.Current.TwoFA);
+        DisplayEngineCore.Current.SwapTo(this, UIScreens.Current.TwoFA);
     }
 
     private void RestoreBoardState()
     {
-        AuthBoard board = MainAppCore.Current.Board;
+        AuthBoard board = DisplayEngineCore.Current.Board;
         if (!string.IsNullOrEmpty(board.Email))
         {
             EmailInput.Text = board.Email;

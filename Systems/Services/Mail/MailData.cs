@@ -23,6 +23,6 @@ public class MailData
 
     public async void Send()
     {
-        await MailService.SendMail(this);
+        await Services.Mail.SendMail(this);
     }
 }

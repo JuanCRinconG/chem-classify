@@ -1,7 +1,7 @@
 using Godot;
 using System.Threading.Tasks;
 
-public partial class MainAppCore : Control
+public partial class DisplayEngineCore : Control
 {
 	[Export]
 	public Control UIContainerSpace;
@@ -9,7 +9,7 @@ public partial class MainAppCore : Control
 	[Export]
 	public PackedScene FirstUIPanel;
 
-	public static MainAppCore Current;
+	public static DisplayEngineCore Current;
 
 	public AuthBoard Board { get; } = new();
 	

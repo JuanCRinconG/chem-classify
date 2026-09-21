@@ -1,7 +1,9 @@
 using MimeKit;
 using System.Threading.Tasks;
 
-public static class MailService
+namespace Services;
+
+public static class Mail
 {
     public static string host = System.Environment.GetEnvironmentVariable("SMTP_HOST");
     public static int port = int.Parse(System.Environment.GetEnvironmentVariable("SMTP_PORT") ?? "587");

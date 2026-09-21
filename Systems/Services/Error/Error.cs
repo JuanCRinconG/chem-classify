@@ -1,6 +1,8 @@
-public partial class ErrorService : PopupPanel
+namespace Services;
+
+public partial class Error : PopupPanel
 {
-	public static ErrorService Current;
+	public static Error Current;
 
 	[Export]
 	public TextureRect WarnIcon;

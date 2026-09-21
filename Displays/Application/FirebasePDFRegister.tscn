@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ctuqcoee76a62"]
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_as82s"]
-[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/ServiceSystems/UIServices/UISwapButton.cs" id="2_swap"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/Services/UIServices/UISwapButton.cs" id="2_swap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -20,7 +20,6 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
 [node name="FirebasePDFRegister" type="PanelContainer" unique_id=1290836043]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

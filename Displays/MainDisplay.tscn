@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dbwwegeti3vb3"]
 
 [ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://Assets/MainUITexture/QrBG.jpg" id="1_pm1sg"]
-[ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/MainSceneSystem/MainAppCore.cs" id="2_cukl5"]
-[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://Displays/LoginDisplay/LoginPanel.tscn" id="2_jss8s"]
-[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/ServiceSystems/UIServices/CloseProgramButton.cs" id="4_gsa4b"]
+[ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/DisplayEngine/DisplayEngineCore.cs" id="2_cukl5"]
+[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://Displays/Login/LoginPanel.tscn" id="2_jss8s"]
+[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/Services/UIServices/CloseProgramButton.cs" id="4_gsa4b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jss8s"]
 bg_color = Color(0.9490196, 0, 0, 1)
@@ -35,8 +35,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_cukl5")
-UIContainerSpace = NodePath("InitialUIContainer")
 FirstUIPanel = ExtResource("2_jss8s")
+UIContainerSpace = NodePath("InitialUIContainer")
 
 [node name="BackgroundTexture" type="TextureRect" parent="." unique_id=783104334]
 layout_mode = 2

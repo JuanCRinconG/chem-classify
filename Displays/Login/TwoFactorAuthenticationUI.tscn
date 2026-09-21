@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bd5qbiw65vods"]
 
 [ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_jb8sh"]
-[ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/LoginSystem/TwoFactorAuthenticator.cs" id="2_bh35k"]
+[ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/Login/TwoFactorAuthenticator.cs" id="2_bh35k"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_p2tyc"]
 
 [node name="TwoFactorAuthenticationUI" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("FactorFields", "ConfirmButton", "ResendCodeButton", "ReturnButton")]
