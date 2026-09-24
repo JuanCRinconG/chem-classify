@@ -1,11 +1,11 @@
-public static class NullChecker
+public static class NullCheck
 {
 	/// <summary>
 	/// Checks whether all provided values are non-null.
 	/// Each entry is a (value, name) pair. Use nameof() for the name at the call site.
 	/// </summary>
 	/// <returns>True if all values are non-null, false on the first null found.</returns>
-	public static bool GroupNullChecker(params (object Value, string Name)[] entries)
+	public static bool Group(params (object Value, string Name)[] entries)
 	{
 		bool result = true;
 

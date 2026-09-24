@@ -8,7 +8,7 @@ public class MailData
 
     public bool Verify()
     {
-        bool result = NullChecker.GroupNullChecker
+        bool result = NullCheck.Group
         (
             (Receiver, nameof(Receiver)),
             (Subject, nameof(Subject)),
