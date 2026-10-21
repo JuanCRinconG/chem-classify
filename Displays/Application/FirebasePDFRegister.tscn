@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ctuqcoee76a62"]
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_as82s"]
-[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/Services/UIServices/UISwapButton.cs" id="2_swap"]
+[ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="2_swap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

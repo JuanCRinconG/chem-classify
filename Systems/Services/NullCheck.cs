@@ -1,3 +1,5 @@
+using Godot;
+
 public static class NullCheck
 {
 	/// <summary>

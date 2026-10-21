@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 /// <summary>Tracks UI signal/control subscriptions for deterministic teardown.</summary>
 public sealed class UIBindings

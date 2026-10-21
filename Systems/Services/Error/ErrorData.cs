@@ -1,3 +1,4 @@
+using Godot;
 
 [GlobalClass]
 public partial class ErrorData : Resource

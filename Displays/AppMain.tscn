@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dbwwegeti3vb3"]
 
-[ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://Assets/MainUITexture/QrBG.jpg" id="1_pm1sg"]
-[ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/DisplayEngine/DisplayEngineCore.cs" id="2_cukl5"]
-[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://Displays/Login/LoginPanel.tscn" id="2_jss8s"]
-[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/Services/UIServices/CloseProgramButton.cs" id="4_gsa4b"]
+[ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/AppManager/AppManager.cs" id="1_3xjee"]
+[ext_resource type="Resource" uid="uid://bl01fd25hmwhh" path="res://SystemsData/DisplayData/AppDisplays.tres" id="2_gjgbx"]
+[ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://Assets/MainUITexture/QrBG.jpg" id="3_ypm5l"]
+[ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/DisplaySystems/CloseProgramButton.cs" id="4_7ulj5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jss8s"]
 bg_color = Color(0.9490196, 0, 0, 1)
@@ -29,29 +29,31 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="MainUi" type="PanelContainer" unique_id=401584730 node_paths=PackedStringArray("UIContainerSpace")]
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_cukl5")
-FirstUIPanel = ExtResource("2_jss8s")
+[node name="AppMain" type="Node" unique_id=491733452 node_paths=PackedStringArray("UIContainerSpace")]
+script = ExtResource("1_3xjee")
 UIContainerSpace = NodePath("InitialUIContainer")
+Displays = ExtResource("2_gjgbx")
 
 [node name="BackgroundTexture" type="TextureRect" parent="." unique_id=783104334]
-layout_mode = 2
-texture = ExtResource("1_pm1sg")
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("3_ypm5l")
 expand_mode = 5
 
 [node name="InitialUIContainer" type="Control" parent="." unique_id=1824848929]
-layout_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="CloseProgramButton" type="Button" parent="." unique_id=55163931]
-layout_mode = 2
+offset_left = 1120.0
+offset_right = 1152.0
+offset_bottom = 33.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_jss8s")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_jss8s")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gsa4b")
 text = "❌"
-script = ExtResource("4_gsa4b")
+script = ExtResource("4_7ulj5")

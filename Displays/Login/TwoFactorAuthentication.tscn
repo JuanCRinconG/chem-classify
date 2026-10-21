@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bd5qbiw65vods"]
 
-[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_jb8sh"]
-[ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/Login/TwoFactorAuthenticator.cs" id="2_bh35k"]
-[ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_p2tyc"]
+[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_ss7bx"]
+[ext_resource type="Script" uid="uid://b4bw7peudoj1k" path="res://Systems/Login/TwoFactorAuthenticator.cs" id="2_8cm5y"]
+[ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_p78jl"]
 
 [node name="TwoFactorAuthenticationUI" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("FactorFields", "ConfirmButton", "ResendCodeButton", "ReturnButton")]
 anchors_preset = 8
@@ -16,13 +16,13 @@ offset_right = 193.5
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_jb8sh")
-script = ExtResource("2_bh35k")
+theme = ExtResource("1_ss7bx")
+script = ExtResource("2_8cm5y")
 FactorFields = [NodePath("VBoxContainer/FactorFieldsContainer/Field"), NodePath("VBoxContainer/FactorFieldsContainer/Field2"), NodePath("VBoxContainer/FactorFieldsContainer/Field3"), NodePath("VBoxContainer/FactorFieldsContainer/Field4"), NodePath("VBoxContainer/FactorFieldsContainer/Field5")]
 ConfirmButton = NodePath("VBoxContainer/ConfirmFields")
 ResendCodeButton = NodePath("VBoxContainer/HBoxContainer/ResendMailButton")
 ReturnButton = NodePath("VBoxContainer/HBoxContainer/ReturnButton")
-TFAError = ExtResource("3_p2tyc")
+TFAError = ExtResource("3_p78jl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1057539187]
 layout_mode = 2

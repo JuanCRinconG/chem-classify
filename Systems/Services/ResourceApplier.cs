@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Godot;
 
 /// <summary>
 /// Marks an exported resource reference that should always have an in-memory fallback.

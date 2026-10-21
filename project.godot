@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 ErrorPopup="*uid://dcl7mex53n7je"
-UIScreens="*uid://ym4ta5hyvdy6"
 
 [display]
 
@@ -30,6 +29,10 @@ window/stretch/aspect="expand"
 [dotnet]
 
 project/assembly_name="ChemClassify"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/data_path_maker/plugin.cfg")
 
 [input]
 

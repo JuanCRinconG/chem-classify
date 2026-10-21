@@ -1,3 +1,5 @@
+using Godot;
+
 public partial class CreateAccountCore : Control
 {
     private UIBindings _LoginBindings = new();
@@ -16,6 +18,9 @@ public partial class CreateAccountCore : Control
 
     [Export]
     public ErrorData LoginError;
+
+    [Export(PropertyHint.None, DisplayList.GetDisplay)]
+    public StringName TwoFactorDisplay;
 
     public override void _Ready()
     {
@@ -55,17 +60,17 @@ public partial class CreateAccountCore : Control
             return;
         }
 
-        AuthBoard board = DisplayEngineCore.Current.Board;
+        AuthBoard board = AppManager.Current.Board;
         board.Path = AuthPath.CreateAccount;
         board.Email = UserEmail;
         board.Password = UserPassword;
         board.Session = null;
-        DisplayEngineCore.Current.SwapTo(this, UIScreens.Current.TwoFA);
+        AppManager.Current.SwapTo(this, TwoFactorDisplay);
     }
 
     private void RestoreBoardState()
     {
-        AuthBoard board = DisplayEngineCore.Current.Board;
+        AuthBoard board = AppManager.Current.Board;
         if (!string.IsNullOrEmpty(board.Email))
         {
             EmailInput.Text = board.Email;

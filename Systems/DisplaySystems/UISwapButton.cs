@@ -1,12 +1,15 @@
+using Godot;
+
 public partial class UISwapButton : Button
 {
+
     private UIBindings UIBinding = new();
 
     [Export]
     public Control CurrentSceneRoot;
 
-    [Export(PropertyHint.File, "*.tscn,*.scn")]
-    public string NextScenePath;
+    [Export(PropertyHint.None, DisplayList.GetDisplay)]
+    public StringName NextDisplay;
 
     public override void _EnterTree()
     {
@@ -20,7 +23,7 @@ public partial class UISwapButton : Button
 
     public void OnSwapScenePressed()
     {
-        DisplayEngineCore.Current.Board.Reset();
-        UISwapService.SwapScenePath(CurrentSceneRoot, NextScenePath);
+        AppManager.Current.Board.Reset();
+        AppManager.Current.SwapTo(CurrentSceneRoot, NextDisplay);
     }
 }

@@ -1,3 +1,5 @@
+using Godot;
+
 namespace Services;
 
 public partial class Error : PopupPanel

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DisplayList" format=3 uid="uid://bl01fd25hmwhh"]
+
+[ext_resource type="Script" uid="uid://drfc1as8uaof0" path="res://Systems/AppManager/DisplayList.cs" id="1_4rc1f"]
+[ext_resource type="PackedScene" uid="uid://bghlurisvn5yk" path="res://Displays/Login/Login.tscn" id="1_thfes"]
+[ext_resource type="PackedScene" uid="uid://bkd8prgw1gjqr" path="res://Displays/Login/CreateAccount.tscn" id="2_d0nnu"]
+[ext_resource type="PackedScene" uid="uid://bd5qbiw65vods" path="res://Displays/Login/TwoFactorAuthentication.tscn" id="3_oftpn"]
+[ext_resource type="PackedScene" uid="uid://ir86gkjgdm0m" path="res://Displays/Application/MainMenu.tscn" id="4_cihit"]
+
+[resource]
+script = ExtResource("1_4rc1f")
+List = Dictionary[StringName, PackedScene]({
+&"CreateAccount": ExtResource("2_d0nnu"),
+&"Login": ExtResource("1_thfes"),
+&"MainMenu": ExtResource("4_cihit"),
+&"TFA": ExtResource("3_oftpn")
+})
+metadata/_custom_type_script = "uid://drfc1as8uaof0"

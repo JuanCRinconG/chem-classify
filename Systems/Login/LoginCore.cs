@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
+using Godot;
 
 public partial class LoginCore : Control
 {
+
     private UIBindings _LoginBindings = new();
 
     [Export]
@@ -18,6 +20,9 @@ public partial class LoginCore : Control
 
     [Export]
     public Button ForgotPasswordButton;
+
+    [Export(PropertyHint.None, DisplayList.GetDisplay)]
+    public StringName TwoFactorDisplay;
 
     public override void _Ready()
     {
@@ -86,17 +91,17 @@ public partial class LoginCore : Control
             return;
         }
 
-        AuthBoard board = DisplayEngineCore.Current.Board;
+        AuthBoard board = AppManager.Current.Board;
         board.Path = AuthPath.Login;
         board.Email = UserEmail;
         board.Password = null;
         board.Session = result.Data;
-        DisplayEngineCore.Current.SwapTo(this, UIScreens.Current.TwoFA);
+        AppManager.Current.SwapTo(this, TwoFactorDisplay);
     }
 
     private void RestoreBoardState()
     {
-        AuthBoard board = DisplayEngineCore.Current.Board;
+        AuthBoard board = AppManager.Current.Board;
         if (!string.IsNullOrEmpty(board.Email))
         {
             EmailInput.Text = board.Email;
