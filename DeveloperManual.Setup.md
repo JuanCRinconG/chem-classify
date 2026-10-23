@@ -104,7 +104,64 @@ Firestore uses the same Application Default Credentials as FirebaseAdmin (`GOOGL
 
 ---
 
-# Third dependency: Simple mail transfer protocol
+# Third dependency: QRCoder (QR / sticker encoding)
+
+ChemClassify encodes QR stickers as **PNG files on disk** — there is no in-app QR preview. The encoding layer is pure C# with no Godot dependencies.
+
+Install QRCoder from the project folder:
+
+```
+dotnet add ChemClassify.csproj package QRCoder
+```
+
+The package is already referenced when pulled from the repo; re-run only if restore failed.
+
+## Code entry points
+
+| Class | Path | Role |
+| --- | --- | --- |
+| `QREncoder` | `Systems/QRGeneration/QREncoder.cs` | Low-level: string → PNG bytes |
+| `QRGenerator` | `Systems/QRGeneration/QRGenerator.cs` | High-level: `Generate()` or `GenerateToFile()` |
+
+## Payload rule
+
+QR codes encode **only** the raw `sdsId` string (e.g. `sds_a1b2c3d4…`). Never put OneDrive URLs or PDF links in the QR.
+
+## Quick test (no Godot required)
+
+After `dotnet build`, from any C# call site or future admin action:
+
+```csharp
+QrGenerateResult qr = QRGenerator.GenerateToFile(
+    "sds_test00000000000000000000000001",
+    @"C:\ChemClassify\stickers\sds_test00000000000000000000000001.png");
+
+if (qr.Ok)
+    // qr.SavedFilePath is the PNG — open with OS viewer or send to printer
+```
+
+## Optional: sticker output folder
+
+Set a default folder for generated sticker PNGs (used by future sticker UI — not required for encoding itself):
+
+```
+[System.Environment]::SetEnvironmentVariable("CHEMCLASSIFY_STICKER_DIR", "C:\ChemClassify\stickers", "User")
+$env:CHEMCLASSIFY_STICKER_DIR = [System.Environment]::GetEnvironmentVariable("CHEMCLASSIFY_STICKER_DIR", "User")
+```
+
+Create the directory if it does not exist. Individual sticker files are named `{sdsId}.png` or `{sdsId}_sticker.png` once the sticker layout service is built.
+
+## Encode options (defaults)
+
+| Option | Default | Notes |
+| --- | --- | --- |
+| Error correction | Medium | Use Quartile/High for worn lab labels |
+| Pixels per module | 8 | Increase for print (e.g. 12) |
+| Quiet zones | true | Keep enabled for reliable scanning |
+
+---
+
+# Fourth dependency: Simple mail transfer protocol
 
 First, install MailKit via this command:  
 
@@ -142,7 +199,7 @@ the last test should provide the environment variables plus a false, meaning tha
 
 ---
 
-# Fourth: Firebase / Firestore SDS collection setup
+# Fifth: Firebase / Firestore SDS collection setup
 
 ChemClassify treats each SDS as **metadata in Firestore** plus **PDF bytes in OneDrive**. Clients query Firestore; they open the PDF with the OS viewer using the stored URL. They never parse PDF binaries for search or expiration mail.
 
@@ -207,7 +264,25 @@ Exact rule JSON can be tightened later; for local Admin-SDK development, having 
 
 ---
 
-# Fifth: OneDrive setup (PDF bytes)
+# Sixth: OneDrive setup (PDF registration — required for SDS upload)
+
+PDF registration uploads SDS bytes to **OneDrive**, not Firebase Storage. Firestore stores the metadata and an HTTPS `fileUrl` so clients can open the PDF with the OS viewer.
+
+Registration flow (implemented in `FirebaseSds.RegisterAsync`, called by `PDFRegisterCore`):
+
+```text
+Admin picks local PDF + enters metadata in FirebasePDFRegister UI
+  → PDFRegisterCore builds SdsRegisterRequest
+  → FirebaseSds.RegisterAsync:
+       1. Upload PDF to OneDrive as {sdsId}.pdf
+       2. Request organization view link (fileUrl)
+       3. Write Firestore document sds/{sdsId}
+  → UI displays assigned sdsId
+```
+
+If OneDrive env vars are missing, step 1 fails before any Firestore write. If Firestore fails after upload, check Godot output for orphan OneDrive item id.
+
+For Firebase Console configuration (collections, indexes, rules), hand `FirebaseSetupPlan.md` to whoever sets up the Firebase project.
 
 PDF files are uploaded with Microsoft Graph into a specific drive folder. Firestore only stores the pointer and open URL.
 
@@ -314,10 +389,20 @@ When executing the project normally, you should see a sample UID from an user fr
 
 ## SDS registration spine
 
-Once `PDFRegisterCore` is wired to `FirebaseSds.RegisterAsync`, a successful admin register should:
+`PDFRegisterCore` is wired to `FirebaseSds.RegisterAsync`. A successful admin register should:
 
 1. Upload a PDF into the configured OneDrive folder named `{sdsId}.pdf`
 2. Create Firestore document `sds/{sdsId}` with `fileUrl`, `expiresAt`, and `storageProvider` = `onedrive`
-3. Return / display the new `sdsId` in the register UI
+3. Display the new `sdsId` in the register UI (`SdsIdPreviewLabel`)
 
 If OneDrive env vars are missing, registration fails before any Firestore write. If Firestore / project id / IAM is wrong, you may get an orphan PDF in OneDrive and a metadata error in the Godot output.
+
+## QR encoding (library test)
+
+QR generation is **not** yet triggered automatically on register. To verify QRCoder after build:
+
+1. Register an SDS (or use a known `sdsId` string)
+2. Call `QRGenerator.GenerateToFile(sdsId, path)` from a future sticker action, or test via a one-off script
+3. Open the saved PNG with the OS image viewer — scan with a phone; payload should be the raw id string
+
+No QR preview appears inside Godot by design.

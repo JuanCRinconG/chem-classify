@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_as82s"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="2_swap"]
+[ext_resource type="Script" uid="uid://dnfh5vcjc7srv" path="res://Systems/PDFRegister/PDFRegisterCore.cs" id="3_core"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -25,6 +26,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_as82s")
+script = ExtResource("3_core")
+DisplayNameInput = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/DisplayNameInput")
+CasInput = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/CasInput")
+HazardInput = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/HazardInput")
+ExpiresYear = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow/ExpiresYear")
+ExpiresMonth = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow/ExpiresMonth")
+ExpiresDay = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/ExpiresRow/ExpiresDay")
+SelectedFileLabel = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/FileRow/SelectedFileLabel")
+PickFileButton = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/FileRow/PickFileButton")
+SdsIdPreviewLabel = NodePath("Margin/RootVBox/FormSection/FormScroll/FormVBox/SdsIdPreviewLabel")
+ClearButton = NodePath("Margin/RootVBox/ActionsRow/ClearButton")
+RegisterButton = NodePath("Margin/RootVBox/ActionsRow/RegisterButton")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=2100001001]
 layout_mode = 2
