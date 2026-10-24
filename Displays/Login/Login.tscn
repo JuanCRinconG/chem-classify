@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bghlurisvn5yk"]
 
-[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/LoginTheme.tres" id="1_vg5ts"]
+[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/AppStyle.tres" id="1_vg5ts"]
 [ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/Login/LoginCore.cs" id="2_ayv28"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_oycse"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="4_f2vgc"]

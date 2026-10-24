@@ -1,0 +1,34 @@
+[gd_resource type="Theme" format=3 uid="uid://ctfaspinbox01"]
+
+[ext_resource type="Texture2D" uid="uid://dk53xwhqp6rqx" path="res://Assets/MainUITexture/EmptyImage.tres" id="1_empty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_updown"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.690196, 0.733333, 0.741176, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[resource]
+SpinBox/constants/buttons_vertical_separation = 0
+SpinBox/constants/buttons_width = 0
+SpinBox/constants/field_and_buttons_separation = 0
+SpinBox/constants/set_min_buttons_width_from_icons = 0
+SpinBox/icons/down = ExtResource("1_empty")
+SpinBox/icons/down_disabled = ExtResource("1_empty")
+SpinBox/icons/down_hover = ExtResource("1_empty")
+SpinBox/icons/down_pressed = ExtResource("1_empty")
+SpinBox/icons/up = ExtResource("1_empty")
+SpinBox/icons/up_disabled = ExtResource("1_empty")
+SpinBox/icons/up_hover = ExtResource("1_empty")
+SpinBox/icons/up_pressed = ExtResource("1_empty")
+SpinBox/styles/updown_background = SubResource("StyleBoxFlat_updown")

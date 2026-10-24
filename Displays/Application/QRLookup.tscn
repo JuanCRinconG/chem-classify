@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqrlookupvw03"]
 
-[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_theme"]
+[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/AppStyle.tres" id="1_theme"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="2_swap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section"]
@@ -32,6 +32,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [node name="QRLookupDisplay" type="PanelContainer" unique_id=-1894966295]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -67,7 +68,6 @@ layout_mode = 2
 text = "Return"
 script = ExtResource("2_swap")
 CurrentSceneRoot = NodePath("../../../../..")
-NextScenePath = "uid://ir86gkjgdm0m"
 
 [node name="BodyRow" type="HBoxContainer" parent="Margin/RootVBox" unique_id=-1894966288]
 layout_mode = 2
@@ -154,7 +154,6 @@ layout_mode = 2
 text = "Open detail"
 script = ExtResource("2_swap")
 CurrentSceneRoot = NodePath("../../../../../..")
-NextScenePath = "uid://cdsdetailview02"
 
 [node name="OpenPdfButton" type="Button" parent="Margin/RootVBox/BodyRow/ManualSection/ManualVBox" unique_id=-1894966270]
 layout_mode = 2

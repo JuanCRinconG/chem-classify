@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctuqcoee76a62"]
 
-[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_as82s"]
+[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/AppStyle.tres" id="1_as82s"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="2_swap"]
 [ext_resource type="Script" uid="uid://dnfh5vcjc7srv" path="res://Systems/PDFRegister/PDFRegisterCore.cs" id="3_core"]
 
@@ -21,6 +21,7 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
 [node name="FirebasePDFRegister" type="PanelContainer" unique_id=1290836043]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -68,7 +69,6 @@ layout_mode = 2
 text = "Return"
 script = ExtResource("2_swap")
 CurrentSceneRoot = NodePath("../../../../..")
-NextScenePath = "uid://ir86gkjgdm0m"
 
 [node name="FormSection" type="PanelContainer" parent="Margin/RootVBox" unique_id=2100001007]
 layout_mode = 2

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bs1bgmfrdhuql"]
 
-[ext_resource type="Theme" uid="uid://bd3387g7l8wlx" path="res://Assets/Styles/MainAppTheme.tres" id="1_theme"]
+[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/AppStyle.tres" id="1_theme"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="2_swap"]
 [ext_resource type="PackedScene" uid="uid://h20jwkngfukd" path="res://Displays/Application/ChemicalExpirationCard.tscn" id="3_card"]
 
