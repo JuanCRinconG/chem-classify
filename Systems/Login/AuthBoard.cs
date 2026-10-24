@@ -75,7 +75,7 @@ public class AuthBoard
     {
         Session = null;
         AppManager app = AppManager.Current;
-        StringName destination = Path == AuthPath.CreateAccount
+        DisplayName destination = Path == AuthPath.CreateAccount
             ? app.CreateAccountDisplay
             : app.LoginDisplay;
         app.SwapTo(from, destination);

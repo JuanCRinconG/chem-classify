@@ -19,9 +19,6 @@ public partial class CreateAccountCore : Control
     [Export]
     public ErrorData LoginError;
 
-    [Export(PropertyHint.None, DisplayList.GetDisplay)]
-    public StringName TwoFactorDisplay;
-
     public override void _Ready()
     {
         _LoginBindings.BindButton(ConfirmFieldsButton, OnConfirmFields);
@@ -65,7 +62,7 @@ public partial class CreateAccountCore : Control
         board.Email = UserEmail;
         board.Password = UserPassword;
         board.Session = null;
-        AppManager.Current.SwapTo(this, TwoFactorDisplay);
+        AppManager.Current.SwapTo(this, AppManager.Current.TwoFactorDisplay);
     }
 
     private void RestoreBoardState()

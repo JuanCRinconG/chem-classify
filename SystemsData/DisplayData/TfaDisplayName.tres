@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DisplayName" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Systems/AppManager/DisplayName.cs" id="1_display_name"]
+
+[resource]
+script = ExtResource("1_display_name")
+Name = &"TFA"

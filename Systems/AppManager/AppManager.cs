@@ -7,8 +7,8 @@ public partial class AppManager : Node
 	[Export]
 	public Control UIContainerSpace;
 
-	[Export(PropertyHint.None, DisplayList.GetDisplay)]
-	public StringName InitialDisplay;
+	[Export]
+	public DisplayName InitialDisplay;
 
 	[Export]
 	public DisplayList Displays;
@@ -23,12 +23,12 @@ public partial class AppManager : Node
 
 	public override void _Ready()
 	{
-		if (string.IsNullOrEmpty(InitialDisplay))
+		if (InitialDisplay == null || string.IsNullOrEmpty(InitialDisplay.Name))
 		{
 			GD.Print("Initial display name is empty, can't instance it");
 			return;
 		}
-		if (Displays == null || !Displays.TryGet(InitialDisplay, out PackedScene firstPanel))
+		if (Displays == null || !Displays.TryGet(InitialDisplay.Name, out PackedScene firstPanel))
 		{
 			GD.PrintErr($"Initial display '{InitialDisplay}' is not in the display list");
 			return;
@@ -41,15 +41,15 @@ public partial class AppManager : Node
 		Current = null;
 	}
 
-	public void SwapTo(Control current, StringName displayName, Action<Node> configure = null)
+	public void SwapTo(Control current, DisplayName displayName, Action<Node> configure = null)
     {
-        if (string.IsNullOrEmpty(displayName))
+        if (displayName == null || string.IsNullOrEmpty(displayName.Name))
         {
             GD.PrintErr("SwapTo: display name is empty");
             return;
         }
 
-        if (Displays == null || !Displays.TryGet(displayName, out PackedScene scene))
+        if (Displays == null || !Displays.TryGet(displayName.Name, out PackedScene scene))
         {
             GD.PrintErr($"SwapTo: no display registered under '{displayName}'");
             return;

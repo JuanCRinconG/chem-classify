@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bghlurisvn5yk"]
 
-[ext_resource type="Theme" uid="uid://yvf8423vevsk" path="res://Assets/Styles/LoginTheme.tres" id="1_vg5ts"]
+[ext_resource type="Theme" uid="uid://mjaovg0qus2k" path="res://Assets/Styles/LoginTheme.tres" id="1_vg5ts"]
 [ext_resource type="Script" uid="uid://dvj1ngvcem47f" path="res://Systems/Login/LoginCore.cs" id="2_ayv28"]
 [ext_resource type="Resource" uid="uid://mvqkw0lq5o8x" path="res://SystemsData/ErrorData/LoginError.tres" id="3_oycse"]
 [ext_resource type="Script" uid="uid://ynrq5x0k0ax" path="res://Systems/DisplaySystems/UISwapButton.cs" id="4_f2vgc"]
+[ext_resource type="Resource" path="res://SystemsData/DisplayData/CreateAccountDisplayName.tres" id="5_create"]
 
 [node name="LoginPanel" type="PanelContainer" unique_id=362582116 node_paths=PackedStringArray("EmailInput", "PasswordInput", "ConfirmFieldsButton", "ForgotPasswordButton")]
 anchors_preset = 8
@@ -54,7 +55,7 @@ size_flags_horizontal = 3
 text = "Create account"
 script = ExtResource("4_f2vgc")
 CurrentSceneRoot = NodePath("../../..")
-NextScenePath = "uid://bkd8prgw1gjqr"
+NextDisplay = ExtResource("5_create")
 
 [node name="ForgotPassword" type="Button" parent="VBoxContainer/AdditionalTools" unique_id=1412341953]
 layout_mode = 2

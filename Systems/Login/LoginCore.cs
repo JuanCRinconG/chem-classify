@@ -21,9 +21,6 @@ public partial class LoginCore : Control
     [Export]
     public Button ForgotPasswordButton;
 
-    [Export(PropertyHint.None, DisplayList.GetDisplay)]
-    public StringName TwoFactorDisplay;
-
     public override void _Ready()
     {
         _LoginBindings.BindButton(ConfirmFieldsButton, OnConfirmFields);
@@ -96,7 +93,7 @@ public partial class LoginCore : Control
         board.Email = UserEmail;
         board.Password = null;
         board.Session = result.Data;
-        AppManager.Current.SwapTo(this, TwoFactorDisplay);
+        AppManager.Current.SwapTo(this, AppManager.Current.TwoFactorDisplay);
     }
 
     private void RestoreBoardState()

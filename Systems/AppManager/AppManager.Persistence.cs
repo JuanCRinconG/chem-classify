@@ -4,12 +4,15 @@ public partial class AppManager
 {
 	public AuthBoard Board { get; } = new();
 
-	[Export(PropertyHint.None, DisplayList.GetDisplay)]
-	public StringName LoginDisplay;
+	[Export]
+	public DisplayName LoginDisplay;
 
-	[Export(PropertyHint.None, DisplayList.GetDisplay)]
-	public StringName CreateAccountDisplay;
+	[Export]
+	public DisplayName CreateAccountDisplay;
 
-	[Export(PropertyHint.None, DisplayList.GetDisplay)]
-	public StringName MainAppDisplay;
+	[Export]
+	public DisplayName MainAppDisplay;
+
+	[Export]
+	public DisplayName TwoFactorDisplay;
 }

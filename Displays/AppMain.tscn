@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dq8xexf2onmpm" path="res://Systems/AppManager/AppManager.cs" id="1_3xjee"]
 [ext_resource type="Resource" uid="uid://bl01fd25hmwhh" path="res://SystemsData/DisplayData/AppDisplays.tres" id="2_gjgbx"]
+[ext_resource type="Resource" path="res://SystemsData/DisplayData/LoginDisplayName.tres" id="3_login"]
+[ext_resource type="Resource" path="res://SystemsData/DisplayData/CreateAccountDisplayName.tres" id="4_create"]
+[ext_resource type="Resource" path="res://SystemsData/DisplayData/MainMenuDisplayName.tres" id="5_main"]
+[ext_resource type="Resource" path="res://SystemsData/DisplayData/TfaDisplayName.tres" id="6_tfa"]
 [ext_resource type="Texture2D" uid="uid://7xqa8w6211fl" path="res://Assets/MainUITexture/QrBG.jpg" id="3_ypm5l"]
 [ext_resource type="Script" uid="uid://cnmy1lat3wfb8" path="res://Systems/DisplaySystems/CloseProgramButton.cs" id="4_7ulj5"]
 
@@ -31,20 +35,19 @@ corner_radius_bottom_left = 3
 
 [node name="AppMain" type="Node" unique_id=491733452 node_paths=PackedStringArray("UIContainerSpace")]
 script = ExtResource("1_3xjee")
-UIContainerSpace = NodePath("InitialUIContainer")
+UIContainerSpace = NodePath("DisplayContainer")
+InitialDisplay = ExtResource("3_login")
 Displays = ExtResource("2_gjgbx")
+LoginDisplay = ExtResource("3_login")
+CreateAccountDisplay = ExtResource("4_create")
+MainAppDisplay = ExtResource("5_main")
+TwoFactorDisplay = ExtResource("6_tfa")
 
-[node name="BackgroundTexture" type="TextureRect" parent="." unique_id=783104334]
+[node name="DisplayContainer" type="TextureRect" parent="." unique_id=783104334]
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("3_ypm5l")
 expand_mode = 5
-
-[node name="InitialUIContainer" type="Control" parent="." unique_id=1824848929]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
 
 [node name="CloseProgramButton" type="Button" parent="." unique_id=55163931]
 offset_left = 1120.0

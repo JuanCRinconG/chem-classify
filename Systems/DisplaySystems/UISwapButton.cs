@@ -8,8 +8,8 @@ public partial class UISwapButton : Button
     [Export]
     public Control CurrentSceneRoot;
 
-    [Export(PropertyHint.None, DisplayList.GetDisplay)]
-    public StringName NextDisplay;
+    [Export]
+    public DisplayName NextDisplay;
 
     public override void _EnterTree()
     {

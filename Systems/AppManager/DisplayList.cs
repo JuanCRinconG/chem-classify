@@ -1,6 +1,7 @@
 using Godot;
 using DPM.System;
 
+[Tool]
 [GlobalClass]
 public partial class DisplayList : Resource
 {
